@@ -1,3 +1,5 @@
+@file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package util
 
 import java.io.File
@@ -13,6 +15,7 @@ object InputReader {
     }
 
     private fun fromResources(day: Int): File {
-        return File(javaClass.classLoader.getResource("input_day_$day.txt").toURI())
+        return File(javaClass.classLoader.getResource(
+                day.toString().padStart(2, '0') + ".txt").toURI())
     }
 }

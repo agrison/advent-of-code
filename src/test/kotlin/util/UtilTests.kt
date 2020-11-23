@@ -10,7 +10,8 @@ class UtilTests {
     @Test
     fun testReadInputAsString() {
         val testInputAsString = InputReader.getInputAsString(1)
-        assertThat(testInputAsString, `is`("this\nis\na\ntest input\nfile\n"))
+        val n = System.lineSeparator()
+        assertThat(testInputAsString, `is`("this${n}is${n}a${n}test input${n}file"))
     }
 
     @Test

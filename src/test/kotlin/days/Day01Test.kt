@@ -6,20 +6,17 @@ import org.hamcrest.core.IsInstanceOf.instanceOf
 import org.hamcrest.core.IsNull.notNullValue
 import org.junit.Test
 
-class Day1Test {
+class Day01Test {
 
-    private val dayOne = Day1()
+    private val dayOne = Day01()
 
     @Test
     fun testPartOne() {
-        assertThat(dayOne.partOne(), `is`("THIS IS"))
+        assertThat(dayOne.partOne(), `is`(514579))
     }
 
     @Test
     fun testPartTwo() {
-        val partTwo = dayOne.partTwo()
-        assertThat(partTwo, notNullValue())
-        assertThat(partTwo, instanceOf(String::class.java))
-        assertThat(partTwo, `is`("FILE"))
+        assertThat(dayOne.partTwo(), `is`(241861950))
     }
 }

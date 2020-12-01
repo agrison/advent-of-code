@@ -9,14 +9,14 @@ class UtilTests {
 
     @Test
     fun testReadInputAsString() {
-        val testInputAsString = InputReader.getInputAsString(1)
+        val testInputAsString = InputReader.inputAsString(1)
         val n = System.lineSeparator()
         assertThat(testInputAsString, `is`("this${n}is${n}a${n}test input${n}file"))
     }
 
     @Test
     fun testReadInputAsList() {
-        val testInputAsList = InputReader.getInputAsList(1)
+        val testInputAsList = InputReader.inputAsList(1)
         assertThat(testInputAsList, contains("this", "is", "a", "test input", "file"))
     }
 }

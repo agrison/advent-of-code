@@ -29,6 +29,9 @@ dependencies {
 
     testImplementation("junit", "junit", "4.13.1")
     testImplementation("org.hamcrest", "hamcrest", "2.2")
+
+    implementation("io.vavr", "vavr", "0.10.3")
+    implementation("io.vavr", "vavr-kotlin", "0.10.2")
 }
 
 tasks.withType<KotlinCompile> {

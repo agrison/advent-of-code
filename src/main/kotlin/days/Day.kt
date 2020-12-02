@@ -29,8 +29,9 @@ abstract class Day(dayNumber: Int) {
     fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyExact)
 
     // core types
-    fun Boolean.toInt() = if (this) 1 else 0
     fun String.occurrences(c: Char) = this.count { it == c }
     operator fun Char.plus(c: Char) = this.toString() + c
     fun Char.eq(c: Char) = this == c
+    fun IntRange.includes(vararg ints: Int) = ints.all(this::contains)
+    fun String.at(pos: Int) = this[pos % this.length]
 }

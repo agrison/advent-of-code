@@ -1,28 +1,26 @@
 package days
 
-    class Day02 : Day(2) {
-        override fun partOne(): Int {
-            return countValid(inputList) { low: Int, high: Int, letter: Char, password: String ->
-                (low..high).contains(password.occurrences(letter))
-            }
-        }
-
-        override fun partTwo(): Int {
-            return countValid(inputList) { left: Int, right: Int, letter: Char, password: String ->
-                runCatching {
-                    password[left - 1].eq(letter) != password[right - 1].eq(letter)
-                }.getOrDefault(false)
-            }
-        }
-
-        private fun countValid(passwords: List<String>,
-                               policy: (a: Int, b: Int, letter: Char, password: String) -> Boolean): Int {
-            val regex = Regex("(\\d+)-(\\d+) ([a-z]): ([a-z]+)")
-            return passwords.sumBy {
-                val (a, b, letter, password) = regex.find(it)!!.destructured
-                policy(a.toInt(), b.toInt(), letter[0], password).toInt()
-            }
+class Day02 : Day(2) {
+    override fun partOne(): Int {
+        return countValid(inputList) { l, r, letter, pwd ->
+            (l..r).contains(pwd.occurrences(letter))
         }
     }
+
+    override fun partTwo(): Int {
+        return countValid(inputList) { l, r, letter, pwd ->
+            pwd.at(l - 1).eq(letter) != pwd.at(r - 1).eq(letter)
+        }
+    }
+
+    private fun countValid(passwords: List<String>,
+                           policy: (a: Int, b: Int, letter: Char, pwd: String) -> Boolean): Int {
+        val regex = Regex("(\\d+)-(\\d+) ([a-z]): ([a-z]+)")
+        return passwords.count {
+            val (l, r, letter, pwd) = regex.find(it)!!.destructured
+            policy(l.toInt(), r.toInt(), letter[0], pwd)
+        }
+    }
+}
 
 

@@ -1,5 +1,17 @@
 # Advent Of Code 2020
 
+## Output
+
+```text
+--- Day 1: Report Repair ---
+Part 1: 1003971       (75.7ms)
+Part 2: 84035952      (1.60s)
+
+--- Day 2: Password Philosophy ---
+Part 1: 645      (11.4ms)
+Part 2: 737      (3.18ms)
+```
+
 ### Running
 
 Project is already setup with gradle. To run the app:

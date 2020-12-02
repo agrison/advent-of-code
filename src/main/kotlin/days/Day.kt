@@ -27,4 +27,7 @@ abstract class Day(dayNumber: Int) {
     // Vavr
     fun io.vavr.collection.List<Int>.sumValues(): Int = this.reduce(Integer::sum)
     fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyExact)
+
+    // core types
+    fun Boolean.toInt() = if (this) 1 else 0
 }

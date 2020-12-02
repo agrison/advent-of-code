@@ -1,16 +1,12 @@
 package days
 
 class Day02 : Day(2) {
-    override fun partOne(): Int {
-        return countValid(inputList) { l, r, letter, pwd ->
-            (l..r).contains(pwd.occurrences(letter))
-        }
+    override fun partOne() = countValid(inputList) { l, r, letter, pwd ->
+        (l..r).contains(pwd.occurrences(letter))
     }
 
-    override fun partTwo(): Int {
-        return countValid(inputList) { l, r, letter, pwd ->
-            pwd.at(l - 1).eq(letter) != pwd.at(r - 1).eq(letter)
-        }
+    override fun partTwo() = countValid(inputList) { l, r, letter, pwd ->
+        pwd.at(l - 1).eq(letter) != pwd.at(r - 1).eq(letter)
     }
 
     private fun countValid(passwords: List<String>,

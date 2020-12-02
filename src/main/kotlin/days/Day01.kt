@@ -3,6 +3,8 @@ package days
 import io.vavr.collection.List
 
 class Day01 : Day(1) {
+    override fun title() = "Report Repair"
+
     override fun partOne() = solve(inputAsVavrInts, 2)
 
     override fun partTwo() = solve(inputAsVavrInts, 3)
@@ -31,4 +33,10 @@ class Day01 : Day(1) {
 //                .first()
 //    }
 
+// -- also part 1 can be 7 times faster using a Set --
+//    override fun partOne(): Int {
+//        val input = inputList.map{it.toInt()}.toSet()
+//        return input.mapNotNull { v -> if (input.contains(2020 - v)) v * (2020 - v) else null }
+//                .first()
+//    }
 

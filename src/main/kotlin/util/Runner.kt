@@ -47,8 +47,8 @@ object Runner {
     }
 
     private fun printDay(dayClass: Class<out Day>) {
-        println("\n=== DAY ${dayNumber(dayClass.simpleName)} ===")
         val day = dayClass.constructors[0].newInstance() as Day
+        println("\n--- Day ${dayNumber(dayClass.simpleName)}: ${day.title()} ---")
 
         val partOne = measureTimedValue { day.partOne() }
         val partTwo = measureTimedValue { day.partTwo() }

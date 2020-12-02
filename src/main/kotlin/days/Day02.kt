@@ -1,6 +1,8 @@
 package days
 
 class Day02 : Day(2) {
+    override fun title() = "Password Philosophy"
+
     override fun partOne() = countValid(inputList) { l, r, letter, pwd ->
         (l..r).contains(pwd.occurrences(letter))
     }

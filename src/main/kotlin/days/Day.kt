@@ -17,6 +17,8 @@ abstract class Day(dayNumber: Int) {
 
     abstract fun partTwo(): Any
 
+    abstract fun title(): String
+
     // Extensions
     // ArrowKt
     fun arrow.core.Tuple2<Int, Int>.sum(): Int = this.a + this.b

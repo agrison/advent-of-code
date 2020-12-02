@@ -30,4 +30,6 @@ abstract class Day(dayNumber: Int) {
 
     // core types
     fun Boolean.toInt() = if (this) 1 else 0
+    fun String.occurrences(c: Char) = this.count { it == c}
+    operator fun Char.plus(c: Char) = this.toString() + c
 }

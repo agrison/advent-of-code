@@ -13,7 +13,7 @@ class Day03 : Day(3) {
     private fun slope(lines: List<String>, rows: Int, cols: Int): Long {
         return lines.mapIndexed { y, row ->
             val x = rows * y
-            (rows * y % cols == 0 && row[(x / cols) % row.length].eq('#')).toInt()
+            (x % cols == 0 && row[(x / cols) % row.length].eq('#')).toInt()
         }.fold(0L, Long::plus)
     }
 

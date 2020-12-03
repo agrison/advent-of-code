@@ -10,6 +10,10 @@ Part 2: 84035952      (1.60s)
 --- Day 2: Password Philosophy ---
 Part 1: 645      (11.4ms)
 Part 2: 737      (3.18ms)
+
+--- Day 3: Toboggan Trajectory ---
+Part 1: 156             (687us)
+Part 2: 3521829480      (584us)
 ```
 
 ### Running

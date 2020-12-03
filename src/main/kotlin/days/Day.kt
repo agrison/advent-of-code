@@ -36,4 +36,7 @@ abstract class Day(dayNumber: Int) {
     fun Char.eq(c: Char) = this == c
     fun IntRange.includes(vararg ints: Int) = ints.all(this::contains)
     fun String.at(pos: Int) = this[pos % this.length]
+    fun Boolean.toInt() = if (this) 1 else 0
+    fun List<Int>.multiply()= this.reduce { a, b -> a * b }
+    fun List<Long>.multiply()= this.reduce { a, b -> a * b }
 }

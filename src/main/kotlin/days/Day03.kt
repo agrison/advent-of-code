@@ -12,8 +12,7 @@ class Day03 : Day(3) {
     private fun slope(rows: Int, cols: Int): Long {
         return inputList.mapIndexed { y, row ->
             val (x, c) = Pair(rows * y, rows * y / cols)
-            (row.debug03(false, c) &&                              // turn on debugging if needed
-                    x.divisible(cols) && row.at(c, '#')).toInt()
+            (row.debug03(false, c) &&  x.divisible(cols) && row.at(c, '#')).toInt()
         }.fold(0L, Long::plus)
     }
 }

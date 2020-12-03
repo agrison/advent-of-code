@@ -11,25 +11,11 @@ class Day03 : Day(3) {
 
     private fun slope(rows: Int, cols: Int): Long {
         return inputList.mapIndexed { y, row ->
-            val x = rows * y
-            (x.divisible(cols) && row.at(x / cols, '#')).toInt()
+            val (x, c) = Pair(rows * y, rows * y / cols)
+            (row.debug03(false, c) &&                              // turn on debugging if needed
+                    x.divisible(cols) && row.at(c, '#')).toInt()
         }.fold(0L, Long::plus)
     }
-
-    // classic
-    // private fun slope(lines: List<String>, r: Int, c: Int): Long {
-    //     var (y, x, rows, columns) = arrayOf(0, 0, lines.size, lines[0].length)
-    //     var trees = 0L
-    //     while (y < rows) {
-    //         x += r
-    //         y += c
-    //         if (y >= rows)
-    //             break
-    //         if (lines[y][x % columns] == '#')
-    //             trees++
-    //     }
-    //     return trees
-    // }
 }
 
 

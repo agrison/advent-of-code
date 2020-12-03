@@ -1,7 +1,5 @@
 package days
 
-import arrow.core.Tuple2
-import arrow.core.Tuple3
 import util.InputReader
 
 abstract class Day(dayNumber: Int) {
@@ -38,8 +36,33 @@ abstract class Day(dayNumber: Int) {
     fun String.at(pos: Int) = this[pos % this.length]
     fun String.at(pos: Int, c: Char) = this.at(pos) == c
     fun Boolean.toInt() = if (this) 1 else 0
-    fun List<Int>.multiply()= this.reduce { a, b -> a * b }
-    fun List<Long>.multiply()= this.reduce { a, b -> a * b }
+    fun List<Int>.multiply() = this.reduce { a, b -> a * b }
+    fun List<Long>.multiply() = this.reduce { a, b -> a * b }
     fun Int.divisible(other: Int) = this % other == 0
     fun Long.divisible(other: Long) = this % other == 0L
+
+    // colors for debugging graphical puzzles
+    val ANSI_RESET = "\u001B[0m"
+    val ANSI_BLACK = "\u001B[30m"
+    val ANSI_RED = "\u001B[31m"
+    val ANSI_GREEN = "\u001B[32m"
+    val ANSI_YELLOW = "\u001B[33m"
+    val ANSI_BLUE = "\u001B[34m"
+    val ANSI_PURPLE = "\u001B[35m"
+    val ANSI_CYAN = "\u001B[36m"
+    val ANSI_WHITE = "\u001B[37m"
+    fun blue(s: String) = "${ANSI_BLUE}${s}$ANSI_RESET"
+    fun red(s: String) = "${ANSI_RED}${s}$ANSI_RESET"
+    fun cyan(s: String) = "${ANSI_CYAN}${s}$ANSI_RESET"
+    fun green(s: String) = "${ANSI_GREEN}${s}$ANSI_RESET"
+    fun greenBg(s: String) = "\u001B[42m${ANSI_WHITE}${s}${ANSI_RESET}"
+    fun redBg(s: String) = "\u001B[41m${ANSI_YELLOW}${s}${ANSI_RESET}"
+
+    // specific to Day 03
+    fun String.debug03(enabled: Boolean, at: Int): Boolean {
+        if (enabled)
+            println(this.substring(0, at % this.length) + (if (this.at(at, '#')) red("#") else green("•"))
+                    + (if ((at + 1) % this.length == 0) "" else this.substring((at + 1) % this.length)))
+        return true
+    }
 }

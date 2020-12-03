@@ -1,16 +1,14 @@
 package days
 
-import io.vavr.collection.List
-
 class Day01 : Day(1) {
     override fun title() = "Report Repair"
 
-    override fun partOne() = solve(inputAsVavrInts, 2)
+    override fun partOne() = solve(2)
 
-    override fun partTwo() = solve(inputAsVavrInts, 3)
+    override fun partTwo() = solve(3)
 
-    private fun solve(lines: List<Int>, size: Int): Int =
-            lines.combinations(size)
+    private fun solve(size: Int): Int =
+            inputAsVavrInts.combinations(size)
                     .filter { it.sumValues() == 2020 }
                     .map { it.mulValues() }
                     .head()

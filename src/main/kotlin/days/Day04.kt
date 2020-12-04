@@ -1,6 +1,7 @@
 package days
 
 import arrow.core.extensions.list.foldable.forAll
+import java.lang.System.lineSeparator
 
 class Day04 : Day(4) {
     override fun title() = "Passport Processing"
@@ -23,8 +24,8 @@ class Day04 : Day(4) {
             { p -> p.field("pid").matches("\\d{9}") }))
 
     private fun validPassports(criteria: List<((s: String) -> Boolean)>): Int {
-        return inputString.split((System.lineSeparator().repeat(2)).regex())
-                .map { it.replace("\n".regex(), " ").replace("\\s+".toRegex(), " ") }
+        return inputString.split((lineSeparator().repeat(2)).regex())
+                .map { it.replace("\n".regex(), " ").replace("\\s+".regex(), " ") }
                 .count { p -> criteria.forAll { it(p) } }
     }
 }

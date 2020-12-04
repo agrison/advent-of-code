@@ -25,9 +25,8 @@ class Day04 : Day(4) {
             { p -> p.field("ecl").`in`("amb", "blu", "brn", "gry", "grn", "hzl", "oth") },
             { p -> p.field("pid").matches("\\d{9}") }))
 
-    private fun validPassports(criteria: List<((s: String) -> Boolean)>): Int {
-        return inputString.split(lineSeparator() * 2)
-                .map { it.replace(lineSeparator(), " ") }
-                .count { p -> criteria.forAll { it(p) } }
-    }
+    private fun validPassports(criteria: List<((s: String) -> Boolean)>): Int =
+            inputString.split(lineSeparator() * 2)
+                    .map { it.replace(lineSeparator(), " ") }
+                    .count { p -> criteria.forAll { it(p) } }
 }

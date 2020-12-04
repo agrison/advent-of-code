@@ -40,6 +40,14 @@ abstract class Day(dayNumber: Int) {
     fun List<Long>.multiply() = this.reduce { a, b -> a * b }
     fun Int.divisible(other: Int) = this % other == 0
     fun Long.divisible(other: Long) = this % other == 0L
+    fun String.containsAll(vararg strs: String) = strs.map { this.contains(it) }.fold(true) { a,b -> a && b }
+    fun String.field(s: String): String = runCatching { this.substring(this.indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
+    fun String.intField(s: String, remove: String="@"): Int = this.replace(remove, "").field(s).int()
+    fun String.int() = runCatching { Integer.parseInt(this.replace("""[^\d]""", "")) }.getOrDefault(0)
+    fun Int.`in`(i: IntRange) = (i.first..(i.last+1)).contains(this)
+    fun String.regex() = this.toRegex()
+    fun String.matches(s: String) = this.matches(s.regex())
+    fun String.`in`(vararg strs: String) = strs.contains(this)
 
     // colors for debugging graphical puzzles
     val ANSI_RESET = "\u001B[0m"

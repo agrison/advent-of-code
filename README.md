@@ -14,6 +14,10 @@ Part 2: 737      (3.18ms)
 --- Day 3: Toboggan Trajectory ---
 Part 1: 156             (687us)
 Part 2: 3521829480      (584us)
+
+--- Day 4: Passport Processing ---
+Part 1: 242      (19.9ms)
+Part 2: 186      (28.5ms)
 ```
 
 ### Running

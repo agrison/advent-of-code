@@ -48,6 +48,7 @@ abstract class Day(dayNumber: Int) {
     fun String.regex() = this.toRegex()
     fun String.matches(s: String) = this.matches(s.regex())
     fun String.`in`(vararg strs: String) = strs.contains(this)
+    operator fun String.times(i: Int) = this.repeat(i)
 
     // colors for debugging graphical puzzles
     val ANSI_RESET = "\u001B[0m"

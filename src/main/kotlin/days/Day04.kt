@@ -6,7 +6,9 @@ import java.lang.System.lineSeparator
 class Day04 : Day(4) {
     override fun title() = "Passport Processing"
 
-    override fun partOne() = validPassports(listOf { it -> it.containsAll("byr:", "iyr:", "eyr:", "hgt:", "hcl:", "ecl:", "pid:") })
+    override fun partOne() = validPassports(listOf { it ->
+        it.containsAll("byr:", "iyr:", "eyr:", "hgt:", "hcl:", "ecl:", "pid:")
+    })
 
     override fun partTwo() = validPassports(listOf(
             { p -> p.intField("byr").`in`(1920..2002) },
@@ -24,10 +26,8 @@ class Day04 : Day(4) {
             { p -> p.field("pid").matches("\\d{9}") }))
 
     private fun validPassports(criteria: List<((s: String) -> Boolean)>): Int {
-        return inputString.split((lineSeparator().repeat(2)).regex())
-                .map { it.replace("\n".regex(), " ").replace("\\s+".regex(), " ") }
+        return inputString.split(lineSeparator() * 2)
+                .map { it.replace(lineSeparator(), " ") }
                 .count { p -> criteria.forAll { it(p) } }
     }
 }
-
-

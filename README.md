@@ -18,6 +18,10 @@ Part 2: 3521829480      (584us)
 --- Day 4: Passport Processing ---
 Part 1: 242      (19.9ms)
 Part 2: 186      (28.5ms)
+
+--- Day 5: Binary Boarding ---
+Part 1: 974      (6.53ms)
+Part 2: 646      (6.95ms)
 ```
 
 ### Running

@@ -60,6 +60,7 @@ abstract class Day(dayNumber: Int) {
         m.forEach { s = s.replace(it.key.regex(), it.value) }
         return s
     }
+    fun String.toInt(radix: Int) = parseInt(this, radix)
     fun String.binary() = parseInt(this, 2)
     fun <T> Collection<T>.contains(vararg e: T) = this.containsAll(e.toList())
 

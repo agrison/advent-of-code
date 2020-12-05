@@ -1,5 +1,14 @@
 # Advent Of Code 2020
 
+## Goal
+
+After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the 
+[Advent of Code](https://adventofcode.com/2020) with **Kotlin** (hopefully this time I won't need Java). 
+
+1. A deep dive into Kotlin. 
+2. Write fast and idiomatic solutions.
+3. Using extensions to make code shorter (see [Day.kt](https://github.com/agrison/advent-of-code-2020/blob/master/src/main/kotlin/days/Day.kt)).
+
 ## Output
 
 ```text

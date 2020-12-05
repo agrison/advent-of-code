@@ -56,6 +56,7 @@ abstract class Day(dayNumber: Int) {
         return s
     }
     fun String.binary() = parseInt(this, 2)
+    fun <T> Collection<T>.contains(vararg e: T) = this.containsAll(e.toList())
 
     // colors for debugging graphical puzzles
     val ANSI_RESET = "\u001B[0m"

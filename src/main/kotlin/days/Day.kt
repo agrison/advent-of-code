@@ -55,6 +55,11 @@ abstract class Day(dayNumber: Int) {
         m.forEach { s = s.replace(it.key, it.value) }
         return s
     }
+    fun String.replacingRegex(m: Map<String, String>): String {
+        var s = this
+        m.forEach { s = s.replace(it.key.regex(), it.value) }
+        return s
+    }
     fun String.binary() = parseInt(this, 2)
     fun <T> Collection<T>.contains(vararg e: T) = this.containsAll(e.toList())
 

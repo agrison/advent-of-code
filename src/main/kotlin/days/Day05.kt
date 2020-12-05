@@ -10,6 +10,6 @@ class Day05 : Day(5) {
     }
 
     private fun seats() = inputList.map {
-        it.replacing(mapOf('F' to '0', 'B' to '1', 'L' to '0', 'R' to '1')).binary()
+        it.replacingRegex(mapOf("[FL]" to "0", "[BR]" to "1")).binary()
     }
 }

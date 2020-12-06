@@ -21,36 +21,36 @@ abstract class Day(dayNumber: Int) {
 
     // Extensions
     // ArrowKt
-    fun arrow.core.Tuple2<Int, Int>.sum(): Int = this.a + this.b
-    fun arrow.core.Tuple2<Int, Int>.mul(): Int = this.a * this.b
-    fun arrow.core.Tuple3<Int, Int, Int>.sum(): Int = this.a + this.b + this.c
-    fun arrow.core.Tuple3<Int, Int, Int>.mul(): Int = this.a * this.b * this.c
+    fun arrow.core.Tuple2<Int, Int>.sum(): Int = a + b
+    fun arrow.core.Tuple2<Int, Int>.mul(): Int = a * b
+    fun arrow.core.Tuple3<Int, Int, Int>.sum(): Int = a + b + c
+    fun arrow.core.Tuple3<Int, Int, Int>.mul(): Int = a * b * c
 
     // Vavr
     fun io.vavr.collection.List<Int>.sumValues(): Int = this.reduce(Integer::sum)
     fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyExact)
 
     // core types
-    fun String.occurrences(c: Char) = this.count { it == c }
-    operator fun Char.plus(c: Char) = this.toString() + c
+    fun String.occurrences(c: Char) = count { it == c }
+    operator fun Char.plus(c: Char) = toString() + c
     fun Char.eq(c: Char) = this == c
     fun IntRange.includes(vararg ints: Int) = ints.all(this::contains)
-    fun String.at(pos: Int) = this[pos % this.length]
-    fun String.at(pos: Int, c: Char) = this.at(pos) == c
+    fun String.at(pos: Int) = this[pos % length]
+    fun String.at(pos: Int, c: Char) = at(pos) == c
     fun Boolean.toInt() = if (this) 1 else 0
-    fun List<Int>.multiply() = this.reduce { a, b -> a * b }
-    fun List<Long>.multiply() = this.reduce { a, b -> a * b }
+    fun List<Int>.multiply() = reduce { a, b -> a * b }
+    fun List<Long>.multiply() = reduce { a, b -> a * b }
     fun Int.divisible(other: Int) = this % other == 0
     fun Long.divisible(other: Long) = this % other == 0L
-    fun String.containsAll(vararg strs: String) = strs.map { this.contains(it) }.fold(true) { a, b -> a && b }
-    fun String.field(s: String): String = runCatching { this.substring(this.indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
-    fun String.intField(s: String, remove: String = "@"): Int = this.replace(remove, "").field(s).int()
-    fun String.int() = runCatching { Integer.parseInt(this.replace("""[^\d]""", "")) }.getOrDefault(0)
+    fun String.containsAll(vararg strs: String) = strs.map { contains(it) }.fold(true) { a, b -> a && b }
+    fun String.field(s: String): String = runCatching { substring(indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
+    fun String.intField(s: String, remove: String = "@"): Int = replace(remove, "").field(s).int()
+    fun String.int() = runCatching { Integer.parseInt(replace("""[^\d]""", "")) }.getOrDefault(0)
     fun Int.`in`(i: IntRange) = (i.first..(i.last + 1)).contains(this)
-    fun String.regex() = this.toRegex()
-    fun String.matches(s: String) = this.matches(s.regex())
+    fun String.regex() = toRegex()
+    fun String.matches(s: String) = matches(s.regex())
     fun String.`in`(vararg strs: String) = strs.contains(this)
-    operator fun String.times(i: Int) = this.repeat(i)
+    operator fun String.times(i: Int) = repeat(i)
     fun String.replacing(m: Map<Char, Char>): String {
         var s = this
         m.forEach { s = s.replace(it.key, it.value) }
@@ -65,8 +65,8 @@ abstract class Day(dayNumber: Int) {
 
     fun String.toInt(radix: Int) = parseInt(this, radix)
     fun String.binary() = parseInt(this, 2)
-    fun <T> Collection<T>.contains(vararg e: T) = this.containsAll(e.toList())
-    fun String.charSet() = this.split("").toSet() - ""
+    fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
+    fun String.charSet() = split("").toSet() - ""
 
     // constants
     val alphabet = CharArray(26) { (it + 97).toChar() }.joinToString("")

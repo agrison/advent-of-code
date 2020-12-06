@@ -6,10 +6,8 @@ class Day06 : Day(6) {
     override fun title() = "Custom Customs"
 
     override fun partOne() = inputString.split(lineSeparator() * 2)
-            .map { it.replace(lineSeparator(), "").charSet().size }
-            .sum()
+            .sumBy { it.replace(lineSeparator(), "").charSet().size }
 
     override fun partTwo() = inputString.split(lineSeparator() * 2)
-            .map { it.lines().fold(alphabet.charSet()) { all, s -> all.intersect(s.charSet()) }.size }
-            .sum()
+            .sumBy { it.lines().fold(alphabet.charSet()) { all, s -> all.intersect(s.charSet()) }.size }
 }

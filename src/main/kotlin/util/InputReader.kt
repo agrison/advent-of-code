@@ -15,6 +15,12 @@ object InputReader {
         return fromResources(day).readLines()
     }
 
+    fun inputAsSet(day: Int): Set<String> {
+        val s = LinkedHashSet<String>()
+        s.addAll(fromResources(day).readLines())
+        return s
+    }
+
     fun inputAsVavrStrings(day: Int): io.vavr.collection.List<String> {
         return fromResources(day).readLines().toVavrList()
     }

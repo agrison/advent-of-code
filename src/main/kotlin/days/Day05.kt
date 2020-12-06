@@ -9,7 +9,7 @@ class Day05 : Day(5) {
         (1..128 * 8).first { !s.contains(it) && s.contains(it - 1, it + 1) }
     }
 
-    private fun seats() = inputList.map {
+    private fun seats() = inputSet.map {
         it.replacingRegex(mapOf("[FL]" to "0", "[BR]" to "1")).toInt(2)
     }
 }

@@ -31,6 +31,10 @@ Part 2: 186      (28.5ms)
 --- Day 5: Binary Boarding ---
 Part 1: 974      (6.53ms)
 Part 2: 646      (6.95ms)
+
+--- Day 6: Custom Customs ---
+Part 1: 6630      (10.6ms)
+Part 2: 3437      (12.2ms)
 ```
 
 ### Running

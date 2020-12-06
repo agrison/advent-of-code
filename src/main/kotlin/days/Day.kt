@@ -55,14 +55,20 @@ abstract class Day(dayNumber: Int) {
         m.forEach { s = s.replace(it.key, it.value) }
         return s
     }
+
     fun String.replacingRegex(m: Map<String, String>): String {
         var s = this
         m.forEach { s = s.replace(it.key.regex(), it.value) }
         return s
     }
+
     fun String.toInt(radix: Int) = parseInt(this, radix)
     fun String.binary() = parseInt(this, 2)
     fun <T> Collection<T>.contains(vararg e: T) = this.containsAll(e.toList())
+    fun String.charSet() = this.split("").toSet() - ""
+
+    // constants
+    val alphabet = CharArray(26) { (it + 97).toChar() }.joinToString("")
 
     // colors for debugging graphical puzzles
     val ANSI_RESET = "\u001B[0m"

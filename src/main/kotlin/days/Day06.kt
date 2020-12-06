@@ -10,6 +10,6 @@ class Day06 : Day(6) {
             .sum()
 
     override fun partTwo() = inputString.split(lineSeparator() * 2)
-            .map { it.split("\n").fold(alphabet.charSet()) { all, s -> all.intersect(s.charSet()) }.size }
+            .map { it.lines().fold(alphabet.charSet()) { all, s -> all.intersect(s.charSet()) }.size }
             .sum()
 }

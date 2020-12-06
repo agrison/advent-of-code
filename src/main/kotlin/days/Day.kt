@@ -2,6 +2,7 @@ package days
 
 import util.InputReader
 import java.lang.Integer.parseInt
+import java.lang.System.lineSeparator
 
 abstract class Day(dayNumber: Int) {
 
@@ -67,6 +68,7 @@ abstract class Day(dayNumber: Int) {
     fun String.binary() = parseInt(this, 2)
     fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
     fun String.charSet() = split("").toSet() - ""
+    fun String.lines() = split(lineSeparator())
 
     // constants
     val alphabet = CharArray(26) { (it + 97).toChar() }.joinToString("")

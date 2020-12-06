@@ -8,7 +8,6 @@ class Day06 : Day(6) {
             .reduce(Integer::sum)
 
     override fun partTwo() = inputString.split(System.lineSeparator() * 2)
-            .map {
-                it.split("\n").fold(alphabet.charSet()) { all, s -> all.intersect(s.charSet()) }.size
-            }.reduce(Integer::sum)
+            .map { it.split("\n").fold(alphabet.charSet()) { all, s -> all.intersect(s.charSet()) }.size }
+            .reduce(Integer::sum)
 }

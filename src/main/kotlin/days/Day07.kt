@@ -8,26 +8,23 @@ class Day07 : Day(7) {
     override fun partTwo() = nestedBags(loadBags().second)
 
     // recursive
-    private fun bagsWithGold(bagsIn: Map<Color, Colors> = loadBags().first, color: String = "shiny gold",
-                     set: Colors = mutableSetOf()): Int {
-        bagsIn.getValue(color).forEach {
-            bagsWithGold(bagsIn, it, set + it)
-        }
+    private fun bagsWithGold(bagsIn: Bags = loadBags().first, color: String = "shiny gold",
+                             set: Colors = mutableSetOf()): Int {
+        bagsIn.getValue(color).forEach { bagsWithGold(bagsIn, it, set + it) }
         return set.size
     }
 
     // recursive
-    private fun nestedBags(bags: Map<Color, ColorCounts>, color: String = "shiny gold"): Int {
+    private fun nestedBags(bags: BagsCount, color: String = "shiny gold"): Int {
         var total = 0
         bags.getValue(color).forEach {
-            // burnt myself on the computation order :)
-            total += it.first
-            total += it.first * nestedBags(bags, it.second)
+            total += it.first // bags
+            total += it.first * nestedBags(bags, it.second) // the nested
         }
         return total
     }
 
-    private fun loadBags(): Pair<Map<Color, Colors>, Map<Color, ColorCounts>> {
+    private fun loadBags(): Pair<Bags, BagsCount> {
         val bagsIn = mutableMapOf<Color, Colors>().withDefault { mutableSetOf() }
         val bags = mutableMapOf<Color, ColorCounts>().withDefault { mutableListOf() }
         inputList.forEach {
@@ -50,3 +47,5 @@ typealias Color = String
 typealias Colors = MutableSet<Color>
 typealias ColorCount = Pair<Int, Color>
 typealias ColorCounts = MutableList<ColorCount>
+typealias Bags = Map<Color, Colors>
+typealias BagsCount = Map<Color, ColorCounts>

@@ -24,12 +24,9 @@ class Day07 : Day(7) {
         val bagsIn = mutableMapOf<Color, Colors>().withDefault { mutableSetOf() }
         val bags = mutableMapOf<Color, ColorCounts>().withDefault { mutableListOf() }
         inputList.forEach {
-            val color = it.split(" bags").first()
+            val (color) = it.split(" bags")
             "(\\d+) (.+?) bags?[,.]".regex().findAll(it.split("contain ")[1]).forEach { b ->
                 val (count, colorInside) = b.destructured
-                // was using [] but it doesn't work with `withDefault` since it would break the Map contract (returning null if not found)
-                // still learning Kotlin, lost a good 5 minutes on this :-D
-                // https://youtrack.jetbrains.com/issue/KT-11851?_ga=2.219652313.1528153521.1607319978-2134806531.1605262314
                 bagsIn[colorInside] = bagsIn.getValue(colorInside) + color
                 bags[color] = bags.getValue(color) + Pair(count.toInt(), colorInside)
             }
@@ -45,3 +42,8 @@ typealias ColorCount = Pair<Int, Color>
 typealias ColorCounts = MutableList<ColorCount>
 typealias Bags = Map<Color, Colors>
 typealias BagsCount = Map<Color, ColorCounts>
+
+// Note:
+// was using [] with Map but it doesn't work with `withDefault` since it would break the Map contract (returning null if not found)
+// still learning Kotlin, lost a good 5 minutes on this :-D
+// https://youtrack.jetbrains.com/issue/KT-11851?_ga=2.219652313.1528153521.1607319978-2134806531.1605262314

@@ -15,14 +15,10 @@ class Day07 : Day(7) {
     }
 
     // recursive
-    private fun nestedBags(bags: BagsCount, color: String = "shiny gold"): Int {
-        var total = 0
-        bags.getValue(color).forEach {
-            total += it.first // bags
-            total += it.first * nestedBags(bags, it.second) // the nested
-        }
-        return total
-    }
+    private fun nestedBags(bags: BagsCount, color: String = "shiny gold"): Int =
+            bags.getValue(color).scan(0) { acc, it ->
+                (acc + it.first) + it.first * nestedBags(bags, it.second)
+            }.last()
 
     private fun loadBags(): Pair<Bags, BagsCount> {
         val bagsIn = mutableMapOf<Color, Colors>().withDefault { mutableSetOf() }

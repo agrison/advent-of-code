@@ -35,6 +35,10 @@ Part 2: 646      (6.95ms)
 --- Day 6: Custom Customs ---
 Part 1: 6630      (10.6ms)
 Part 2: 3437      (12.2ms)
+
+--- Day 7: Handy Haversacks ---
+Part 1: 287        (12.9ms)
+Part 2: 48160      (4.73ms)
 ```
 
 ### Running

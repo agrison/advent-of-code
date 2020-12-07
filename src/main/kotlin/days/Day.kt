@@ -69,6 +69,14 @@ abstract class Day(dayNumber: Int) {
     fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
     fun String.charSet() = split("").toSet() - ""
     fun String.lines() = split(lineSeparator())
+    operator fun <T> MutableSet<T>.plus(e: T): MutableSet<T> {
+        this.add(e)
+        return this
+    }
+    operator fun <T> MutableList<T>.plus(e: T): MutableList<T> {
+        this.add(e)
+        return this
+    }
 
     // constants
     val alphabet = CharArray(26) { (it + 97).toChar() }.joinToString("")

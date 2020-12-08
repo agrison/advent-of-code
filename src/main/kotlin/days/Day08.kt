@@ -19,7 +19,7 @@ class Day08 : Day(8) {
             else if (isEnd(pos)) return Success(acc)
 
             visited.add(pos)
-            val instr: Instr = this[pos]
+            val instr = this[pos]
             pos += when (instr.op()) {
                 "acc" -> { acc += instr.arg(); 1 }
                 "jmp" -> instr.arg()

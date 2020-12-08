@@ -8,6 +8,7 @@ abstract class Day(dayNumber: Int) {
 
     // Input feeders
     protected val inputList: List<String> by lazy { InputReader.inputAsList(dayNumber) }
+    protected val program: List<String> by lazy { InputReader.inputAsList(dayNumber) }
     protected val inputSet: Set<String> by lazy { InputReader.inputAsSet(dayNumber) }
     protected val inputString: String by lazy { InputReader.inputAsString(dayNumber) }
     protected val inputInts: List<Int> by lazy { InputReader.inputAsInts(dayNumber) }
@@ -87,7 +88,13 @@ abstract class Day(dayNumber: Int) {
         to -> switchOp(to, from)
         else -> this
     }
-    fun Int.atEnd(program: Instructions): Boolean = this == program.size
+    fun Program.exchange(i: Int, from: String, to: String): Program {
+        val l = this.toMutableList()
+        l[i] = l[i].exchange(from, to)
+        return l
+    }
+    fun Int.atEnd(program: Program): Boolean = this == program.size
+    fun Program.isEnd(i: Int) = size == i
 
 
     // constants

@@ -7,7 +7,7 @@ class Day08 : Day(8) {
     override fun partOne() = program.run().output
 
     override fun partTwo() = program.indices
-            .map { program.exchange(it, "jmp", "nop").run() }
+            .map { program.swap(it, "jmp", "nop").run() }
             .first { it is Success }.output
 
     fun Program.run(): Execution {

@@ -90,17 +90,16 @@ abstract class Day(dayNumber: Int) {
     fun Instr.op(): String = split(" ")[0]
     fun Instr.arg(): Int = parseInt(split(" ")[1])
     fun Instr.switchOp(from: String, to: String) = replace(from, to)
-    fun Instr.exchange(from: String, to: String) = when(op()) {
+    fun Instr.swap(from: String, to: String) = when(op()) {
         from -> switchOp(from, to)
         to -> switchOp(to, from)
         else -> this
     }
-    fun Program.exchange(i: Int, from: String, to: String): Program {
+    fun Program.swap(i: Int, from: String, to: String): Program {
         val l = this.toMutableList()
-        l[i] = l[i].exchange(from, to)
+        l[i] = l[i].swap(from, to)
         return l
     }
-    fun Int.atEnd(program: Program): Boolean = this == program.size
     fun Program.isEnd(i: Int) = size == i
 
 

@@ -3,17 +3,15 @@ package days
 class Day08 : Day(8) {
     override fun title() = "Handheld Halting"
 
-    override fun partOne() = when (val exec = program.run()) {
-        is InfiniteLoop -> exec.output
-        else -> -1
-    }
+    // returns an InfiniteLoop(value)
+    override fun partOne() = program.run().output
 
-    override fun partTwo(): Int =
-            program.indices.map { program.exchange(it, "jmp", "nop").run() }
-                    .first { it is Success }.output
+    override fun partTwo() = program.indices
+            .map { program.exchange(it, "jmp", "nop").run() }
+            .first { it is Success }.output
 
     fun Program.run(): Execution {
-        var (pos, acc, visited) = Triple<Int, Int, MutableSet<Int>>(0, 0, mutableSetOf())
+        var (pos, acc, visited) = Triple(0, 0, mutableSetOf<Int>())
         while (true) {
             if (pos in visited) return InfiniteLoop(acc)
             else if (isEnd(pos)) return Success(acc)

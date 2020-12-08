@@ -35,11 +35,9 @@ class Day08 : Day(8) {
             visited.add(pos)
             val instr = program[pos]
             pos += when (instr.op()) {
-                "acc" -> {
-                    acc += instr.arg(); 1
-                }
-                "nop" -> 1
+                "acc" -> { acc += instr.arg(); 1 }
                 "jmp" -> instr.arg()
+                "nop" -> 1
                 else -> 0
             }
         }

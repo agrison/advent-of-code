@@ -39,6 +39,10 @@ Part 2: 3437      (12.2ms)
 --- Day 7: Handy Haversacks ---
 Part 1: 287        (12.9ms)
 Part 2: 48160      (4.73ms)
+
+--- Day 8: Handheld Halting ---
+Part 1: 1262      (1.87ms)
+Part 2: 1643      (33.5ms)
 ```
 
 ### Running

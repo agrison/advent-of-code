@@ -78,6 +78,18 @@ abstract class Day(dayNumber: Int) {
         return this
     }
 
+    // Instructions
+    fun Instr.op(): String = split(" ")[0]
+    fun Instr.arg(): Int = parseInt(split(" ")[1])
+    fun Instr.switchOp(from: String, to: String) = replace(from, to)
+    fun Instr.exchange(from: String, to: String) = when(op()) {
+        from -> switchOp(from, to)
+        to -> switchOp(to, from)
+        else -> this
+    }
+    fun Int.atEnd(program: Instructions): Boolean = this == program.size
+
+
     // constants
     val alphabet = CharArray(26) { (it + 97).toChar() }.joinToString("")
 

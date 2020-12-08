@@ -9,7 +9,7 @@ class Day08 : Day(8) {
     }
 
     override fun partTwo(): Int =
-            (0 until program.size - 1).map { program.exchange(it, "jmp", "nop").run() }
+            program.indices.map { program.exchange(it, "jmp", "nop").run() }
                     .first { it is Success }.output
 
     fun Program.run(): Execution {

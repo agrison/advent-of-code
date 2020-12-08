@@ -29,10 +29,3 @@ class Day08 : Day(8) {
         }
     }
 }
-
-typealias Instr = String
-typealias Program = List<Instr>
-
-abstract class Execution(val output: Int)
-data class InfiniteLoop(val acc: Int) : Execution(acc)
-data class Success(val acc: Int) : Execution(acc)

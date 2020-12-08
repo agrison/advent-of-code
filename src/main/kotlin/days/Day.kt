@@ -4,6 +4,9 @@ import util.InputReader
 import java.lang.Integer.parseInt
 import java.lang.System.lineSeparator
 
+typealias Instr = String
+typealias Program = List<Instr>
+
 abstract class Day(dayNumber: Int) {
 
     // Input feeders
@@ -80,6 +83,10 @@ abstract class Day(dayNumber: Int) {
     }
 
     // Instructions
+    abstract class Execution(val output: Int)
+    data class InfiniteLoop(val acc: Int) : Execution(acc)
+    data class Success(val acc: Int) : Execution(acc)
+
     fun Instr.op(): String = split(" ")[0]
     fun Instr.arg(): Int = parseInt(split(" ")[1])
     fun Instr.switchOp(from: String, to: String) = replace(from, to)

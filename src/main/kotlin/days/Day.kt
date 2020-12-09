@@ -80,6 +80,7 @@ abstract class Day(dayNumber: Int) {
         this.add(e)
         return this
     }
+    fun List<Long>.cumSum() = scan(0L) { a, b -> a + b}
 
     // Instructions
     abstract class Execution(val output: Int)

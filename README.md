@@ -46,7 +46,7 @@ Part 2: 1643      (33.5ms)
 
 --- Day 9: Encoding Error ---
 Part 1: 41682220      (13.6ms)
-Part 2: 5388976       (21.9ms)
+Part 2: 5388976       (19.2ms)
 ```
 
 ### Running

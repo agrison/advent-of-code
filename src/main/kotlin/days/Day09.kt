@@ -13,8 +13,7 @@ class Day09 : Day(9) {
             }]
 
     override fun partTwo(): Long {
-        val invalidNumber = partOne()
-        val scan = series.scan(0L) { a, b -> a + b }
+        val (invalidNumber, scan) = Pair(partOne(), series.cumSum())
         scan.forEachIndexed { first, value ->
             (first until scan.size).find { last -> scan[last] - value == invalidNumber }
                     ?.let { last ->
@@ -24,7 +23,6 @@ class Day09 : Day(9) {
         return -1L
     }
 
-    private fun sumOfTwoInPreamble(n: Long, preamble: Set<Long>): Boolean {
-        return preamble.exists { p -> preamble.contains(n - p) && n - p != p }
-    }
+    private fun sumOfTwoInPreamble(n: Long, preamble: Set<Long>) =
+            preamble.exists { p -> preamble.contains(n - p) && n - p != p }
 }

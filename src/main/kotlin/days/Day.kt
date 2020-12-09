@@ -14,13 +14,12 @@ abstract class Day(dayNumber: Int) {
     protected val program: List<String> by lazy { InputReader.inputAsList(dayNumber) }
     protected val inputSet: Set<String> by lazy { InputReader.inputAsSet(dayNumber) }
     protected val inputString: String by lazy { InputReader.inputAsString(dayNumber) }
-    protected val inputInts: List<Int> by lazy { InputReader.inputAsInts(dayNumber) }
     protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy { InputReader.inputAsVavrStrings(dayNumber) }
     protected val inputAsVavrInts: io.vavr.collection.List<Int> by lazy { InputReader.inputAsVavrInts(dayNumber) }
 
-    abstract fun partOne(): Any
+    abstract fun partOne(): Any?
 
-    abstract fun partTwo(): Any
+    abstract fun partTwo(): Any?
 
     abstract fun title(): String
 

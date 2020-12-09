@@ -50,8 +50,8 @@ object Runner {
         val day = dayClass.constructors[0].newInstance() as Day
         println("\n--- Day ${dayNumber(dayClass.simpleName)}: ${day.title()} ---")
 
-        val partOne = measureTimedValue { day.partOne() }
-        val partTwo = measureTimedValue { day.partTwo() }
+        val partOne = measureTimedValue { day.partOne() ?: "empty" }
+        val partTwo = measureTimedValue { day.partTwo() ?: "empty" }
         printParts(partOne, partTwo)
     }
 

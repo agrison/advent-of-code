@@ -43,7 +43,7 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
  🌟 Part 2: 48160      (4.73ms)
 
  🎄 --- Day 8: Handheld Halting --- 
-🌟 Part 1: 1262      (1.87ms)
+ 🌟 Part 1: 1262      (1.87ms)
  🌟 Part 2: 1643      (33.5ms)
 
 🎄 --- Day 9: Encoding Error --- 

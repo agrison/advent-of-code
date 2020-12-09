@@ -32,6 +32,7 @@ dependencies {
 
     implementation("io.vavr", "vavr", "0.10.3")
     implementation("io.vavr", "vavr-kotlin", "0.10.2")
+    implementation("com.vdurmont", "emoji-java", "5.1.1")
 }
 
 tasks.withType<KotlinCompile> {

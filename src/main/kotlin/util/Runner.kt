@@ -14,6 +14,7 @@ object Runner {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        println("\uD83C\uDF85 === Advent of Code 2020 === \uD83C\uDF85\n")
         if (args.isNotEmpty()) {
             val day = try {
                 args[0].toInt()
@@ -48,7 +49,7 @@ object Runner {
 
     private fun printDay(dayClass: Class<out Day>) {
         val day = dayClass.constructors[0].newInstance() as Day
-        println("\n--- Day ${dayNumber(dayClass.simpleName)}: ${day.title()} ---")
+        println("\n\uD83C\uDF84 --- Day ${dayNumber(dayClass.simpleName)}: ${day.title()} ---")
 
         val partOne = measureTimedValue { day.partOne() ?: "empty" }
         val partTwo = measureTimedValue { day.partTwo() ?: "empty" }
@@ -57,8 +58,8 @@ object Runner {
 
     private fun printParts(partOne: TimedValue<Any>, partTwo: TimedValue<Any>) {
         val padding = max(partOne.value.toString().length, partTwo.value.toString().length) + 14        // 14 is 8 (length of 'Part 1: ') + 6 more
-        println("Part 1: ${partOne.value}".padEnd(padding, ' ') + "(${partOne.duration})")
-        println("Part 2: ${partTwo.value}".padEnd(padding, ' ') + "(${partTwo.duration})")
+        println(" \uD83C\uDF1F Part 1: ${partOne.value}".padEnd(padding, ' ') + "(${partOne.duration})")
+        println(" \uD83C\uDF1F Part 2: ${partTwo.value}".padEnd(padding, ' ') + "(${partTwo.duration})")
     }
 
     private fun printError(message: String) {

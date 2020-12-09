@@ -12,41 +12,43 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 ## Output
 
 ```text
---- Day 1: Report Repair ---
-Part 1: 1003971       (75.7ms)
-Part 2: 84035952      (1.60s)
+🎅 === Advent of Code 2020 === 🎅
 
---- Day 2: Password Philosophy ---
-Part 1: 645      (11.4ms)
-Part 2: 737      (3.18ms)
+🎄 --- Day 1: Report Repair --- 🎄
+🌟 Part 1: 1003971       (75.7ms)
+🌟 Part 2: 84035952      (1.60s)
 
---- Day 3: Toboggan Trajectory ---
-Part 1: 156             (687us)
-Part 2: 3521829480      (584us)
+🎄 --- Day 2: Password Philosophy --- 🎄
+🌟 Part 1: 645      (11.4ms)
+🌟 Part 2: 737      (3.18ms)
 
---- Day 4: Passport Processing ---
-Part 1: 242      (19.9ms)
-Part 2: 186      (28.5ms)
+🎄 --- Day 3: Toboggan Trajectory --- 🎄
+🌟 Part 1: 156             (687us)
+🌟 Part 2: 3521829480      (584us)
 
---- Day 5: Binary Boarding ---
-Part 1: 974      (6.53ms)
-Part 2: 646      (6.95ms)
+🎄 --- Day 4: Passport Processing --- 🎄
+🌟 Part 1: 242      (19.9ms)
+🌟 Part 2: 186      (28.5ms)
 
---- Day 6: Custom Customs ---
-Part 1: 6630      (10.6ms)
-Part 2: 3437      (12.2ms)
+🎄 --- Day 5: Binary Boarding --- 🎄
+🌟 Part 1: 974      (6.53ms)
+🌟 Part 2: 646      (6.95ms)
 
---- Day 7: Handy Haversacks ---
-Part 1: 287        (12.9ms)
-Part 2: 48160      (4.73ms)
+🎄 --- Day 6: Custom Customs --- 🎄
+🌟 Part 1: 6630      (10.6ms)
+🌟 Part 2: 3437      (12.2ms)
 
---- Day 8: Handheld Halting ---
-Part 1: 1262      (1.87ms)
-Part 2: 1643      (33.5ms)
+🎄 --- Day 7: Handy Haversacks --- 🎄
+🌟 Part 1: 287        (12.9ms)
+🌟 Part 2: 48160      (4.73ms)
 
---- Day 9: Encoding Error ---
-Part 1: 41682220      (13.6ms)
-Part 2: 5388976       (19.2ms)
+🎄 --- Day 8: Handheld Halting --- 🎄
+🌟 Part 1: 1262      (1.87ms)
+🌟 Part 2: 1643      (33.5ms)
+
+🎄 --- Day 9: Encoding Error --- 🎄
+🌟 Part 1: 41682220      (13.6ms)
+🌟 Part 2: 5388976       (19.2ms)
 ```
 
 ### Running

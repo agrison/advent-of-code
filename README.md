@@ -49,6 +49,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 9: Encoding Error --- 
  🌟 Part 1: 41682220      (13.6ms)
  🌟 Part 2: 5388976       (19.2ms)
+
+🎄 --- Day 10: Adapter Array ---
+ 🌟 Part 1: 2414            (1.70ms)
+ 🌟 Part 2: 21156911906816  (351us)
 ```
 
 ### Running

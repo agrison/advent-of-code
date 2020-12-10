@@ -3,6 +3,7 @@ package days
 import util.InputReader
 import java.lang.Integer.parseInt
 import java.lang.System.lineSeparator
+import kotlin.math.absoluteValue
 
 typealias Instr = String
 typealias Program = List<Instr>
@@ -81,6 +82,14 @@ abstract class Day(dayNumber: Int) {
         return this
     }
     fun List<Long>.cumSum() = scan(0L) { a, b -> a + b}
+    fun Pair<Int, Int>.difference() = second - first
+    fun Pair<Int, Int>.differenceIs(i: Int) = difference() == i
+    fun Pair<Long, Long>.difference() = (second - first).absoluteValue
+    fun Pair<Long, Long>.differenceIs(i: Long) = difference() == i
+    fun Pair<Int, Int>.sum() = first + second
+    fun Pair<Int, Int>.multiply() = first * second
+    fun Pair<Long, Long>.sum() = first + second
+    fun Pair<Long, Long>.multiply() = first * second
 
     // Instructions
     abstract class Execution(val output: Int)

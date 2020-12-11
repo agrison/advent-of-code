@@ -1,64 +1,60 @@
 package days
 
-import days.SeatStrategy.Adjacent
-import days.SeatStrategy.FirstSeen
+import kotlin.reflect.KFunction2
 
 class Day11 : Day(11) {
     override fun title() = "Seating System"
 
-    override fun partOne(): Int = evolve(Adjacent)
+    override fun partOne(): Int = evolve(4, this::adjacent)
 
-    override fun partTwo(): Int = evolve(FirstSeen)
+    override fun partTwo(): Int = evolve(5, this::firstSeen)
 
-    private fun evolve(strategy: SeatStrategy): Int {
+    private fun evolve(tolerance: Int, strategy: KFunction2<AllSeats, SeatPosition, Int>): Int {
         var seats = loadSeats()
-        while (true) {
-            val copy = seats.evolve(strategy)
-            if (copy == seats)
-                break
-            seats = copy
-        }
-        return seats.occupied()
-    }
-
-    private fun Seats.adjacent(pos: Position): Int {
-        return listOf(Pair(-1, -1), Pair(-1, 0), Pair(-1, 1), Pair(0, -1), Pair(0, 1), Pair(1, -1), Pair(1, 0), Pair(1, 1))
-                .map { it + pos }
-                .count { getOrDefault(it, ".") == "#" }
-    }
-
-    private fun Seats.firstSeen(pos: Position): Int {
-        val adj = mutableSetOf<Position>()
-        /*N*/ (pos.first - 1 downTo 0).firstOrNull { seat(it, pos.second) }?.let { adj.add(Pair(it, pos.second)) }
-        /*S*/ (pos.first + 1..inputList.size).firstOrNull { seat(it, pos.second) }?.let { adj.add(Pair(it, pos.second)) }
-        /*E*/ (pos.second + 1..inputList[0].length).firstOrNull { seat(pos.first, it) }?.let { adj.add(Pair(pos.first, it)) }
-        /*W*/ (pos.second - 1 downTo 0).firstOrNull { seat(pos.first, it) }?.let { adj.add(Pair(pos.first, it)) }
-        /*NE*/(1..5).firstOrNull { seat(pos + Pair(-it, it)) }?.let { adj.add(pos + Pair(-it, it)) }
-        /*NW*/(1..5).firstOrNull { seat(pos + Pair(-it, -it)) }?.let { adj.add(pos + Pair(-it, -it)) }
-        /*SE*/(1..5).firstOrNull { seat(pos + Pair(it, it)) }?.let { adj.add(pos + Pair(it, it)) }
-        /*SW*/(1..5).firstOrNull { seat(pos + Pair(it, -it)) }?.let { adj.add(pos + Pair(it, -it)) }
-
-        return adj.filter { occupied(it) }.count()
-    }
-
-    private fun Seats.evolve(strategy: SeatStrategy): Seats {
-        val copy = toMutableMap()
-        entries.forEach { (seat, state) ->
-            if (state == "L" && ((if (strategy == Adjacent) adjacent(seat) else firstSeen(seat)) == 0)) {
-                copy.replace(seat, "#")
-            } else if (state == "#" && (if (strategy == Adjacent) adjacent(seat) >= 4 else firstSeen(seat) >= 5)) {
-                copy.replace(seat, "L")
+        while (true)
+            when (val copy = evolve(seats, tolerance, strategy)) {
+                seats -> return seats.occupied()
+                else -> seats = copy
             }
-        }
-        return copy
     }
 
-    private fun loadSeats(): Seats {
-        var (i, seats) = Pair(0, mutableMapOf<Position, String>())
+    private fun adjacent(seats: AllSeats, pos: SeatPosition): Int {
+        return listOf(p(-1, -1), p(-1, 0), p(-1, 1), p(0, -1), p(0, 1), p(1, -1), p(1, 0), p(1, 1))
+                .count { seats[it + pos] == "#" }
+    }
+
+    private fun firstSeen(s: AllSeats, pos: SeatPosition): Int {
+        val adj = mutableSetOf<SeatPosition>()
+        /*N*/  (pos.first - 1 downTo 0).firstOrNull { s.isSeat(it, pos.second) }?.let { adj.add(p(it, pos.second)) }
+        /*S*/  (pos.first + 1..inputList.size).firstOrNull { s.isSeat(it, pos.second) }?.let { adj.add(p(it, pos.second)) }
+        /*E*/  (pos.second + 1..inputList[0].length).firstOrNull { s.isSeat(pos.first, it) }?.let { adj.add(p(pos.first, it)) }
+        /*W*/  (pos.second - 1 downTo 0).firstOrNull { s.isSeat(pos.first, it) }?.let { adj.add(p(pos.first, it)) }
+        /*NE*/ (1..5).firstOrNull { s.isSeat(pos + p(-it, it)) }?.let { adj.add(pos + p(-it, it)) }
+        /*NW*/ (1..5).firstOrNull { s.isSeat(pos + p(-it, -it)) }?.let { adj.add(pos + p(-it, -it)) }
+        /*SE*/ (1..5).firstOrNull { s.isSeat(pos + p(it, it)) }?.let { adj.add(pos + p(it, it)) }
+        /*SW*/ (1..5).firstOrNull { s.isSeat(pos + p(it, -it)) }?.let { adj.add(pos + p(it, -it)) }
+
+        return adj.filter { s.occupied(it) }.count()
+    }
+
+    private fun evolve(s: AllSeats, tolerance: Int, strategy: KFunction2<AllSeats, SeatPosition, Int>): AllSeats {
+        return s.toMutableMap().let { copy ->
+            s.entries.forEach { (seat, state) ->
+                if (state == "L" && strategy(s, seat) == 0)
+                    copy.replace(seat, "#")
+                else if (state == "#" && strategy(s, seat) >= tolerance)
+                    copy.replace(seat, "L")
+            }
+            copy
+        }
+    }
+
+    private fun loadSeats(): AllSeats {
+        var (i, seats) = p(0, mutableMapOf<SeatPosition, String>())
         inputList.forEach { row ->
             var j = 0
             row.toCharArray().forEach { seat ->
-                seats[Pair(i, j)] = seat.toString()
+                seats[p(i, j)] = seat.toString()
                 j++
             }
             i++
@@ -70,12 +66,10 @@ class Day11 : Day(11) {
     }
 }
 
-typealias Position = Pair<Int, Int>
-typealias Seats = MutableMap<Position, String>
+typealias SeatPosition = Pair<Int, Int>
+typealias AllSeats = MutableMap<SeatPosition, String>
 
-enum class SeatStrategy { Adjacent, FirstSeen }
-
-fun Seats.occupied() = entries.count { it.value == "#" }
-fun Seats.occupied(p: Pair<Int, Int>) = get(p) == "#"
-fun Seats.seat(i: Int, j: Int) = seat(Pair(i, j))
-fun Seats.seat(p: Pair<Int, Int>) = get(p) != "."
+fun AllSeats.occupied() = entries.count { it.value == "#" }
+fun AllSeats.occupied(p: Pair<Int, Int>) = get(p) == "#"
+fun AllSeats.isSeat(i: Int, j: Int) = isSeat(Pair(i, j))
+fun AllSeats.isSeat(p: Pair<Int, Int>) = get(p) != "."

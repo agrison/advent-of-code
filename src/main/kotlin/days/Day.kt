@@ -92,6 +92,9 @@ abstract class Day(dayNumber: Int) {
     fun Pair<Long, Long>.sum() = first + second
     fun Pair<Long, Long>.multiply() = first * second
 
+    // Pair shortcut
+    fun <T,U> p(t: T, u: U) :Pair<T, U> = Pair(t, u)
+
     // Instructions
     abstract class Execution(val output: Int)
     data class InfiniteLoop(val acc: Int) : Execution(acc)

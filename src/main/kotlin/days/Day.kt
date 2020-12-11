@@ -88,6 +88,7 @@ abstract class Day(dayNumber: Int) {
     fun Pair<Long, Long>.differenceIs(i: Long) = difference() == i
     fun Pair<Int, Int>.sum() = first + second
     fun Pair<Int, Int>.multiply() = first * second
+    operator fun Pair<Int, Int>.plus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first + p.first, second + p.second)
     fun Pair<Long, Long>.sum() = first + second
     fun Pair<Long, Long>.multiply() = first * second
 

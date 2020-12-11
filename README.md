@@ -53,6 +53,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 10: Adapter Array ---
  🌟 Part 1: 2414            (1.70ms)
  🌟 Part 2: 21156911906816  (351us)
+
+🎄 --- Day 11: Seating System ---
+ 🌟 Part 1: 2283  (381ms)
+ 🌟 Part 2: 2054  (976ms)
 ```
 
 ### Running

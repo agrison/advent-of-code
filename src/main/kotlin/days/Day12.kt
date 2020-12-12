@@ -3,11 +3,11 @@ package days
 class Day12 : Day(12) {
     override fun title() = "Rain Risk"
     // ugly
-    val coordToDir = mapOf(0 to "east", -360 to "east",
+    val degToDir = mapOf(0 to "east", -360 to "east",
             90 to "north", -270 to "north",
             180 to "west", -180 to "west",
             270 to "south", -90 to "south")
-    val dirToCoord = coordToDir.entries.associate { (k, v) -> v to k }
+    val dirToDeg = degToDir.entries.associate { (k, v) -> v to k }
 
     fun forward(direction: String, pa: Pair<Int, Int>, amount: Int): Pair<Int, Int> {
         return when (direction) {
@@ -30,8 +30,8 @@ class Day12 : Day(12) {
                 'W' -> pos += p(-amount, 0)
                 'N' -> pos += p(0, amount)
                 'S' -> pos += p(0, -amount)
-                'L' -> direction = coordToDir[(dirToCoord[direction]!! + amount) % 360]!!
-                'R' -> direction = coordToDir[(dirToCoord[direction]!! - amount) % 360]!!
+                'L' -> direction = degToDir[(dirToDeg[direction]!! + amount) % 360]!!
+                'R' -> direction = degToDir[(dirToDeg[direction]!! - amount) % 360]!!
             }
         }
 

@@ -36,43 +36,53 @@ abstract class Day(dayNumber: Int) {
     fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyExact)
 
     // core types
+    // Strings
     fun String.occurrences(c: Char) = count { it == c }
-    operator fun Char.plus(c: Char) = toString() + c
-    fun Char.eq(c: Char) = this == c
-    fun IntRange.includes(vararg ints: Int) = ints.all(this::contains)
     fun String.at(pos: Int) = this[pos % length]
     fun String.at(pos: Int, c: Char) = at(pos) == c
-    fun Boolean.toInt() = if (this) 1 else 0
-    fun List<Int>.multiply() = reduce { a, b -> a * b }
-    fun List<Long>.multiply() = reduce { a, b -> a * b }
-    fun Int.divisible(other: Int) = this % other == 0
-    fun Long.divisible(other: Long) = this % other == 0L
     fun String.containsAll(vararg strs: String) = strs.map { contains(it) }.fold(true) { a, b -> a && b }
     fun String.field(s: String): String = runCatching { substring(indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
     fun String.intField(s: String, remove: String = "@"): Int = replace(remove, "").field(s).int()
-    fun String.int() = runCatching { Integer.parseInt(replace("""[^\d]""", "")) }.getOrDefault(0)
-    fun Int.`in`(i: IntRange) = (i.first..(i.last + 1)).contains(this)
+    fun String.int() = runCatching { parseInt(replace("""[^\d]""", "")) }.getOrDefault(0)
     fun String.regex() = toRegex()
     fun String.matches(s: String) = matches(s.regex())
     fun String.`in`(vararg strs: String) = strs.contains(this)
+    fun String.toInt(radix: Int) = parseInt(this, radix)
+    fun String.binary() = parseInt(this, 2)
+    fun String.charSet() = split("").toSet() - ""
+    fun String.lines() = split(lineSeparator())
+    fun String.split() = toCharArray()
     operator fun String.times(i: Int) = repeat(i)
     fun String.replacing(m: Map<Char, Char>): String {
         var s = this
         m.forEach { s = s.replace(it.key, it.value) }
         return s
     }
-
     fun String.replacingRegex(m: Map<String, String>): String {
         var s = this
         m.forEach { s = s.replace(it.key.regex(), it.value) }
         return s
     }
 
-    fun String.toInt(radix: Int) = parseInt(this, radix)
-    fun String.binary() = parseInt(this, 2)
+    // Integers & Long
+    fun Int.divisible(other: Int) = this % other == 0
+    fun Int.`in`(i: IntRange) = (i.first..(i.last + 1)).contains(this)
+    fun Long.divisible(other: Long) = this % other == 0L
+
+    // Booleans
+    fun Boolean.toInt() = if (this) 1 else 0
+
+    // Characters
+    operator fun Char.plus(c: Char) = toString() + c
+    fun Char.eq(c: Char) = this == c
+
+    //Ranges
+    fun IntRange.includes(vararg ints: Int) = ints.all(this::contains)
+
+    // Collections
+    fun List<Int>.multiply() = reduce { a, b -> a * b }
+    fun List<Long>.multiply() = reduce { a, b -> a * b }
     fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
-    fun String.charSet() = split("").toSet() - ""
-    fun String.lines() = split(lineSeparator())
     operator fun <T> MutableSet<T>.plus(e: T): MutableSet<T> {
         this.add(e)
         return this
@@ -82,6 +92,8 @@ abstract class Day(dayNumber: Int) {
         return this
     }
     fun List<Long>.cumSum() = scan(0L) { a, b -> a + b}
+
+    // Pairs
     fun Pair<Int, Int>.difference() = second - first
     fun Pair<Int, Int>.differenceIs(i: Int) = difference() == i
     fun Pair<Long, Long>.difference() = (second - first).absoluteValue
@@ -89,11 +101,11 @@ abstract class Day(dayNumber: Int) {
     fun Pair<Int, Int>.sum() = first + second
     fun Pair<Int, Int>.multiply() = first * second
     operator fun Pair<Int, Int>.plus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first + p.first, second + p.second)
+    operator fun Pair<Int, Int>.times(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first * p.first, second * p.second)
     fun Pair<Long, Long>.sum() = first + second
     fun Pair<Long, Long>.multiply() = first * second
-
-    // Pair shortcut
     fun <T,U> p(t: T, u: U) :Pair<T, U> = Pair(t, u)
+    fun Pair<Int, Int>.manhattan() = first.absoluteValue + second.absoluteValue
 
     // Instructions
     abstract class Execution(val output: Int)

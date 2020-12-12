@@ -57,6 +57,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 11: Seating System ---
  🌟 Part 1: 2283  (381ms)
  🌟 Part 2: 2054  (976ms)
+
+🎄 --- Day 12: Rain Risk ---
+ 🌟 Part 1: 1007   (1.16ms)
+ 🌟 Part 2: 41212  (461us)
 ```
 
 ### Running

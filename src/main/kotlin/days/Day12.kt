@@ -1,37 +1,25 @@
 package days
 
+import days.Day12.Direction.E
+
 class Day12 : Day(12) {
     override fun title() = "Rain Risk"
-    // ugly
-    val degToDir = mapOf(0 to "east", -360 to "east",
-            90 to "north", -270 to "north",
-            180 to "west", -180 to "west",
-            270 to "south", -90 to "south")
-    val dirToDeg = degToDir.entries.associate { (k, v) -> v to k }
 
-    fun forward(direction: String, pa: Pair<Int, Int>, amount: Int): Pair<Int, Int> {
-        return when (direction) {
-            "east" -> pa + p(amount, 0)
-            "west" -> pa + p(-amount, 0)
-            "north" -> pa + p(0, amount)
-            "south" -> pa + p(0, -amount)
-            else -> pa
-        }
-    }
+    enum class Direction(val dx: Int, val dy: Int) { N(0, 1), E(1, 0), S(0, -1), W(-1, 0) }
 
     override fun partOne(): Int {
-        var (pos, direction) = p(p(0, 0), "east")
+        var (pos, direction) = p(p(0, 0), E)
 
         inputList.forEach { l ->
             val (cmd, amount) = p(l.at(0), l.substring(1).toInt())
             when (cmd) {
-                'F' -> pos = forward(direction, pos, amount)
-                'E' -> pos += p(amount, 0)
-                'W' -> pos += p(-amount, 0)
+                'F' -> pos += p(direction.dx * amount, direction.dy * amount)
                 'N' -> pos += p(0, amount)
+                'E' -> pos += p(amount, 0)
                 'S' -> pos += p(0, -amount)
-                'L' -> direction = degToDir[(dirToDeg[direction]!! + amount) % 360]!!
-                'R' -> direction = degToDir[(dirToDeg[direction]!! - amount) % 360]!!
+                'W' -> pos += p(-amount, 0)
+                'L' -> direction = Direction.values()[(direction.ordinal + 1 * (amount / 90)) % 4]
+                'R' -> direction = Direction.values()[(direction.ordinal + 3 * (amount / 90)) % 4]
             }
         }
 
@@ -45,22 +33,12 @@ class Day12 : Day(12) {
             val (cmd, amount) = p(l.at(0), l.substring(1).toInt())
             when (cmd) {
                 'F' -> pos += p(amount * waypoint.first, amount * waypoint.second)
-                'E' -> waypoint += p(amount, 0)
-                'W' -> waypoint += p(-amount, 0)
                 'N' -> waypoint += p(0, amount)
+                'E' -> waypoint += p(amount, 0)
                 'S' -> waypoint += p(0, -amount)
-                'L' -> waypoint = when (amount / 90) {
-                    1 -> p(-waypoint.second, waypoint.first)
-                    2 -> p(-waypoint.first, -waypoint.second)
-                    3 -> p(waypoint.second, -waypoint.first)
-                    else -> waypoint
-                }
-                'R' -> waypoint = when (amount / 90) {
-                    1 -> p(waypoint.second, -waypoint.first)
-                    2 -> p(-waypoint.first, -waypoint.second)
-                    3 -> p(-waypoint.second, waypoint.first)
-                    else -> waypoint
-                }
+                'W' -> waypoint += p(-amount, 0)
+                'L' -> (0 until amount / 90).forEach { waypoint = p(-waypoint.second, waypoint.first) }
+                'R' -> (0 until amount / 90).forEach { waypoint = p(waypoint.second, -waypoint.first) }
             }
         }
 

@@ -65,6 +65,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 13: Shuttle Search ---
  🌟 Part 1: 5257             (47.9us)
  🌟 Part 2: 538703333547789  (1.07ms)
+
+🎄 --- Day 14: Docking Data ---
+ 🌟 Part 1: 13865835758282  (3.60ms)
+ 🌟 Part 2: 4195339838136   (57.4ms)
 ```
 
 ### Running

@@ -2,6 +2,7 @@ package days
 
 import util.InputReader
 import java.lang.Integer.parseInt
+import java.lang.Long.parseLong
 import java.lang.System.lineSeparator
 import kotlin.math.absoluteValue
 
@@ -49,6 +50,7 @@ abstract class Day(dayNumber: Int) {
     fun String.`in`(vararg strs: String) = strs.contains(this)
     fun String.toInt(radix: Int) = parseInt(this, radix)
     fun String.binary() = parseInt(this, 2)
+    fun String.binaryLong() = parseLong(this, 2)
     fun String.charSet() = split("").toSet() - ""
     fun String.lines() = split(lineSeparator())
     fun String.split() = toCharArray()
@@ -63,6 +65,9 @@ abstract class Day(dayNumber: Int) {
         m.forEach { s = s.replace(it.key.regex(), it.value) }
         return s
     }
+    fun String.butLast() = substring(0, length - 1)
+    fun String.between(left: String, right: String) = split(left)[1].split(right).first()
+    fun String.afterLast(s: String) = split(s).last()
 
     // Integers & Long
     fun Int.divisible(other: Int) = this % other == 0

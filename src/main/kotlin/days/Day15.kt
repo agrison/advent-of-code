@@ -18,8 +18,7 @@ class Day15 : Day(15) {
                 val num = if (i < 6) n else lastSpoken
                 yield(num) // <-
                 lastSpoken = if (num in alreadySpoken) turn - alreadySpoken[num]!! else 0
-                alreadySpoken[num] = turn
-                turn++
+                alreadySpoken[num] = turn++
             }
         }
     }

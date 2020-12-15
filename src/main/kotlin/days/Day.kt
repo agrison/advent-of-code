@@ -18,6 +18,7 @@ abstract class Day(dayNumber: Int) {
     protected val inputString: String by lazy { InputReader.inputAsString(dayNumber) }
     protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy { InputReader.inputAsVavrStrings(dayNumber) }
     protected val inputAsVavrInts: io.vavr.collection.List<Int> by lazy { InputReader.inputAsVavrInts(dayNumber) }
+    protected val inputInts: List<Int> by lazy { InputReader.inputAsString(dayNumber).map {it.toInt()} }
 
     abstract fun partOne(): Any?
 
@@ -97,6 +98,12 @@ abstract class Day(dayNumber: Int) {
         return this
     }
     fun List<Long>.cumSum() = scan(0L) { a, b -> a + b}
+
+    // Sequence
+    fun <T : Any> cycle(vararg xs: T): Sequence<T> {
+        var i = 0
+        return generateSequence { xs[i++ % xs.size] }
+    }
 
     // Pairs
     fun Pair<Int, Int>.difference() = second - first

@@ -69,6 +69,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 14: Docking Data ---
  🌟 Part 1: 13865835758282  (3.60ms)
  🌟 Part 2: 4195339838136   (57.4ms)
+
+🎄 --- Day 15: Rambunctious Recitation ---
+ 🌟 Part 1: 319   (9.62ms)
+ 🌟 Part 2: 2424  (4.40s)
 ```
 
 ### Running

@@ -73,6 +73,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 15: Rambunctious Recitation ---
  🌟 Part 1: 319   (1.45ms)
  🌟 Part 2: 2424  (725ms)
+
+🎄 --- Day 16: Ticket Translation ---
+ 🌟 Part 1: 19087          (8.19ms)
+ 🌟 Part 2: 1382443095281  (701ms)
 ```
 
 ### Running

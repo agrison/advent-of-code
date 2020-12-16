@@ -69,6 +69,8 @@ abstract class Day(dayNumber: Int) {
     fun String.butLast() = substring(0, length - 1)
     fun String.between(left: String, right: String) = split(left)[1].split(right).first()
     fun String.afterLast(s: String) = split(s).last()
+    fun String.allInts() : List<Int> = "(\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
+    fun String.allLongs() : List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
 
     // Integers & Long
     fun Int.divisible(other: Int) = this % other == 0

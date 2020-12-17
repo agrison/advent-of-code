@@ -19,7 +19,7 @@ class Day17 : Day(17) {
 
 data class Position(val x: Int, val y: Int, val z: Int, val w: Int = 0)
 
-data class Cubes(var cubes: Set<Position>, var hyper: Boolean = false) {
+data class Cubes(val cubes: Set<Position>, val hyper: Boolean = false) {
     fun count() = cubes.size
 
     fun evolve(): Cubes {

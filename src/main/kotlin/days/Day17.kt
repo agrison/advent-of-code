@@ -7,15 +7,13 @@ class Day17 : Day(17) {
 
     override fun partTwo() = (0..5).fold(loadCubes(true)) { g, _ -> g.evolve() }.count()
 
-    private fun loadCubes(hyper: Boolean = false): Cubes {
-        mutableSetOf<Position>().let {
-            inputList.forEachIndexed { x, line ->
-                line.forEachIndexed { y, state ->
-                    if (state == '#') it.add(Position(x, y, 0))
-                }
+    private fun loadCubes(hyper: Boolean = false) = mutableSetOf<Position>().let {
+        inputList.forEachIndexed { x, line ->
+            line.forEachIndexed { y, state ->
+                if (state == '#') it.add(Position(x, y, 0))
             }
-            return Cubes(it, hyper)
         }
+        Cubes(it, hyper)
     }
 }
 
@@ -52,15 +50,14 @@ data class Cubes(var cubes: Set<Position>, var hyper: Boolean = false) {
         return total
     }
 
-    private fun scanAmplitude(): MutableList<IntRange> {
-        val res = mutableListOf<IntRange>()
-        res.add(IntRange(cubes.map { it.x }.min()!! - 1, cubes.map { it.x }.max()!! + 1))
-        res.add(IntRange(cubes.map { it.y }.min()!! - 1, cubes.map { it.y }.max()!! + 1))
-        res.add(IntRange(cubes.map { it.z }.min()!! - 1, cubes.map { it.z }.max()!! + 1))
+    private fun scanAmplitude() = mutableListOf<IntRange>().let {
+        it.add(IntRange(cubes.map { it.x }.min()!! - 1, cubes.map { it.x }.max()!! + 1))
+        it.add(IntRange(cubes.map { it.y }.min()!! - 1, cubes.map { it.y }.max()!! + 1))
+        it.add(IntRange(cubes.map { it.z }.min()!! - 1, cubes.map { it.z }.max()!! + 1))
         // part2: if hyper then same as x,y,z, otherwise a range of 1
-        res.add(if (hyper) IntRange(cubes.map { it.w }.min()!! - 1, cubes.map { it.w }.max()!! + 2)
-                else IntRange(0, 0))
-        return res
+        it.add(if (hyper) IntRange(cubes.map { it.w }.min()!! - 1, cubes.map { it.w }.max()!! + 2)
+        else IntRange(0, 0))
+        it
     }
 }
 

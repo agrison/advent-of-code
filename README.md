@@ -1,5 +1,7 @@
 # Advent Of Code 2020
 
+![Advent Of Code 2020](https://github.com/agrison/advent-of-code-2020/workflows/Advent%20Of%20Code%202020/badge.svg)
+
 ## Goal
 
 After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the 

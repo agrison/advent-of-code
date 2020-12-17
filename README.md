@@ -77,6 +77,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 16: Ticket Translation ---
  🌟 Part 1: 19087          (8.19ms)
  🌟 Part 2: 1382443095281  (701ms)
+
+🎄 --- Day 17: Conway Cubes ---
+ 🌟 Part 1: 362   (11.1ms)
+ 🌟 Part 2: 1980  (121ms)
 ```
 
 ### Running

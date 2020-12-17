@@ -60,5 +60,3 @@ data class Cubes(var cubes: Set<Position>, var hyper: Boolean = false) {
         it
     }
 }
-
-

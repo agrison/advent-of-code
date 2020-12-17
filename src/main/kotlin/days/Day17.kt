@@ -24,7 +24,7 @@ data class Cubes(var cubes: Set<Position>, var hyper: Boolean = false) {
 
     fun evolve(): Cubes {
         val nextCubes = mutableSetOf<Position>()
-        val (xRange, yRange, zRange, wRange) = scanAmplitude()
+        val (xRange, yRange, zRange, wRange) = allRanges()
         for (x in xRange)
             for (y in yRange)
                 for (z in zRange)
@@ -50,13 +50,13 @@ data class Cubes(var cubes: Set<Position>, var hyper: Boolean = false) {
         return total
     }
 
-    private fun scanAmplitude() = mutableListOf<IntRange>().let {
-        it.add(IntRange(cubes.map { it.x }.min()!! - 1, cubes.map { it.x }.max()!! + 1))
-        it.add(IntRange(cubes.map { it.y }.min()!! - 1, cubes.map { it.y }.max()!! + 1))
-        it.add(IntRange(cubes.map { it.z }.min()!! - 1, cubes.map { it.z }.max()!! + 1))
+    private fun allRanges() = mutableListOf<IntRange>().let { ranges ->
+        ranges.add(cubes.map { it.x }.min()!! - 1 .. cubes.map { it.x }.max()!! + 1)
+        ranges.add(cubes.map { it.y }.min()!! - 1 .. cubes.map { it.y }.max()!! + 1)
+        ranges.add(cubes.map { it.z }.min()!! - 1 .. cubes.map { it.z }.max()!! + 1)
         // part2: if hyper then same as x,y,z, otherwise a range of 1
-        it.add(if (hyper) IntRange(cubes.map { it.w }.min()!! - 1, cubes.map { it.w }.max()!! + 2)
-        else IntRange(0, 0))
-        it
+        ranges.add(if (hyper) cubes.map { it.w }.min()!! - 1 .. cubes.map { it.w }.max()!! + 1
+                   else       0..0)
+        ranges
     }
 }

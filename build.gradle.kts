@@ -27,7 +27,7 @@ dependencies {
     implementation("io.arrow-kt", "arrow-syntax", "0.11.0")
     kapt("io.arrow-kt", "arrow-meta", "0.11.0")
 
-    testImplementation("junit", "junit", "4.13.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation("org.hamcrest", "hamcrest", "2.2")
 
     implementation("io.vavr", "vavr", "0.10.3")
@@ -37,4 +37,8 @@ dependencies {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

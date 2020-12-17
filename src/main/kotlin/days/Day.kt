@@ -9,7 +9,7 @@ import kotlin.math.absoluteValue
 typealias Instr = String
 typealias Program = List<Instr>
 
-abstract class Day(dayNumber: Int) {
+abstract class Day(val dayNumber: Int) {
 
     // Input feeders
     protected val inputList: List<String> by lazy { InputReader.inputAsList(dayNumber) }

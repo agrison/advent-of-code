@@ -25,17 +25,17 @@ class Day18 : Day(18) {
         val stack = Stack<String>()
 
         value.replace(" ", "").map { it.toString() }.forEach { token ->
-            when {
-                token == "(" -> stack += token
-                token.matches("\\d") -> expression += token
-                token in "+*" -> {
+            when (token) {
+                "(" -> stack += token
+                in "0".."9" -> expression += token
+                "+", "*" -> {
                     while (!stack.isEmpty() &&
                             (!part2 || (stack.last() != "*" || token != "+"))
                             && stack.last() != "(")
                         expression += stack.pop()
                     stack += token
                 }
-                token == ")" -> {
+                ")" -> {
                     while (stack.last() != "(")
                         expression += stack.pop()
                     stack.popIf("(")

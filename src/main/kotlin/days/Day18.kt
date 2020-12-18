@@ -21,17 +21,15 @@ class Day18 : Day(18) {
     }
 
     private fun parse(value: String, part2: Boolean = false): List<String> {
-        val expression = mutableListOf<String>()
-        val stack = Stack<String>()
+        val (expression, stack) = p(mutableListOf<String>(), Stack<String>())
 
-        value.replace(" ", "").map { it.toString() }.forEach { token ->
+        value.replace(" ", "").stringList().forEach { token ->
             when (token) {
                 "(" -> stack += token
                 in "0".."9" -> expression += token
                 "+", "*" -> {
-                    while (!stack.isEmpty() &&
-                            (!part2 || (stack.last() != "*" || token != "+"))
-                            && stack.last() != "(")
+                    while (!stack.isEmpty() && stack.last() != "(" &&
+                            (!part2 || (stack.last() != "*" || token != "+")))
                         expression += stack.pop()
                     stack += token
                 }
@@ -48,4 +46,3 @@ class Day18 : Day(18) {
     }
 }
 
-fun <T> Stack<T>.popIf(t: T): T? = if (last() == t) pop() else null

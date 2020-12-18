@@ -4,6 +4,7 @@ import util.InputReader
 import java.lang.Integer.parseInt
 import java.lang.Long.parseLong
 import java.lang.System.lineSeparator
+import java.util.*
 import kotlin.math.absoluteValue
 
 typealias Instr = String
@@ -71,6 +72,7 @@ abstract class Day(val dayNumber: Int) {
     fun String.afterLast(s: String) = split(s).last()
     fun String.allInts() : List<Int> = "(\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
     fun String.allLongs() : List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
+    fun String.stringList() : List<String> = map { it.toString() }
 
     // Integers & Long
     fun Int.divisible(other: Int) = this % other == 0
@@ -120,6 +122,9 @@ abstract class Day(val dayNumber: Int) {
     fun Pair<Long, Long>.multiply() = first * second
     fun <T,U> p(t: T, u: U) :Pair<T, U> = Pair(t, u)
     fun Pair<Int, Int>.manhattan() = first.absoluteValue + second.absoluteValue
+
+    // Stack
+    fun <T> Stack<T>.popIf(t: T): T? = if (last() == t) pop() else null
 
     // Instructions
     abstract class Execution(val output: Int)

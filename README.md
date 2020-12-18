@@ -83,6 +83,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 17: Conway Cubes ---
  🌟 Part 1: 362   (11.1ms)
  🌟 Part 2: 1980  (121ms)
+
+🎄 --- Day 18: Operation Order ---
+ 🌟 Part 1: 7293529867931   (32.5ms)
+ 🌟 Part 2: 60807587180737  (8.80ms)
 ```
 
 ### Running

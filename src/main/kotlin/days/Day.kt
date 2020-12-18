@@ -73,6 +73,7 @@ abstract class Day(val dayNumber: Int) {
     fun String.allInts() : List<Int> = "(\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
     fun String.allLongs() : List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
     fun String.stringList() : List<String> = map { it.toString() }
+    fun String.noSpaces() = replace("\\s+".regex(), "")
 
     // Integers & Long
     fun Int.divisible(other: Int) = this % other == 0
@@ -125,6 +126,7 @@ abstract class Day(val dayNumber: Int) {
 
     // Stack
     fun <T> Stack<T>.popIf(t: T): T? = if (last() == t) pop() else null
+    fun <T> Stack<T>.lastIs(t: T): Boolean = last() == t
 
     // Instructions
     abstract class Execution(val output: Int)

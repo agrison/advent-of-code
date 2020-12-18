@@ -20,21 +20,21 @@ class Day18 : Day(18) {
         stack.last()
     }
 
-    private fun parse(value: String, part2: Boolean = false): List<String> {
+    private fun parse(str: String, part2: Boolean = false): List<String> {
         val (expression, stack) = p(mutableListOf<String>(), Stack<String>())
 
-        value.replace(" ", "").stringList().forEach { token ->
+        str.noSpaces().stringList().forEach { token ->
             when (token) {
                 "(" -> stack += token
                 in "0".."9" -> expression += token
                 "+", "*" -> {
-                    while (!stack.isEmpty() && stack.last() != "(" &&
-                            (!part2 || (stack.last() != "*" || token != "+")))
+                    while (!stack.isEmpty() && !stack.lastIs("(") &&
+                            (!part2 || (!stack.lastIs("*") || token != "+")))
                         expression += stack.pop()
                     stack += token
                 }
                 ")" -> {
-                    while (stack.last() != "(")
+                    while (!stack.lastIs("("))
                         expression += stack.pop()
                     stack.popIf("(")
                 }

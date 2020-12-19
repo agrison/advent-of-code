@@ -74,6 +74,12 @@ abstract class Day(val dayNumber: Int) {
     fun String.allLongs() : List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
     fun String.stringList() : List<String> = map { it.toString() }
     fun String.noSpaces() = replace("\\s+".regex(), "")
+    fun String.normalSplit(delim: String) = split(delim).filter { it != "" }
+    fun String.except(str: String) = replace(str, "")
+    fun String.except(c: Char) = replace(c + "", "")
+    fun String.before(str: String) = split(str)[0]
+    fun String.after(str: String) = split(str)[1]
+    fun String.or(eq: String, or: String) = if (this == eq) this else or
 
     // Integers & Long
     fun Int.divisible(other: Int) = this % other == 0
@@ -103,6 +109,7 @@ abstract class Day(val dayNumber: Int) {
         return this
     }
     fun List<Long>.cumSum() = scan(0L) { a, b -> a + b}
+    fun <T> List<T>.except(filter: T) = filter { it != filter }
 
     // Sequence
     fun <T : Any> cycle(vararg xs: T): Sequence<T> {

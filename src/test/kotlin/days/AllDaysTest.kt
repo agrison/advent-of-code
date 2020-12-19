@@ -28,6 +28,7 @@ class AllDaysTest {
             Answer({ Day16() }, 19087, 1382443095281),
             Answer({ Day17() }, 362, 1980),
             Answer({ Day18() }, 7293529867931, 60807587180737),
+            Answer({ Day19() }, 279, 384),
     ).map {
         val day = it.inst.invoke()
         DynamicTest.dynamicTest("Day ${day.dayNumber} - Part 1 - expecting ${it.part1}") {

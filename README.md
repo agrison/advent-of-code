@@ -17,20 +17,20 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎅 === Advent of Code 2020 === 🎅
 
 🎄 --- Day 1: Report Repair --- 
- 🌟 Part 1: 1003971       (75.7ms)
- 🌟 Part 2: 84035952      (1.60s)
+ 🌟 Part 1: 1003971       (65ms)
+ 🌟 Part 2: 84035952      (1.51s)
 
 🎄 --- Day 2: Password Philosophy --- 
  🌟 Part 1: 645      (11.4ms)
- 🌟 Part 2: 737      (3.18ms)
+ 🌟 Part 2: 737      (2.47ms)
 
 🎄 --- Day 3: Toboggan Trajectory --- 
  🌟 Part 1: 156             (687us)
  🌟 Part 2: 3521829480      (584us)
 
 🎄 --- Day 4: Passport Processing --- 
- 🌟 Part 1: 242      (19.9ms)
- 🌟 Part 2: 186      (28.5ms)
+ 🌟 Part 1: 242      (14.4ms)
+ 🌟 Part 2: 186      (14.7ms)
 
 🎄 --- Day 5: Binary Boarding --- 
  🌟 Part 1: 974      (6.53ms)
@@ -53,20 +53,20 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
  🌟 Part 2: 5388976       (19.2ms)
 
 🎄 --- Day 10: Adapter Array ---
- 🌟 Part 1: 2414            (1.70ms)
- 🌟 Part 2: 21156911906816  (351us)
+ 🌟 Part 1: 2414            (734us)
+ 🌟 Part 2: 21156911906816  (327us)
 
 🎄 --- Day 11: Seating System ---
  🌟 Part 1: 2283  (381ms)
  🌟 Part 2: 2054  (976ms)
 
 🎄 --- Day 12: Rain Risk ---
- 🌟 Part 1: 1007   (1.16ms)
+ 🌟 Part 1: 1007   (48.5us)
  🌟 Part 2: 41212  (461us)
 
 🎄 --- Day 13: Shuttle Search ---
  🌟 Part 1: 5257             (47.9us)
- 🌟 Part 2: 538703333547789  (1.07ms)
+ 🌟 Part 2: 538703333547789  (40.5ms)
 
 🎄 --- Day 14: Docking Data ---
  🌟 Part 1: 13865835758282  (3.60ms)
@@ -85,8 +85,12 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
  🌟 Part 2: 1980  (121ms)
 
 🎄 --- Day 18: Operation Order ---
- 🌟 Part 1: 7293529867931   (32.5ms)
- 🌟 Part 2: 60807587180737  (8.80ms)
+ 🌟 Part 1: 7293529867931   (10.7ms)
+ 🌟 Part 2: 60807587180737  (5.21ms)
+
+🎄 --- Day 19: Monster Messages ---
+ 🌟 Part 1: 279  (34.7ms)
+ 🌟 Part 2: 384  (225ms)
 ```
 
 ### Running

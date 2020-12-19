@@ -13,14 +13,14 @@ typealias Program = List<Instr>
 abstract class Day(val dayNumber: Int, val year: Int = 2020) {
 
     // Input feeders
-    protected val inputList: List<String> by lazy { InputReader.inputAsList(dayNumber) }
-    protected val inputGroups: List<String> by lazy { InputReader.inputAsGroups(dayNumber) }
-    protected val program: List<String> by lazy { InputReader.inputAsList(dayNumber) }
-    protected val inputSet: Set<String> by lazy { InputReader.inputAsSet(dayNumber) }
-    protected val inputString: String by lazy { InputReader.inputAsString(dayNumber) }
-    protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy { InputReader.inputAsVavrStrings(dayNumber) }
-    protected val inputAsVavrInts: io.vavr.collection.List<Int> by lazy { InputReader.inputAsVavrInts(dayNumber) }
-    protected val inputInts: List<Int> by lazy { InputReader.inputAsString(dayNumber).map { it.toInt() } }
+    protected val inputList: List<String> by lazy { InputReader.inputAsList(dayNumber, year) }
+    protected val inputGroups: List<String> by lazy { InputReader.inputAsGroups(dayNumber, year) }
+    protected val program: List<String> by lazy { InputReader.inputAsList(dayNumber, year) }
+    protected val inputSet: Set<String> by lazy { InputReader.inputAsSet(dayNumber, year) }
+    protected val inputString: String by lazy { InputReader.inputAsString(dayNumber, year) }
+    protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy { InputReader.inputAsVavrStrings(dayNumber, year) }
+    protected val inputAsVavrInts: io.vavr.collection.List<Int> by lazy { InputReader.inputAsVavrInts(dayNumber, year) }
+    protected val inputInts: List<Int> by lazy { InputReader.inputAsString(dayNumber, year).map { it.toInt() } }
 
     abstract fun partOne(): Any?
 

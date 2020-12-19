@@ -1,8 +1,9 @@
-package days
+package me.grison.aoc.y2020
 
+import me.grison.aoc.Day
 import kotlin.reflect.KFunction2
 
-class Day11 : Day(11) {
+class Day11 : Day(11, 2020) {
     override fun title() = "Seating System"
 
     override fun partOne(): Int = evolve(4, this::adjacent)

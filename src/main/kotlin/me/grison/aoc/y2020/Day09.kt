@@ -1,8 +1,9 @@
-package days
+package me.grison.aoc.y2020
 
 import arrow.core.extensions.set.foldable.exists
+import me.grison.aoc.Day
 
-class Day09 : Day(9) {
+class Day09 : Day(9, 2020) {
     override fun title() = "Encoding Error"
 
     private val series = inputList.map { it.toLong() }
@@ -14,13 +15,14 @@ class Day09 : Day(9) {
 
     override fun partTwo(): Long {
         val (invalidNumber, scan) = Pair(partOne(), series.cumSum())
+        val result = mutableListOf<Long>()
         scan.forEachIndexed { first, value ->
             (first until scan.size).find { last -> scan[last] - value == invalidNumber }
                     ?.let { last ->
-                        return (series.slice(first..last).min() ?: 0L) + (series.slice(first..last).max() ?: 0L)
+                        result.add((series.slice(first..last).min() ?: 0L) + (series.slice(first..last).max() ?: 0L))
                     }
         }
-        return -1L
+        return result.first()
     }
 
     private fun sumOfTwoInPreamble(n: Long, preamble: Set<Long>) =

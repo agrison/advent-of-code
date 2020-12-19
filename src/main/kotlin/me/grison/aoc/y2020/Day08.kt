@@ -1,6 +1,9 @@
-package days
+package me.grison.aoc.y2020
 
-class Day08 : Day(8) {
+import me.grison.aoc.Day
+import me.grison.aoc.Program
+
+class Day08 : Day(8, 2020) {
     override fun title() = "Handheld Halting"
 
     // returns an InfiniteLoop(value)

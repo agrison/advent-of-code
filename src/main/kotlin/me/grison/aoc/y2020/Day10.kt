@@ -1,11 +1,12 @@
-package days
+package me.grison.aoc.y2020
 
 import arrow.syntax.collections.tail
+import me.grison.aoc.Day
 
-class Day10 : Day(10) {
+class Day10 : Day(10, 2020) {
     override fun title() = "Adapter Array"
 
-    val adapters = (inputList.map { it.toInt() } + 0).sorted()
+    private val adapters = (inputList.map { it.toLong() } + 0L).sorted()
 
     override fun partOne() = adapters.zip(adapters.tail())
             .fold(Pair(0, 1)) { a, b ->
@@ -13,9 +14,9 @@ class Day10 : Day(10) {
             }.multiply()
 
     override fun partTwo(): Long {
-        val ways = mutableMapOf(0 to 1L)
+        val ways = mutableMapOf(0L to 1L)
         adapters.tail().sorted().forEach { j ->
-            ways[j] = listOf(1, 2, 3).filter { it <= j }
+            ways[j] = listOf(1L, 2L, 3L).filter { it <= j }
                     .sumOf { ways.getOrDefault(j - it, 0L) }
         }
         return ways.getOrDefault(ways.keys.max() ?: 0L, 0L)

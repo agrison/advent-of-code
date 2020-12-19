@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day03 : Day(3) {
+import me.grison.aoc.Day
+
+class Day03 : Day(3, 2020) {
     override fun title() = "Toboggan Trajectory"
 
     override fun partOne() = slope(3, 1)

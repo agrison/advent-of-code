@@ -4,6 +4,7 @@ package util
 
 import java.io.File
 import io.vavr.kotlin.*;
+import java.lang.System.lineSeparator
 
 object InputReader {
 
@@ -13,6 +14,10 @@ object InputReader {
 
     fun inputAsList(day: Int): List<String> {
         return fromResources(day).readLines()
+    }
+
+    fun inputAsGroups(day: Int): List<String> {
+        return fromResources(day).readText().split(lineSeparator() + lineSeparator())
     }
 
     fun inputAsSet(day: Int): Set<String> {

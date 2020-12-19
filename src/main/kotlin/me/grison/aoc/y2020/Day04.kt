@@ -1,9 +1,10 @@
-package days
+package me.grison.aoc.y2020
 
 import arrow.core.extensions.list.foldable.forAll
+import me.grison.aoc.Day
 import java.lang.System.lineSeparator
 
-class Day04 : Day(4) {
+class Day04 : Day(4, 2020) {
     override fun title() = "Passport Processing"
 
     override fun partOne() = validPassports(listOf { it ->

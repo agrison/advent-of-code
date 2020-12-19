@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day17 : Day(17) {
+import me.grison.aoc.Day
+
+class Day17 : Day(17, 2020) {
     override fun title() = "Conway Cubes"
 
     override fun partOne() = (0..5).fold(loadCubes()) { g, _ -> g.evolve() }.count()

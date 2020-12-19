@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day07 : Day(7) {
+import me.grison.aoc.Day
+
+class Day07 : Day(7, 2020) {
     override fun title() = "Handy Haversacks"
 
     override fun partOne() = bagsWithGold(loadBags().first)

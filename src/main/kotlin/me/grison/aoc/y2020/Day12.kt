@@ -1,8 +1,9 @@
-package days
+package me.grison.aoc.y2020
 
-import days.Day12.Direction.E
+import me.grison.aoc.Day
+import me.grison.aoc.y2020.Day12.Direction.E
 
-class Day12 : Day(12) {
+class Day12 : Day(12, 2020) {
     override fun title() = "Rain Risk"
 
     override fun partOne(): Int {

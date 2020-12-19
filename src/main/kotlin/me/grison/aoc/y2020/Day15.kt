@@ -1,8 +1,10 @@
-package days
+package me.grison.aoc.y2020
+
+import me.grison.aoc.Day
 
 // see previous commit, I was using a Map, but it was taking 4.5 sec for part 2
 // using an IntArray makes it < 1s on my machine.
-class Day15 : Day(15) {
+class Day15 : Day(15, 2020) {
     override fun title() = "Rambunctious Recitation"
 
     override fun partOne() = memoryGame(2020)

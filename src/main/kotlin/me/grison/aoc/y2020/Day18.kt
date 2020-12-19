@@ -1,8 +1,9 @@
-package days
+package me.grison.aoc.y2020
 
+import me.grison.aoc.Day
 import java.util.*
 
-class Day18 : Day(18) {
+class Day18 : Day(18, 2020) {
     override fun title() = "Operation Order"
 
     override fun partOne() = inputList.map { evaluate(parse(it)) }.sum()

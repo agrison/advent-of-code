@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day14 : Day(14) {
+import me.grison.aoc.Day
+
+class Day14 : Day(14, 2020) {
     override fun title() = "Docking Data"
 
     override fun partOne() = runEmulator { memory, mask, addr, value ->

@@ -1,8 +1,9 @@
-package days
+package me.grison.aoc.y2020
 
+import me.grison.aoc.Day
 import java.lang.System.lineSeparator
 
-class Day19 : Day(19) {
+class Day19 : Day(19, 2020) {
     override fun title() = "Monster Messages"
     private val solutionKey = "0"
 

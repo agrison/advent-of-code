@@ -1,6 +1,6 @@
 package util
 
-import days.Day
+import me.grison.aoc.Day
 import org.reflections.Reflections
 import kotlin.math.max
 import kotlin.time.ExperimentalTime
@@ -10,29 +10,43 @@ import kotlin.time.measureTimedValue
 @ExperimentalTime
 object Runner {
 
-    private val reflections = Reflections("days")
+    private val defaultYear = 2020
+    private var reflections = Reflections("me.grison.aoc")
+    private var allYears = false
+
 
     @JvmStatic
     fun main(args: Array<String>) {
-        println("\uD83C\uDF85 === Advent of Code 2020 === \uD83C\uDF85\n")
         if (args.isNotEmpty()) {
-            val day = try {
-                args[0].toInt()
+            val (year, day) = when("/" in args[0]) {
+                true -> Pair(args[0].split("/")[0].toInt(), args[0].split("/")[1])
+                false -> Pair(defaultYear, args[0])
             }
-            catch (e: NumberFormatException) {
-                printError("Day argument must be an integer")
-                return
-            }
+            println("\uD83C\uDF85 === Advent of Code $year === \uD83C\uDF85\n")
 
-            val dayClass = getAllDayClasses()?.find { dayNumber(it.simpleName) == day }
-            if (dayClass != null) {
-                printDay(dayClass)
-            }
-            else {
-                printError("Day $day not found")
+            reflections = Reflections("me.grison.aoc.y$year")
+
+            if (day == "*") {
+                val allDayClasses = getAllDayClasses()
+                if (allDayClasses != null) {
+                    allDayClasses.sortedBy { dayNumber(it.simpleName) }.forEach { printDay(it) }
+                }
+                else {
+                    printError("Couldn't find day classes - make sure you're in the right directory and try building again")
+                }
+            } else {
+                val dayClass = getAllDayClasses() ?.find { dayNumber(it.simpleName) == day.toInt() }
+                if (dayClass != null) {
+                    printDay(dayClass)
+                }
+                else {
+                    printError("Day $day not found")
+                }
             }
         }
         else {
+            println("\uD83C\uDF85 === Advent of Code (all years) === \uD83C\uDF85\n")
+            allYears = true
             val allDayClasses = getAllDayClasses()
             if (allDayClasses != null) {
                 allDayClasses.sortedBy { dayNumber(it.simpleName) }.forEach { printDay(it) }
@@ -49,7 +63,7 @@ object Runner {
 
     private fun printDay(dayClass: Class<out Day>) {
         val day = dayClass.constructors[0].newInstance() as Day
-        println("\n\uD83C\uDF84 --- Day ${dayNumber(dayClass.simpleName)}: ${day.title()} ---")
+        println("\n\uD83C\uDF84 --- Day ${if (allYears) day.year.toString() + "/" else ""}${day.dayNumber}: ${day.title()} ---")
 
         val partOne = measureTimedValue { day.partOne() ?: "empty" }
         val partTwo = measureTimedValue { day.partTwo() ?: "empty" }

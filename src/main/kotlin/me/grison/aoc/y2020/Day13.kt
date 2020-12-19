@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day13 : Day(13) {
+import me.grison.aoc.Day
+
+class Day13 : Day(13, 2020) {
     override fun title() = "Shuttle Search"
 
     private val schedule = inputList[1].split(",").map { if (it == "x") -1 else it.toInt() }
@@ -31,8 +33,8 @@ class Day13 : Day(13) {
     // wouldn't have found this myself, thank you internet
     // https://rosettacode.org/wiki/Chinese_remainder_theorem#Kotlin
     // adapted from Int to Long
-    fun chineseRemainder(n: LongArray, a: LongArray): Long {
-        val prod: Long = n.fold(1) { acc, i -> acc * i }
+    private fun chineseRemainder(n: LongArray, a: LongArray): Long {
+        val prod: Long = n.fold(1L) { acc, i -> acc * i }
         var sum: Long = 0
         for (i in n.indices) {
             val p = prod / n[i]
@@ -42,7 +44,7 @@ class Day13 : Day(13) {
     }
 
     /* returns x where (a * x) % b == 1 */
-    fun multInv(a: Long, b: Long): Long {
+    private fun multInv(a: Long, b: Long): Long {
         if (b == 1L) return 1L
         var (aa, bb) = p(a, b)
         var (x0, x1) = p(0L, 1L)

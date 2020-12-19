@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day05 : Day(5) {
+import me.grison.aoc.Day
+
+class Day05 : Day(5, 2020) {
     override fun title() = "Binary Boarding"
 
     override fun partOne() = seats().maxOrNull() ?: 0

@@ -4,10 +4,10 @@
 
 ## Goal
 
-After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the 
-[Advent of Code](https://adventofcode.com/2020) with **Kotlin** (hopefully this time I won't need Java). 
+After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the
+[Advent of Code](https://adventofcode.com/2020) with **Kotlin** (hopefully this time I won't need Java).
 
-1. A deep dive into Kotlin. 
+1. A deep dive into Kotlin.
 2. Write fast and idiomatic solutions.
 3. Using extensions to make code shorter (see [Day.kt](https://github.com/agrison/advent-of-code-2020/blob/master/src/main/kotlin/days/Day.kt)).
 
@@ -119,12 +119,12 @@ The stub `Day01Test` class shows a test of the functionality of `Day01` where th
 ### Architecture
 
 * Inputs go into `src/main/resources` and follow the naming convention `X.txt` where X is like `01`, `02` and so on
-* Solutions go into `src/main/kotlin/days` and extend the `Day` abstract class, calling its constructor with their day number 
+* Solutions go into `src/main/kotlin/days` and extend the `Day` abstract class, calling its constructor with their day number
 * Solutions follow the naming convention `DayX`
 * It is assumed all solutions will have two parts but share the same input
 * Input is exposed in the solution classes in two forms - `inputList` and `inputString`
 * Day 1 solution class and input file are stubbed as a guide on how to extend the project,
-and how you can use the `inputList` and `inputString` mentioned above
+  and how you can use the `inputList` and `inputString` mentioned above
 * To get started simply replace `src/main/01.txt` with the real input and the solutions in `Day01` with your own
 * A Day 1 test class also exists, mostly to show a few hamcrest matchers, and how test input files can differ from actual ones (see **Test input** section above).
-To get started with testing you can edit this class, and the input file at `src/test/resources/01.txt`
+  To get started with testing you can edit this class, and the input file at `src/test/resources/01.txt`

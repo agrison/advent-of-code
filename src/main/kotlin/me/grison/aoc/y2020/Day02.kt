@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day02 : Day(2) {
+import me.grison.aoc.Day
+
+class Day02 : Day(2, 2020) {
     override fun title() = "Password Philosophy"
 
     override fun partOne() = countValid { l, r, letter, pwd ->

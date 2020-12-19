@@ -1,6 +1,8 @@
-package days
+package me.grison.aoc.y2020
 
-class Day01 : Day(1) {
+import me.grison.aoc.Day
+
+class Day01 : Day(1, 2020) {
     override fun title() = "Report Repair"
 
     override fun partOne() = solve(2)

@@ -1,5 +1,6 @@
-package days
+package me.grison.aoc
 
+import sun.net.util.IPAddressUtil.scan
 import util.InputReader
 import java.lang.Integer.parseInt
 import java.lang.Long.parseLong
@@ -10,16 +11,17 @@ import kotlin.math.absoluteValue
 typealias Instr = String
 typealias Program = List<Instr>
 
-abstract class Day(val dayNumber: Int) {
+abstract class Day(val dayNumber: Int, val year: Int = 2020) {
 
     // Input feeders
     protected val inputList: List<String> by lazy { InputReader.inputAsList(dayNumber) }
+    protected val inputGroups: List<String> by lazy { InputReader.inputAsGroups(dayNumber) }
     protected val program: List<String> by lazy { InputReader.inputAsList(dayNumber) }
     protected val inputSet: Set<String> by lazy { InputReader.inputAsSet(dayNumber) }
     protected val inputString: String by lazy { InputReader.inputAsString(dayNumber) }
     protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy { InputReader.inputAsVavrStrings(dayNumber) }
     protected val inputAsVavrInts: io.vavr.collection.List<Int> by lazy { InputReader.inputAsVavrInts(dayNumber) }
-    protected val inputInts: List<Int> by lazy { InputReader.inputAsString(dayNumber).map {it.toInt()} }
+    protected val inputInts: List<Int> by lazy { InputReader.inputAsString(dayNumber).map { it.toInt() } }
 
     abstract fun partOne(): Any?
 
@@ -62,17 +64,19 @@ abstract class Day(val dayNumber: Int) {
         m.forEach { s = s.replace(it.key, it.value) }
         return s
     }
+
     fun String.replacingRegex(m: Map<String, String>): String {
         var s = this
         m.forEach { s = s.replace(it.key.regex(), it.value) }
         return s
     }
+
     fun String.butLast() = substring(0, length - 1)
     fun String.between(left: String, right: String) = split(left)[1].split(right).first()
     fun String.afterLast(s: String) = split(s).last()
-    fun String.allInts() : List<Int> = "(\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
-    fun String.allLongs() : List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
-    fun String.stringList() : List<String> = map { it.toString() }
+    fun String.allInts(): List<Int> = "(\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
+    fun String.allLongs(): List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
+    fun String.stringList(): List<String> = map { it.toString() }
     fun String.noSpaces() = replace("\\s+".regex(), "")
     fun String.normalSplit(delim: String) = split(delim).filter { it != "" }
     fun String.except(str: String) = replace(str, "")
@@ -104,11 +108,13 @@ abstract class Day(val dayNumber: Int) {
         this.add(e)
         return this
     }
+
     operator fun <T> MutableList<T>.plus(e: T): MutableList<T> {
         this.add(e)
         return this
     }
-    fun List<Long>.cumSum() = scan(0L) { a, b -> a + b}
+
+    fun List<Long>.cumSum() : List<Long> = this.scan(0L) { a, b -> a + b }
     fun <T> List<T>.except(filter: T) = filter { it != filter }
     fun <T> List<T>.join() = joinToString("")
 
@@ -129,7 +135,7 @@ abstract class Day(val dayNumber: Int) {
     operator fun Pair<Int, Int>.times(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first * p.first, second * p.second)
     fun Pair<Long, Long>.sum() = first + second
     fun Pair<Long, Long>.multiply() = first * second
-    fun <T,U> p(t: T, u: U) :Pair<T, U> = Pair(t, u)
+    fun <T, U> p(t: T, u: U): Pair<T, U> = Pair(t, u)
     fun Pair<Int, Int>.manhattan() = first.absoluteValue + second.absoluteValue
 
     // Stack
@@ -144,16 +150,18 @@ abstract class Day(val dayNumber: Int) {
     fun Instr.op(): String = split(" ")[0]
     fun Instr.arg(): Int = parseInt(split(" ")[1])
     fun Instr.switchOp(from: String, to: String) = replace(from, to)
-    fun Instr.swap(from: String, to: String) = when(op()) {
+    fun Instr.swap(from: String, to: String) = when (op()) {
         from -> switchOp(from, to)
         to -> switchOp(to, from)
         else -> this
     }
+
     fun Program.swap(i: Int, from: String, to: String): Program {
         val l = this.toMutableList()
         l[i] = l[i].swap(from, to)
         return l
     }
+
     fun Program.isEnd(i: Int) = size == i
 
 

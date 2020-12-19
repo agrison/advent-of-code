@@ -1,9 +1,10 @@
-package days
+package me.grison.aoc.y2020
 
 import arrow.core.extensions.list.foldable.exists
+import me.grison.aoc.Day
 import java.lang.System.lineSeparator
 
-class Day16 : Day(16) {
+class Day16 : Day(16, 2020) {
     override fun title() = "Ticket Translation"
 
     override fun partOne(): Int {

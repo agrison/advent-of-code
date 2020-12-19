@@ -54,6 +54,7 @@ class Day19 : Day(19) {
     private fun iterateRules(rules: Map<String, String>, solutions: MutableMap<String, String>) {
         rules.forEach { (number, rule) ->
             when {
+                // this is an initial rule
                 '"' in rule -> solutions[number] = rule.except('"')
                 else -> {
                     val ruleParts = rule.normalSplit(" ")

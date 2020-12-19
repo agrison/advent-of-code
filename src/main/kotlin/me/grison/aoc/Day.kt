@@ -1,6 +1,5 @@
 package me.grison.aoc
 
-import sun.net.util.IPAddressUtil.scan
 import util.InputReader
 import java.lang.Integer.parseInt
 import java.lang.Long.parseLong

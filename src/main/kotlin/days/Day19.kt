@@ -47,15 +47,15 @@ class Day19 : Day(19) {
         solutions
     }
 
-    private fun iterateRules(rules: Map<String, String>, resolved: MutableMap<String, String>) {
+    private fun iterateRules(rules: Map<String, String>, solutions: MutableMap<String, String>) {
         rules.forEach { (number, rule) ->
             when {
-                '"' in rule -> resolved[number] = rule.except('"')
+                '"' in rule -> solutions[number] = rule.except('"')
                 else -> {
                     val ruleParts = rule.normalSplit(" ")
-                    val solved = ruleParts.except("|").all { it in resolved.keys }
+                    val solved = ruleParts.except("|").all { it in solutions.keys }
                     if (solved) {
-                        resolved[number] = "(" + ruleParts.map { if (it == "|") "|" else resolved[it] }.joinToString("") + ")"
+                        solutions[number] = "(" + ruleParts.map { it.or("|", solutions[it]) }.join() + ")"
                     }
                 }
             }

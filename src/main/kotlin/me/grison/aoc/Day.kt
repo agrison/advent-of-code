@@ -18,7 +18,12 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     protected val program: List<String> by lazy { InputReader.inputAsList(dayNumber, year) }
     protected val inputSet: Set<String> by lazy { InputReader.inputAsSet(dayNumber, year) }
     protected val inputString: String by lazy { InputReader.inputAsString(dayNumber, year) }
-    protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy { InputReader.inputAsVavrStrings(dayNumber, year) }
+    protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy {
+        InputReader.inputAsVavrStrings(
+            dayNumber,
+            year
+        )
+    }
     protected val inputAsVavrInts: io.vavr.collection.List<Int> by lazy { InputReader.inputAsVavrInts(dayNumber, year) }
     protected val inputInts: List<Int> by lazy { InputReader.inputAsString(dayNumber, year).map { it.toInt() } }
 
@@ -45,7 +50,9 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     fun String.at(pos: Int) = this[pos % length]
     fun String.at(pos: Int, c: Char) = at(pos) == c
     fun String.containsAll(vararg strs: String) = strs.map { contains(it) }.fold(true) { a, b -> a && b }
-    fun String.field(s: String): String = runCatching { substring(indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
+    fun String.field(s: String): String =
+        runCatching { substring(indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
+
     fun String.intField(s: String, remove: String = "@"): Int = replace(remove, "").field(s).int()
     fun String.int() = runCatching { parseInt(replace("""[^\d]""", "")) }.getOrDefault(0)
     fun String.regex() = toRegex()
@@ -113,9 +120,10 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
         return this
     }
 
-    fun List<Long>.cumSum() : List<Long> = this.scan(0L) { a, b -> a + b }
+    fun List<Long>.cumSum(): List<Long> = this.scan(0L) { a, b -> a + b }
     fun <T> List<T>.except(filter: T) = filter { it != filter }
     fun <T> List<T>.join() = joinToString("")
+    fun <T> List<T>.butLast() = dropLast(1)
 
     // Sequence
     fun <T : Any> cycle(vararg xs: T): Sequence<T> {
@@ -187,8 +195,18 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     // specific to Day 03
     fun String.debug03(enabled: Boolean, at: Int): Boolean {
         if (enabled)
-            println(this.substring(0, at % this.length) + (if (this.at(at, '#')) red("#") else green("•"))
-                    + (if ((at + 1) % this.length == 0) "" else this.substring((at + 1) % this.length)))
+            println(
+                this.substring(0, at % this.length) + (if (this.at(at, '#')) red("#") else green("•"))
+                        + (if ((at + 1) % this.length == 0) "" else this.substring((at + 1) % this.length))
+            )
         return true
     }
 }
+
+fun <T> List<T>.butLast() = dropLast(1)
+fun <T> List<List<T>>.swapRowCols() = flatMap { it.withIndex() }
+    .groupBy({ (i, _) -> i }, { (_, v) -> v })
+    .map { (_, v) -> v.reversed() }
+fun List<List<List<Boolean>>>.flattenGrid() = flatMap { it.mapIndexed { i, list -> IndexedValue(i, list) } }
+    .groupBy({ (i, _) -> i }, { (_, v) -> v })
+    .map { (_, v) -> v.reduce { acc, list -> acc + list } }

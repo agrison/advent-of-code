@@ -91,6 +91,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 19: Monster Messages ---
  🌟 Part 1: 279  (34.7ms)
  🌟 Part 2: 384  (225ms)
+ 
+🎄 --- Day 20: Jurassic Jigsaw ---
+ 🌟 Part 1: 64802175715999  (57.1ms)
+ 🌟 Part 2: 2146            (107ms)
 ```
 
 ### Running

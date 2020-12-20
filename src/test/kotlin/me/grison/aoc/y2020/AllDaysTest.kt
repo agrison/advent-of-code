@@ -30,7 +30,7 @@ class AllDaysTest {
             Answer({ Day17() }, 362, 1980),
             Answer({ Day18() }, 7293529867931, 60807587180737),
             Answer({ Day19() }, 279, 384),
-            Answer({ Day20() }, 64802175715999, 0)
+            Answer({ Day20() }, 64802175715999, 2146)
     ).map {
         val day = it.inst.invoke()
         DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 1 - expecting ${it.part1}") {

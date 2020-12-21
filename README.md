@@ -95,6 +95,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 20: Jurassic Jigsaw ---
  🌟 Part 1: 64802175715999  (57.1ms)
  🌟 Part 2: 2146            (107ms)
+ 
+🎄 --- Day 21: Allergen Assessment ---
+ 🌟 Part 1: 2798                                       (27.8ms)
+ 🌟 Part 2: gbt,rpj,vdxb,dtb,bqmhk,vqzbq,zqjm,nhjrzzj  (5.59ms)
 ```
 
 ### Running

@@ -1,11 +1,24 @@
 package me.grison.aoc
 
+import scientifik.kmath.operations.Complex
 import util.InputReader
 import java.lang.Integer.parseInt
 import java.lang.Long.parseLong
 import java.lang.System.lineSeparator
+import java.math.BigInteger
+import java.nio.charset.Charset
+import java.security.MessageDigest
 import java.util.*
+import java.util.function.IntFunction
+import java.util.function.ToIntFunction
+import kotlin.math.abs
 import kotlin.math.absoluteValue
+import java.util.stream.Collectors
+
+import java.util.stream.IntStream
+
+
+
 
 typealias Instr = String
 typealias Program = List<Instr>
@@ -96,6 +109,17 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     fun Int.`in`(i: IntRange) = (i.first..(i.last + 1)).contains(this)
     fun Long.divisible(other: Long) = this % other == 0L
 
+    // Complex
+    fun Complex.manhattan() = (abs(this.re) + abs(this.im)).toInt()
+    val Double.j: Complex
+        get() = Complex(0, this)
+    val Int.j: Complex
+        get() = Complex(0, this)
+    val Double.r: Complex
+        get() = Complex(this, 0)
+    val Int.r: Complex
+        get() = Complex(this, 0)
+
     // Booleans
     fun Boolean.toInt() = if (this) 1 else 0
 
@@ -124,6 +148,19 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     fun <T> List<T>.except(filter: T) = filter { it != filter }
     fun <T> List<T>.join() = joinToString("")
     fun <T> List<T>.butLast() = dropLast(1)
+    fun <T> List<List<T>>.transpose(): List<List<T>> {
+        val N = this.stream().mapToInt { l: List<T> -> l.size }.max().orElse(-1)
+        val iterList = this.stream().map { it: List<T> -> it.iterator() }.collect(Collectors.toList())
+        return IntStream.range(0, N)
+            .mapToObj { n: Int ->
+                iterList.stream()
+                    .filter { it: Iterator<T> -> it.hasNext() }
+                    .map { m: Iterator<T> -> m.next() }
+                    .collect(Collectors.toList())
+            }
+            .collect(Collectors.toList())
+    }
+
 
     // Sequence
     fun <T : Any> cycle(vararg xs: T): Sequence<T> {
@@ -144,6 +181,7 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     fun Pair<Long, Long>.multiply() = first * second
     fun <T, U> p(t: T, u: U): Pair<T, U> = Pair(t, u)
     fun Pair<Int, Int>.manhattan() = first.absoluteValue + second.absoluteValue
+    fun <T, U> Pair<T, U>.swap() = p(second, first)
 
     // Stack
     fun <T> Stack<T>.popIf(t: T): T? = if (last() == t) pop() else null
@@ -201,6 +239,26 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
             )
         return true
     }
+
+    class Memoize1<in T, out R>(val f: (T) -> R) : (T) -> R {
+        private val values = mutableMapOf<T, R>()
+        override fun invoke(x: T): R {
+            return values.getOrPut(x, { f(x) })
+        }
+    }
+
+    fun <T, R> ((T) -> R).memoize(): (T) -> R = Memoize1(this)
+
+    fun md5(data: String) =
+        MessageDigest.getInstance("MD5").let { m ->
+            m.update(data.toByteArray(Charset.forName("UTF-8")))
+            m.digest().toHex()
+        }
+
+    fun ByteArray.toHex() = String.format(
+        "%0" + (this.size shl 1) + "x",
+        BigInteger(1, this)
+    )
 }
 
 fun <T> List<T>.butLast() = dropLast(1)

@@ -16,6 +16,7 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     jcenter()
+    maven("https://dl.bintray.com/mipt-npm/scientifik")
 }
 
 dependencies {
@@ -33,6 +34,9 @@ dependencies {
     implementation("io.vavr", "vavr", "0.10.3")
     implementation("io.vavr", "vavr-kotlin", "0.10.2")
     implementation("com.vdurmont", "emoji-java", "5.1.1")
+    implementation("com.beust", "klaxon", "5.0.1")
+
+    api("kscience.kmath:kmath-core:0.1.4")
 }
 
 tasks.withType<KotlinCompile> {

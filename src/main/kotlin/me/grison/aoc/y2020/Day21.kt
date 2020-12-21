@@ -39,16 +39,10 @@ class Day21 : Day(21, 2020) {
 
         inputList.forEach { line ->
             val foodIngredients = line.before(" (").normalSplit(" ").toSet()
-            for (ing in foodIngredients) {
-                ingredients[ing] = (ingredients[ing] ?: 0) + 1
-            }
+            foodIngredients.forEach { ing -> ingredients[ing] = (ingredients[ing] ?: 0) + 1 }
+
             val foodAllergens = line.before(")").after(" (contains ").normalSplit(", ")
-            for (all in foodAllergens) {
-                if (all !in allergens)
-                    allergens[all] = foodIngredients
-                else
-                    allergens[all] = allergens[all]!!.intersect(foodIngredients)
-            }
+            foodAllergens.forEach { all -> allergens.merge(all, foodIngredients) { prev, new -> prev.intersect(new) } }
         }
 
         return p(allergens, ingredients)

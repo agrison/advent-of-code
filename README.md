@@ -89,16 +89,16 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
  🌟 Part 2: 60807587180737  (5.21ms)
 
 🎄 --- Day 19: Monster Messages ---
- 🌟 Part 1: 279  (34.7ms)
- 🌟 Part 2: 384  (225ms)
+ 🌟 Part 1: 279  (32.1ms)
+ 🌟 Part 2: 384  (204ms)
  
 🎄 --- Day 20: Jurassic Jigsaw ---
- 🌟 Part 1: 64802175715999  (57.1ms)
- 🌟 Part 2: 2146            (107ms)
+ 🌟 Part 1: 64802175715999  (11.7ms)
+ 🌟 Part 2: 2146            (94.6ms)
  
 🎄 --- Day 21: Allergen Assessment ---
- 🌟 Part 1: 2798                                       (27.8ms)
- 🌟 Part 2: gbt,rpj,vdxb,dtb,bqmhk,vqzbq,zqjm,nhjrzzj  (5.59ms)
+ 🌟 Part 1: 2798                                       (2.36ms)
+ 🌟 Part 2: gbt,rpj,vdxb,dtb,bqmhk,vqzbq,zqjm,nhjrzzj  (1.77ms)
 ```
 
 ### Running

@@ -28,7 +28,7 @@ class AllDaysTest {
         Answer({ Day15() }, 222870, 117936),
         Answer({ Day16() }, 40, 241),
         Answer({ Day17() }, 654, 57),
-        Answer({ Day18() }, 957, 803),
+        Answer({ Day18() }, 768, 781),
         Answer({ Day19() }, 535, 212),
         Answer({ Day20() }, 831600, 884520),
     ).map {

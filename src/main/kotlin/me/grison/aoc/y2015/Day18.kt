@@ -1,6 +1,7 @@
 package me.grison.aoc.y2015
 
 import me.grison.aoc.Day
+import java.lang.System.lineSeparator
 
 class Day18 : Day(18, 2015) {
     override fun title() = "Like a GIF For Your Yard"
@@ -9,7 +10,7 @@ class Day18 : Day(18, 2015) {
     private val height = 100
 
     override fun partOne(): Int {
-        val input = inputString.replace("\n".regex(), "").toCharArray()
+        val input = inputString.replace(lineSeparator(), "").toCharArray()
         Grid(width, height, input).let { grid ->
             repeat(100) { grid.tick() }
             return grid.onCells()
@@ -17,7 +18,7 @@ class Day18 : Day(18, 2015) {
     }
 
     override fun partTwo(): Int {
-        inputString.replace("\n".regex(), "").toCharArray().let {
+        inputString.replace(lineSeparator(), "").toCharArray().let {
             it[0] = '#'
             it[width - 1] = '#'
             it[width * height - width] = '#'

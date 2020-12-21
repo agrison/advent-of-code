@@ -34,11 +34,13 @@ class AllDaysTest {
         Answer({ Day21() }, 2798, "gbt,rpj,vdxb,dtb,bqmhk,vqzbq,zqjm,nhjrzzj")
     ).map {
         val day = it.inst.invoke()
-        DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 1 - expecting ${it.part1}") {
-            assertThat(it.inst.invoke().partOne(), `is`(it.part1))
+        val p1 = it.inst.invoke().partOne()
+        DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 1 - expecting ${it.part1} - got $p1") {
+            assertThat(p1, `is`(it.part1))
         }
-        DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 2 - expecting ${it.part2}") {
-            assertThat(it.inst.invoke().partTwo(), `is`(it.part2))
+        val p2 = it.inst.invoke().partTwo()
+        DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 2 - expecting ${it.part2} - got $p2") {
+            assertThat(p2, `is`(it.part2))
         }
     }
 }

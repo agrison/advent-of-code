@@ -80,13 +80,13 @@ class Day16 : Day(16, 2020) {
     }
 
     private fun nearbyTickets(): List<String> {
-        val (_, _, _nearby) = inputString.split(lineSeparator() * 2)
-        return _nearby.split(lineSeparator()).tail()
+        val (_, _, _nearby) = inputGroups
+        return _nearby.lines().tail()
     }
 
     private fun myTickets(): List<Long> {
-        val (_, my, _) = inputString.split(lineSeparator() * 2)
-        return my.split(lineSeparator()).last().allLongs()
+        val (_, my, _) = inputGroups
+        return my.lines().last().allLongs()
     }
 }
 

@@ -68,6 +68,6 @@ class Day19 : Day(19, 2020) {
         }
     }
 
-    private fun rules() = inputString.split(lineSeparator() * 2)[0].split(lineSeparator())
-    private fun loadMessages() = inputString.split(lineSeparator() * 2)[1].split(lineSeparator())
+    private fun rules() = inputGroups[0].lines()
+    private fun loadMessages() = inputGroups[1].lines()
 }

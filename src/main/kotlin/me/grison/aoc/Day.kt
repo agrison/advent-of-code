@@ -102,6 +102,7 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     fun String.before(str: String) = split(str)[0]
     fun String.after(str: String) = split(str)[1]
     fun String.or(eq: String, or: String?) = if (this == eq) this else or
+    fun String.oneLine(sep: String = "") = replace(lineSeparator(), sep)
 
     // Integers & Long
     fun Int.divisible(other: Int) = this % other == 0
@@ -131,7 +132,9 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
 
     // Collections
     fun List<Int>.multiply() = reduce { a, b -> a * b }
+    fun List<Int>.product() = reduce { a, b -> a * b }
     fun List<Long>.multiply() = reduce { a, b -> a * b }
+    fun List<Long>.product() = reduce { a, b -> a * b }
     fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
     operator fun <T> MutableSet<T>.plus(e: T): MutableSet<T> {
         this.add(e)
@@ -169,6 +172,7 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
 
     fun <T> Collection<T>.tail() = drop(1)
     fun Collection<String>.ints() = map { it.toInt() }
+    fun Collection<String>.longs() = map { it.toLong() }
 
     // Sequence
     fun <T : Any> cycle(vararg xs: T): Sequence<T> {

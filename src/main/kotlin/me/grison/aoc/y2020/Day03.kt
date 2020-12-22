@@ -9,7 +9,7 @@ class Day03 : Day(3, 2020) {
 
     override fun partTwo() = listOf(11, 31, 51, 71, 12)
             .map { slope(it / 10, it % 10) }
-            .multiply()
+            .product()
 
     private fun slope(cols: Int, rows: Int): Long =
             inputList.mapIndexed { y, row ->

@@ -9,8 +9,6 @@ import java.math.BigInteger
 import java.nio.charset.Charset
 import java.security.MessageDigest
 import java.util.*
-import java.util.function.IntFunction
-import java.util.function.ToIntFunction
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 import java.util.stream.Collectors
@@ -58,50 +56,77 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
 
     // core types
     // Strings
+    //** @return the occurences of `c`. */
     fun String.occurrences(c: Char) = count { it == c }
+    /** @return safe `this[pos]`. */
     fun String.at(pos: Int) = this[pos % length]
+    /** @return whether `this.at(pos) == c`. */
     fun String.at(pos: Int, c: Char) = at(pos) == c
+    /** @return whether this string contains all the given `strs`. */
     fun String.containsAll(vararg strs: String) = strs.map { contains(it) }.fold(true) { a, b -> a && b }
     fun String.field(s: String): String =
         runCatching { substring(indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
 
     fun String.intField(s: String, remove: String = "@"): Int = replace(remove, "").field(s).int()
     fun String.int() = runCatching { parseInt(replace("""[^\d]""", "")) }.getOrDefault(0)
+    /** @return a regex from this string. */
     fun String.regex() = toRegex()
+    /** @return the string without the last character. */
     fun String.matches(s: String) = matches(s.regex())
+    /** @return whether this string is in the given `strs`. */
     fun String.`in`(vararg strs: String) = strs.contains(this)
+    /** @return Int representation of this string. */
     fun String.toInt(radix: Int) = parseInt(this, radix)
+    /** @return binary representation of this string. */
     fun String.binary() = parseInt(this, 2)
+    /** @return Long representation of this string. */
     fun String.binaryLong() = parseLong(this, 2)
+    /** @return set of characters in this string. */
     fun String.charSet() = split("").toSet() - ""
+    /** @return `List<String>` representing the lines in this string. */
     fun String.lines() = split(lineSeparator())
+    /** @return returns a char array. */
     fun String.split() = toCharArray()
+    /** @return times operator for string (repeating). */
     operator fun String.times(i: Int) = repeat(i)
     fun String.replacing(m: Map<Char, Char>): String {
         var s = this
         m.forEach { s = s.replace(it.key, it.value) }
         return s
     }
-
     fun String.replacingRegex(m: Map<String, String>): String {
         var s = this
         m.forEach { s = s.replace(it.key.regex(), it.value) }
         return s
     }
 
+    /** @return the string without the last character. */
     fun String.butLast() = substring(0, length - 1)
+    /** @return the string between `left` and `right`. */
     fun String.between(left: String, right: String) = split(left)[1].split(right).first()
+    /** @return the string after the last `s`. */
     fun String.afterLast(s: String) = split(s).last()
+    /** @return all int found in this string. */
     fun String.allInts(): List<Int> = "(\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
+    /** @return all long found in this string. */
     fun String.allLongs(): List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
+    /** @return like toCharArray() but with strings. */
     fun String.stringList(): List<String> = map { it.toString() }
+    /** @return the string without any spaces. */
     fun String.noSpaces() = replace("\\s+".regex(), "")
+    /** @return like Java `split()` because it's a better `split()`. */
     fun String.normalSplit(delim: String) = split(delim).filter { it != "" }
+    /** @return the string without all occurrences of `str`. */
     fun String.except(str: String) = replace(str, "")
+    /** @return the string without all occurrences of `c`. */
     fun String.except(c: Char) = replace(c + "", "")
+    /** @return the string before `str`. */
     fun String.before(str: String) = split(str)[0]
+    /** @return the string after `str`. */
     fun String.after(str: String) = split(str)[1]
+    /** @return `eq` if this == `eq`, `or` otherwise. */
     fun String.or(eq: String, or: String?) = if (this == eq) this else or
+    /** @return the string where line separators are replaced by `sep` (default empty string). */
     fun String.oneLine(sep: String = "") = replace(lineSeparator(), sep)
 
     // Integers & Long
@@ -152,11 +177,11 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     fun <T> List<T>.butLast() = dropLast(1)
     fun <T> List<List<T>>.transpose(): List<List<T>> {
         val N = this.stream().mapToInt { l: List<T> -> l.size }.max().orElse(-1)
-        val iterList = this.stream().map { it: List<T> -> it.iterator() }.collect(Collectors.toList())
+        val iterList = this.stream().map { it.iterator() }.collect(Collectors.toList())
         return IntStream.range(0, N)
-            .mapToObj { n: Int ->
+            .mapToObj { _ ->
                 iterList.stream()
-                    .filter { it: Iterator<T> -> it.hasNext() }
+                    .filter { it.hasNext() }
                     .map { m: Iterator<T> -> m.next() }
                     .collect(Collectors.toList())
             }

@@ -26,10 +26,10 @@ class Day22 : Day(22, 2020) {
     private fun ArrayDeque<Int>.score() = zip((size downTo 1)).sumBy { it.product() }
 
     private fun recursiveCombat(player1: Deck, player2: Deck): Int {
-        val states: MutableSet<Any> = hashSetOf()
-        while (player1.size > 0 && player2.size > 0) {
-            val state = p(player1, player2)
-            if (!states.add(state))
+        val previousRounds = hashSetOf<Any>()
+        while (player1.isNotEmpty() && player2.isNotEmpty()) {
+            val round = p(player1, player2)
+            if (!previousRounds.add(round))
                 return 1
 
             val (a, b) = p(player1.shift(), player2.shift())

@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 import kotlin.reflect.KFunction2
 
 class Day11 : Day(11, 2020) {

@@ -1,7 +1,7 @@
 package me.grison.aoc.y2020
 
 import arrow.core.extensions.list.foldable.exists
-import me.grison.aoc.Day
+import me.grison.aoc.*
 import java.lang.System.lineSeparator
 
 class Day16 : Day(16, 2020) {

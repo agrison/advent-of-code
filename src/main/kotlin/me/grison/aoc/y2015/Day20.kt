@@ -1,6 +1,6 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day20 : Day(20, 2015) {
     override fun title() = "Infinite Elves and Infinite Houses"

@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 import me.grison.aoc.y2020.Day12.Direction.E
 
 class Day12 : Day(12, 2020) {

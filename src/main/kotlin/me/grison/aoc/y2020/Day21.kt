@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day21 : Day(21, 2020) {
     override fun title() = "Allergen Assessment"

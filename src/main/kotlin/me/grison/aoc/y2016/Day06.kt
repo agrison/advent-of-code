@@ -1,6 +1,6 @@
 package me.grison.aoc.y2016
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day06 : Day(6, 2016) {
     override fun title() = "Signals and Noise"

@@ -1,6 +1,6 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 import java.lang.System.lineSeparator
 
 class Day18 : Day(18, 2015) {

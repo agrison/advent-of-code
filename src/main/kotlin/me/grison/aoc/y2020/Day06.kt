@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 import java.lang.System.lineSeparator
 
 class Day06 : Day(6, 2020) {

@@ -1,6 +1,6 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 // not parsing the input
 class Day15 : Day(15, 2015) {

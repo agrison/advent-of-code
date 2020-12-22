@@ -1,6 +1,6 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 import kotlin.math.min
 

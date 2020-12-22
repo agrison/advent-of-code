@@ -1,6 +1,6 @@
 package me.grison.aoc.y2016
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day07 : Day(7, 2016) {
     override fun title() = "Internet Protocol Version 7"

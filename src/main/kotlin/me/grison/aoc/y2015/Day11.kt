@@ -1,8 +1,7 @@
 package me.grison.aoc.y2015
 
 import arrow.core.extensions.list.foldable.exists
-import me.grison.aoc.Day
-
+import me.grison.aoc.*
 
 class Day11 : Day(11, 2015) {
     override fun title() = "Corporate Policy"

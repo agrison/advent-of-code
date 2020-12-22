@@ -1,10 +1,7 @@
 package me.grison.aoc.y2020
 
 import arrow.syntax.collections.tail
-import me.grison.aoc.Day
-import me.grison.aoc.butLast
-import me.grison.aoc.flattenGrid
-import me.grison.aoc.swapRowCols
+import me.grison.aoc.*
 import java.util.*
 
 class Day20 : Day(20, 2020) {

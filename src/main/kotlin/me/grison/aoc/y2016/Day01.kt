@@ -1,6 +1,6 @@
 package me.grison.aoc.y2016
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 import scientifik.kmath.operations.Complex
 
 class Day01 : Day(1, 2016) {

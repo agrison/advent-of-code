@@ -1,7 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
-import me.grison.aoc.Program
+import me.grison.aoc.*
 
 class Day08 : Day(8, 2020) {
     override fun title() = "Handheld Halting"

@@ -1,6 +1,6 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day19 : Day(19, 2015) {
     override fun title() = "Medicine for Rudolph"

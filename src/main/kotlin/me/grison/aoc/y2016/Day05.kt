@@ -1,7 +1,7 @@
 package me.grison.aoc.y2016
 
 import arrow.syntax.function.memoize
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day05 : Day(5, 2016) {
     override fun title() = "How About a Nice Game of Chess?"

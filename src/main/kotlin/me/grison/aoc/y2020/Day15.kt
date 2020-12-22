@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 // see previous commit, I was using a Map, but it was taking 4.5 sec for part 2
 // using an IntArray makes it < 1s on my machine.

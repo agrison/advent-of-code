@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 import java.util.*
 
 class Day18 : Day(18, 2020) {

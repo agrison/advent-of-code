@@ -1,6 +1,6 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day01 : Day(1, 2015) {
     override fun title() = "Not Quite Lisp"

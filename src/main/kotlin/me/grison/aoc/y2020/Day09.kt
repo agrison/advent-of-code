@@ -1,7 +1,7 @@
 package me.grison.aoc.y2020
 
 import arrow.core.extensions.set.foldable.exists
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day09 : Day(9, 2020) {
     override fun title() = "Encoding Error"

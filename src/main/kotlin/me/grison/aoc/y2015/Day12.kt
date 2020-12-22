@@ -2,7 +2,7 @@ package me.grison.aoc.y2015
 
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.Parser
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day12 : Day(12, 2015) {
     override fun title() = "JSAbacusFramework.io"

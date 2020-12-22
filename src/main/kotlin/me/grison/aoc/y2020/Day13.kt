@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day13 : Day(13, 2020) {
     override fun title() = "Shuttle Search"

@@ -1,6 +1,6 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day03 : Day(3, 2015) {
     override fun title() = "Perfectly Spherical Houses in a Vacuum"

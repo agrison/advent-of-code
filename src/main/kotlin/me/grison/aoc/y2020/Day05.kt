@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day05 : Day(5, 2020) {
     override fun title() = "Binary Boarding"

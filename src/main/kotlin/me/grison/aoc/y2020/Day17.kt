@@ -1,6 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
+import me.grison.aoc.*
 
 class Day17 : Day(17, 2020) {
     override fun title() = "Conway Cubes"

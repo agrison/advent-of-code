@@ -1,7 +1,7 @@
 package me.grison.aoc.y2015
 
-import io.vavr.kotlin.toVavrList
 import me.grison.aoc.*
+import io.vavr.kotlin.toVavrList
 
 class Day09 : Day(9, 2015) {
     override fun title() = "All in a Single Night"

@@ -17,7 +17,7 @@ class AllDaysTest {
         Answer({ Day04() }, 254575, 1038736),
         Answer({ Day05() }, 258, 53),
         Answer({ Day06() }, 569999, 17836115),
-        Answer({ Day07() }, 0, 0),
+        Answer({ Day07() }, 0, 0), // TODO
         Answer({ Day08() }, 1333, 2046),
         Answer({ Day09() }, 251, 898),
         Answer({ Day10() }, 360154, 5103798),
@@ -32,15 +32,20 @@ class AllDaysTest {
         Answer({ Day19() }, 535, 212),
         Answer({ Day20() }, 831600, 884520),
         Answer({ Day21() }, 78, 148),
+        //Answer({ Day22() }, 0, 0), // TODO
         Answer({ Day23() }, 170L, 247L),
         Answer({ Day24() }, 10439961859L, 72050269L),
+        Answer({ Day25() }, 9132360, "Merry Christmas!"),
     ).map {
         val day = it.inst.invoke()
         DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 1 - expecting ${it.part1}") {
             assertThat(day.partOne(), `is`(it.part1))
         }
         DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 2 - expecting ${it.part2}") {
-            assertThat(day.partTwo(), `is`(it.part2))
+            assertThat(
+                if (day.dayNumber < 25) day.partTwo()
+                else "Merry Christmas!", `is`(it.part2)
+            )
         }
     }
 }

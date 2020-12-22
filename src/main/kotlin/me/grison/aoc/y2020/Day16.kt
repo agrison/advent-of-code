@@ -81,7 +81,7 @@ class Day16 : Day(16, 2020) {
 
     private fun nearbyTickets(): List<String> {
         val (_, _, _nearby) = inputString.split(lineSeparator() * 2)
-        return _nearby.split(lineSeparator()).drop(1)
+        return _nearby.split(lineSeparator()).tail()
     }
 
     private fun myTickets(): List<Long> {

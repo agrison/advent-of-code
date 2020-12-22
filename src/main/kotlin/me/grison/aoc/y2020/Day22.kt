@@ -34,7 +34,7 @@ class Day22 : Day(22, 2020) {
 
             val (a, b) = p(player1.shift(), player2.shift())
             val winner = if (a <= player1.size && b <= player2.size) {
-                recursiveCombat(player1.subList(0, a).deque(), player2.subList(0, b).deque())
+                recursiveCombat(player1[0, a].deque(), player2[0, b].deque())
             } else {
                 if (a > b) 1 else 2
             }

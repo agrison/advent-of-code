@@ -35,4 +35,3 @@ class Day20 : Day(20, 2015) {
         return houseNumber
     }
 }
-

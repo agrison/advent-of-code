@@ -17,5 +17,3 @@ class Day03 : Day(3, 2020) {
                 (row.debug03(false, c) && x.divisible(rows) && row.at(c, '#')).toInt()
             }.fold(0L, Long::plus)
 }
-
-

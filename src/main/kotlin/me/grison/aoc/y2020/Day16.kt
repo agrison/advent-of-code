@@ -89,5 +89,3 @@ class Day16 : Day(16, 2020) {
         return my.lines().last().allLongs()
     }
 }
-
-

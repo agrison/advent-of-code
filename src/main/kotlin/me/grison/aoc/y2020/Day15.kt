@@ -26,5 +26,3 @@ class Day15 : Day(15, 2020) {
         return last
     }
 }
-
-

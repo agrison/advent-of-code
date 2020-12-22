@@ -48,4 +48,3 @@ class Day21 : Day(21, 2020) {
         return p(allergens, ingredients)
     }
 }
-

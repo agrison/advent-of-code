@@ -6,7 +6,7 @@ import me.grison.aoc.Day
 class Day16 : Day(16, 2015) {
     override fun title() = "Aunt Sue"
 
-    val known = mutableMapOf("children" to 3, "cats" to 7, "samoyeds" to 2,
+    private val known = mutableMapOf("children" to 3, "cats" to 7, "samoyeds" to 2,
             "pomeranians" to 3, "akitas" to 0, "vizslas" to 0,
             "goldfish" to 5, "trees" to 3, "cars" to 2, "perfumes" to 1)
 
@@ -53,4 +53,3 @@ class Day16 : Day(16, 2015) {
         return isRealAunt1(things, values)
     }
 }
-

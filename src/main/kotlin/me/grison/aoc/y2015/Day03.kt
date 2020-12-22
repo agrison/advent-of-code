@@ -30,5 +30,3 @@ class Day03 : Day(3, 2015) {
         return coordinates
     }
 }
-
-

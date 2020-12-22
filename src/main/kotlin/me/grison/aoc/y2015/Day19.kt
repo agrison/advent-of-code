@@ -40,4 +40,3 @@ class Day19 : Day(19, 2015) {
         return indices.map { base.substring(0, it) + replace + base.substring(it + match.length) }
     }
 }
-

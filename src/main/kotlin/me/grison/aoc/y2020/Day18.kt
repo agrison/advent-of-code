@@ -46,4 +46,3 @@ class Day18 : Day(18, 2020) {
         return expression
     }
 }
-

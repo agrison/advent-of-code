@@ -1,7 +1,10 @@
 package me.grison.aoc.y2020
 
 import arrow.syntax.collections.tail
-import me.grison.aoc.*
+import me.grison.aoc.Day
+import me.grison.aoc.butLast
+import me.grison.aoc.flattenGrid
+import me.grison.aoc.swapRowCols
 import java.util.*
 
 class Day20 : Day(20, 2020) {
@@ -22,27 +25,64 @@ class Day20 : Day(20, 2020) {
         }
 
         return tiles.filter { tile -> tile.minEdges().count { edgeCount.getValue(it) == 1 } == 2 }
-            .map { tile -> tile.id }.multiply()
+            .map { tile -> tile.id }.product()
     }
 
     override fun partTwo(): Int {
         val tiles = tiles()
         val globalTile = assembleCompleteTile(tiles)
 
-        return searchNessie(globalTile)?.let {
+
+
+        var count = searchNessie(globalTile)?.let {
             globalTile.pixels.sumOf { r -> r.count { it } } - it * 15
         } ?: 0
+
+        var s = globalTile.mkString()
+        fun String.sharps() = withIndex().filter { (_, c) -> c == '#' }.map { (i, _) -> i }
+
+        var L = s.split("\n").map { it.stringList().toMutableList() }.toMutableList()
+        fun String.red() = red(this)
+        fun String.roughColor() = this
+        val SSS = mutableSetOf<Pair<Int, Int>>()
+        NESSIES.forEach { (y, x) ->
+
+            L[y - 1] = L[y - 1].mapIndexed { i, v -> if (i-x in nessie[0].sharps()) nessieR[0][i-x].toString().red() else v.roughColor() }.toMutableList()
+            L[y] = L[y].mapIndexed { i, v -> if (i-x in nessie[1].sharps()) nessieR[1][i-x].toString().red() else v.roughColor() }.toMutableList()
+            L[y + 1] = L[y + 1].mapIndexed { i, v -> if (i-x in nessie[2].sharps()) nessieR[2][i-x].toString().red() else v.roughColor() }.toMutableList()
+        }
+
+        L = L.map { l ->
+            l.map { if (it == "#") cyan(it) else if (it == ".") blue(it) else it}.toMutableList()
+        }.toMutableList()
+
+        println("\n" + L.joinToString("\n") { it.joinToString("") })
+
+
+        return count
     }
+
+    val NESSIES = mutableListOf<Pair<Int, Int>>()
 
     private fun countNessies(tile: Tile) =
         (1 until tile.size())
             .flatMap { y -> (0..tile.size() - nessie[0].length).map { x -> p(x, y) } }
-            .count { (x, y) -> isNessie(tile, x, y) }
+            .count { (x, y) ->
+                val z = isNessie(tile, x, y)
+                if (z) NESSIES.add(p(y, x))
+                z
+            }
 
     private val nessie = listOf(
         "                  # ",
         "#    ##    ##    ###",
         " #  #  #  #  #  #   "
+    )
+
+    private val nessieR = listOf(
+        """                  _ """,
+        """\    __    __    /O>""",
+        """ \  /  \  /  \  /   """
     )
 
     private fun isNessie(tile: Tile, x: Int, y: Int): Boolean {
@@ -171,6 +211,10 @@ class Day20 : Day(20, 2020) {
                 2 -> bottom = tileID
                 3 -> left = tileID
             }
+        }
+
+        fun mkString() : String {
+            return pixels.joinToString("\n") { it.map { b -> if (b) '#' else '.' }.joinToString("") }
         }
     }
 }

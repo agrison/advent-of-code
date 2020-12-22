@@ -22,5 +22,3 @@ class Day02 : Day(2, 2015) {
                         total + (l + l + w + w) + (l * w * h)
                     }
 }
-
-

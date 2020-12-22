@@ -6,7 +6,7 @@ import me.grison.aoc.Day
 class Day15 : Day(15, 2015) {
     override fun title() = "Science for Hungry People"
 
-    val attributes = mutableMapOf("Sugar" to Attributes(3, 0, 0, -3, 2),
+    private val attributes = mutableMapOf("Sugar" to Attributes(3, 0, 0, -3, 2),
             "Sprinkles" to Attributes(-3, 3, 0, 0, 9),
             "Candy" to Attributes(-1, 0, 4, 0, 1),
             "Chocolate" to Attributes(0, 0, -2, 2, 8))

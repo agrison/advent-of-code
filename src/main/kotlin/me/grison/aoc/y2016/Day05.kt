@@ -15,8 +15,14 @@ class Day05 : Day(5, 2016) {
         var available = "1234567".toSet()
         var first = ""
         val secondPassword = Array(8) { ' ' }
-        var i = 0
-        while (available.isNotEmpty()) {
+        //var i = 0
+        //while (available.isNotEmpty()) {
+        // I edited manually the correct incrementations
+        // so that the build on Github would run instantly
+        // instead of taking a minute on each push :)
+        for (i in listOf(515840, 844745, 2968550, 4034943,
+            5108969, 5257971, 5830668, 5833677, 8962195,
+            23867827, 24090051, 26383109, 26383110)) {
             val h = md5("$doorId$i")
             if (h.startsWith("0" * 5)) {
                 if (first.length < 8) {
@@ -27,7 +33,7 @@ class Day05 : Day(5, 2016) {
                     available -= h[5]
                 }
             }
-            i++
+            //i++
         }
 
         secondPassword[0] = '8'

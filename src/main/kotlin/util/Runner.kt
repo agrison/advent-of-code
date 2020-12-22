@@ -1,6 +1,7 @@
 package util
 
 import me.grison.aoc.Day
+import me.grison.aoc.afterLast
 import org.reflections.Reflections
 import kotlin.math.max
 import kotlin.time.ExperimentalTime
@@ -18,7 +19,7 @@ object Runner {
     @JvmStatic
     fun main(args: Array<String>) {
         if (args.isNotEmpty()) {
-            val (year, day) = when("/" in args[0]) {
+            val (year, day) = when ("/" in args[0]) {
                 true -> Pair(args[0].split("/")[0].toInt(), args[0].split("/")[1])
                 false -> Pair(defaultYear, args[0])
             }
@@ -30,28 +31,26 @@ object Runner {
                 val allDayClasses = getAllDayClasses()
                 if (allDayClasses != null) {
                     allDayClasses.sortedBy { dayNumber(it.simpleName) }.forEach { printDay(it) }
-                }
-                else {
+                } else {
                     printError("Couldn't find day classes - make sure you're in the right directory and try building again")
                 }
             } else {
-                val dayClass = getAllDayClasses() ?.find { dayNumber(it.simpleName) == day.toInt() }
+                val dayClass = getAllDayClasses()?.find { dayNumber(it.simpleName) == day.toInt() }
                 if (dayClass != null) {
                     printDay(dayClass)
-                }
-                else {
+                } else {
                     printError("Day $day not found")
                 }
             }
-        }
-        else {
+        } else {
             println("\uD83C\uDF85 === Advent of Code (all years) === \uD83C\uDF85\n")
             allYears = true
             val allDayClasses = getAllDayClasses()
             if (allDayClasses != null) {
-                allDayClasses.sortedBy { dayNumber(it.simpleName) }.forEach { printDay(it) }
-            }
-            else {
+                allDayClasses.sortedWith(compareBy(
+                    { it.`package`.name.afterLast(".") }, { dayNumber(it.simpleName) })
+                ).forEach { printDay(it) }
+            } else {
                 printError("Couldn't find day classes - make sure you're in the right directory and try building again")
             }
         }
@@ -71,7 +70,10 @@ object Runner {
     }
 
     private fun printParts(partOne: TimedValue<Any>, partTwo: TimedValue<Any>) {
-        val padding = max(partOne.value.toString().length, partTwo.value.toString().length) + 14        // 14 is 8 (length of 'Part 1: ') + 6 more
+        val padding = max(
+            partOne.value.toString().length,
+            partTwo.value.toString().length
+        ) + 14        // 14 is 8 (length of 'Part 1: ') + 6 more
         println(" \uD83C\uDF1F Part 1: ${partOne.value}".padEnd(padding, ' ') + "(${partOne.duration})")
         println(" \uD83C\uDF1F Part 2: ${partTwo.value}".padEnd(padding, ' ') + "(${partTwo.duration})")
     }

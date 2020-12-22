@@ -20,9 +20,9 @@ class Day22 : Day(22, 2020) {
         (if (recursiveCombat(player1, player2) == 1) player1 else player2).score()
     }
 
-    private fun decks(): Pair<Deck, Deck> = inputGroups.map { it.lines().tail().ints().deque() }.pair()
+    private fun decks() = inputGroups.map { it.lines().tail().ints().deque() }.pair()
 
-    private fun ArrayDeque<Int>.score() = zip((size downTo 1)).sumBy { it.product() }
+    private fun Deck.score() = zip((size downTo 1)).sumBy { it.product() }
 
     private fun recursiveCombat(player1: Deck, player2: Deck): Int {
         val previousRounds = hashSetOf<Any>()

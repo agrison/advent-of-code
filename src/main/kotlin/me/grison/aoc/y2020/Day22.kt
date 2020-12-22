@@ -13,15 +13,11 @@ class Day22 : Day(22, 2020) {
             else player2.addLast(p2, p1)
         }
 
-        val deck = if (player1.isEmpty()) player2 else player1
-        return deck.score()
+        return (if (player1.isEmpty()) player2 else player1).score()
     }
 
-    override fun partTwo(): Any {
-        val (player1, player2) = decks()
-        val deck = if (recursiveCombat(player1, player2) == 1) player1 else player2
-
-        return deck.score()
+    override fun partTwo() = decks().let { (player1, player2) ->
+        (if (recursiveCombat(player1, player2) == 1) player1 else player2).score()
     }
 
     private fun decks(): Pair<ArrayDeque<Int>, ArrayDeque<Int>> =

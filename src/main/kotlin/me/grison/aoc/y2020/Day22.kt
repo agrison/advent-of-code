@@ -9,10 +9,8 @@ class Day22 : Day(22, 2020) {
         val (player1, player2) = decks()
         while (player1.isNotEmpty() && player2.isNotEmpty()) {
             val (p1, p2) = p(player1.shift(), player2.shift())
-            if (p1 > p2)
-                player1.addLast(p1, p2)
-            else
-                player2.addLast(p2, p1)
+            if (p1 > p2) player1.addLast(p1, p2)
+            else player2.addLast(p2, p1)
         }
 
         val deck = if (player1.isEmpty()) player2 else player1

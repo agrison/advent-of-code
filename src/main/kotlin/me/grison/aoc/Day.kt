@@ -198,7 +198,10 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     fun <T> Collection<T>.tail() = drop(1)
     fun Collection<String>.ints() = map { it.toInt() }
     fun Collection<String>.longs() = map { it.toLong() }
-    operator fun <T> Collection<T>.get(x: Int, y: Int) = this.filterIndexed { i, _ -> i >= x && i < y }
+    operator fun <T> Collection<T>.get(x: Int, y: Int) = this.filterIndexed { i, _ -> i in x until y }
+    fun <T> Iterable<T>.pair() = iterator().let {
+        p(it.next(), it.next())
+    }
 
     // Sequence
     fun <T : Any> cycle(vararg xs: T): Sequence<T> {

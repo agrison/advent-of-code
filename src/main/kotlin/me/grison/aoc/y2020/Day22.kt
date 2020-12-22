@@ -20,8 +20,7 @@ class Day22 : Day(22, 2020) {
         (if (recursiveCombat(player1, player2) == 1) player1 else player2).score()
     }
 
-    private fun decks(): Pair<Deck, Deck> =
-        p(inputGroups[0].lines().tail().ints().deque(), inputGroups[1].lines().tail().ints().deque())
+    private fun decks(): Pair<Deck, Deck> = inputGroups.map { it.lines().tail().ints().deque() }.pair()
 
     private fun ArrayDeque<Int>.score() = zip((size downTo 1)).sumBy { it.product() }
 

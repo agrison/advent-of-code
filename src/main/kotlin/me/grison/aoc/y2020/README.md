@@ -99,6 +99,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 21: Allergen Assessment ---
  🌟 Part 1: 2798                                       (2.36ms)
  🌟 Part 2: gbt,rpj,vdxb,dtb,bqmhk,vqzbq,zqjm,nhjrzzj  (1.77ms)
+
+🎄 --- Day 22: Crab Combat ---
+ 🌟 Part 1: 32598  (3.67ms)
+ 🌟 Part 2: 35836  (292ms)
 ```
 
 ### Running

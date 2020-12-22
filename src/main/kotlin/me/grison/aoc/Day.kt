@@ -16,8 +16,7 @@ import kotlin.math.absoluteValue
 import java.util.stream.Collectors
 
 import java.util.stream.IntStream
-
-
+import kotlin.collections.ArrayDeque
 
 
 typealias Instr = String
@@ -160,7 +159,16 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
             }
             .collect(Collectors.toList())
     }
+    fun <T> Collection<T>.deque() = ArrayDeque(this)
+    fun <T> ArrayDeque<T>.addLast(vararg e: T) : ArrayDeque<T> {
+        for (ee in e) { this.addLast(ee) }
+        return this
+    }
+    operator fun <T> ArrayDeque<T>.plus(e: T) = addLast(e)
+    fun <T> ArrayDeque<T>.shift() = removeFirst()
 
+    fun <T> Collection<T>.tail() = drop(1)
+    fun Collection<String>.ints() = map { it.toInt() }
 
     // Sequence
     fun <T : Any> cycle(vararg xs: T): Sequence<T> {

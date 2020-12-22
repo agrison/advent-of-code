@@ -1,10 +1,7 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
-
 import arrow.core.extensions.list.foldable.exists
-import io.vavr.kotlin.toVavrList
-import java.util.concurrent.atomic.AtomicInteger
+import me.grison.aoc.Day
 
 
 class Day11 : Day(11, 2015) {

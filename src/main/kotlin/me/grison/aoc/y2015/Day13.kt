@@ -1,8 +1,7 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.Day
-
 import io.vavr.kotlin.toVavrList
+import me.grison.aoc.Day
 import kotlin.math.max
 
 class Day13 : Day(13, 2015) {

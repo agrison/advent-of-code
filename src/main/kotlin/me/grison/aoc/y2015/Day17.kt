@@ -2,8 +2,6 @@ package me.grison.aoc.y2015
 
 import me.grison.aoc.Day
 
-import arrow.syntax.collections.tail
-
 class Day17 : Day(17, 2015) {
     override fun title() = "No Such Thing as Too Much"
 

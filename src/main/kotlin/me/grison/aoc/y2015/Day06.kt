@@ -2,9 +2,6 @@ package me.grison.aoc.y2015
 
 import me.grison.aoc.Day
 
-import java.lang.System.lineSeparator
-import kotlin.reflect.KFunction
-
 class Day06 : Day(6, 2015) {
     override fun title() = "Probably a Fire Hazard"
 

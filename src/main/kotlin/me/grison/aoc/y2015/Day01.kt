@@ -12,6 +12,6 @@ class Day01 : Day(1, 2015) {
         var floor = 0
         return inputString.split().map {
             if (it == '(') ++floor else --floor
-        }.indexOf(-1) + 1;
+        }.indexOf(-1) + 1
     }
 }

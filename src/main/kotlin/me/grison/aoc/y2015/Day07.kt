@@ -2,8 +2,6 @@ package me.grison.aoc.y2015
 
 import me.grison.aoc.Day
 
-import javax.print.attribute.standard.Destination
-
 class Day07 : Day(7, 2015) {
     override fun title() = "Some Assembly Required"
 

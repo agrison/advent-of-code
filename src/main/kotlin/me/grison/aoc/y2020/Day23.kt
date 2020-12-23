@@ -73,16 +73,14 @@ class Day23 : Day(23, 2020) {
 
 data class Cup(val value: Int, var next: Cup? = null) {
     fun next() = next!!
-
     fun nextValue() = next().value
+    private fun picked() = listOf(value, nextValue(), forward(2).value)
 
     fun forward(n: Int): Cup {
         var cup = copy()
         repeat(n) { cup = cup.next() }
         return cup
     }
-
-    private fun picked() = listOf(value, nextValue(), forward(2).value)
 
     fun destination(move: Cup, min: Int, max: Int): Int {
         var destination = if (value == min) max else value - 1

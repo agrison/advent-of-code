@@ -103,6 +103,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 22: Crab Combat ---
  🌟 Part 1: 32598  (3.67ms)
  🌟 Part 2: 35836  (292ms)
+
+🎄 --- Day 23: Crab Cups ---
+ 🌟 Part 1: 53248976      (1.20ms)
+ 🌟 Part 2: 418819514477  (1.91s)
 ```
 
 ### Running

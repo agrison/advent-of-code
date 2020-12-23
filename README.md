@@ -1,115 +1,43 @@
-# Advent Of Code 2020 in Kotlin
+# Advent Of Code
 
 ![Advent Of Code 2020](https://github.com/agrison/advent-of-code-2020/workflows/Advent%20Of%20Code%202020/badge.svg)
 
 ## Goal
 
-After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the 
-[Advent of Code](https://adventofcode.com/2020) with **Kotlin** (hopefully this time I won't need Java). 
+After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the
+[Advent of Code](https://adventofcode.com/2020) with **Kotlin** (hopefully this time I won't need Java).
 
-1. A deep dive into Kotlin. 
+1. A deep dive into Kotlin.
 2. Write fast and idiomatic solutions.
 3. Using extensions to make code shorter (see [Day.kt](https://github.com/agrison/advent-of-code-2020/blob/master/src/main/kotlin/days/Day.kt)).
 
-## 2020 Output
+I am gradually rewriting all previous years solutions in Kotlin because it's a better language for such challenges than the other I used before (except Python, but I'm not doing so much Python so just forgetting how to write some basic stuff).
 
-```text
-🎅 === Advent of Code 2020 === 🎅
+## 2020 
 
-🎄 --- Day 1: Report Repair --- 
- 🌟 Part 1: 1003971       (65ms)
- 🌟 Part 2: 84035952      (1.51s)
+🎅 In progress 🎅
 
-🎄 --- Day 2: Password Philosophy --- 
- 🌟 Part 1: 645      (11.4ms)
- 🌟 Part 2: 737      (2.47ms)
+![2020](2020.png)
 
-🎄 --- Day 3: Toboggan Trajectory --- 
- 🌟 Part 1: 156             (687us)
- 🌟 Part 2: 3521829480      (584us)
+## 2019
 
-🎄 --- Day 4: Passport Processing --- 
- 🌟 Part 1: 242      (14.4ms)
- 🌟 Part 2: 186      (14.7ms)
+![2019](2019.png)
 
-🎄 --- Day 5: Binary Boarding --- 
- 🌟 Part 1: 974      (6.53ms)
- 🌟 Part 2: 646      (6.95ms)
+## 2018
 
-🎄 --- Day 6: Custom Customs --- 
- 🌟 Part 1: 6630      (10.6ms)
- 🌟 Part 2: 3437      (12.2ms)
+![2018](2018.png)
 
-🎄 --- Day 7: Handy Haversacks --- 
- 🌟 Part 1: 287        (12.9ms)
- 🌟 Part 2: 48160      (4.73ms)
+## 2017
 
- 🎄 --- Day 8: Handheld Halting --- 
- 🌟 Part 1: 1262      (1.87ms)
- 🌟 Part 2: 1643      (33.5ms)
+![2017](2017.png)
 
-🎄 --- Day 9: Encoding Error --- 
- 🌟 Part 1: 41682220      (13.6ms)
- 🌟 Part 2: 5388976       (19.2ms)
+## 2016
 
-🎄 --- Day 10: Adapter Array ---
- 🌟 Part 1: 2414            (734us)
- 🌟 Part 2: 21156911906816  (327us)
+![2016](2016.png)
 
-🎄 --- Day 11: Seating System ---
- 🌟 Part 1: 2283  (381ms)
- 🌟 Part 2: 2054  (976ms)
+## 2015
 
-🎄 --- Day 12: Rain Risk ---
- 🌟 Part 1: 1007   (48.5us)
- 🌟 Part 2: 41212  (461us)
-
-🎄 --- Day 13: Shuttle Search ---
- 🌟 Part 1: 5257             (47.9us)
- 🌟 Part 2: 538703333547789  (40.5ms)
-
-🎄 --- Day 14: Docking Data ---
- 🌟 Part 1: 13865835758282  (3.60ms)
- 🌟 Part 2: 4195339838136   (57.4ms)
-
-🎄 --- Day 15: Rambunctious Recitation ---
- 🌟 Part 1: 319   (1.45ms)
- 🌟 Part 2: 2424  (725ms)
-
-🎄 --- Day 16: Ticket Translation ---
- 🌟 Part 1: 19087          (8.19ms)
- 🌟 Part 2: 1382443095281  (701ms)
-
-🎄 --- Day 17: Conway Cubes ---
- 🌟 Part 1: 362   (11.1ms)
- 🌟 Part 2: 1980  (121ms)
-
-🎄 --- Day 18: Operation Order ---
- 🌟 Part 1: 7293529867931   (10.7ms)
- 🌟 Part 2: 60807587180737  (5.21ms)
-
-🎄 --- Day 19: Monster Messages ---
- 🌟 Part 1: 279  (32.1ms)
- 🌟 Part 2: 384  (204ms)
- 
-🎄 --- Day 20: Jurassic Jigsaw ---
- 🌟 Part 1: 64802175715999  (11.7ms)
- 🌟 Part 2: 2146            (94.6ms)
- 
-🎄 --- Day 21: Allergen Assessment ---
- 🌟 Part 1: 2798                                       (2.36ms)
- 🌟 Part 2: gbt,rpj,vdxb,dtb,bqmhk,vqzbq,zqjm,nhjrzzj  (1.77ms)
-
-🎄 --- Day 22: Crab Combat ---
- 🌟 Part 1: 32598  (3.67ms)
- 🌟 Part 2: 35836  (292ms)
-
-🎄 --- Day 23: Crab Cups ---
- 🌟 Part 1: 53248976      (1.20ms)
- 🌟 Part 2: 418819514477  (1.91s)
-```
-
-### Running
+![2015](2015.png)
 
 Project is already setup with gradle. To run the app:
 

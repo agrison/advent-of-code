@@ -17,7 +17,7 @@ class AllDaysTest {
         Answer({ Day04() }, 254575, 1038736),
         Answer({ Day05() }, 258, 53),
         Answer({ Day06() }, 569999, 17836115),
-        Answer({ Day07() }, 0, 0), // TODO
+        Answer({ Day07() }, 3176, 14710),
         Answer({ Day08() }, 1333, 2046),
         Answer({ Day09() }, 251, 898),
         Answer({ Day10() }, 360154, 5103798),

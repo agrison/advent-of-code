@@ -1,43 +1,59 @@
 package me.grison.aoc.y2015
 
-import me.grison.aoc.*
+import me.grison.aoc.Day
+import me.grison.aoc.matches
+import me.grison.aoc.normalSplit
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.set
 
 class Day07 : Day(7, 2015) {
     override fun title() = "Some Assembly Required"
 
-    override fun partOne() : Int {
-        //println(inputList.map { parse(it) })
-        return 0
-    }
+    override fun partOne() =
+        calculate(loadCommands(), mutableMapOf(), "a")
 
-    override fun partTwo() = 0
+    override fun partTwo() =
+        calculate(loadCommands(), mutableMapOf("b" to partOne()), "a")
 
-    val wires = mutableMapOf<String, Command>()
-
-    private fun compute(op: String, a: Int, b: Int): Int {
-        return when(op) {
-            "AND" -> a and b
-            "OR" -> a or b
-            "NOT" -> -a - 1
-            "LSHIFT" -> a shl b
-            "RSHIFT" -> a shr b
-            else -> 0
+    private fun loadCommands() = mutableMapOf<String, List<String>>().let {
+        inputList.forEach { command ->
+            val (ops, res) = command.normalSplit(" -> ")
+            it[res.trim()] = ops.trim().normalSplit(" ")
         }
+        it
     }
 
-    private fun calculateWire(name: String): Int {
-        val wire = wires.get(name)!!
-        if (name.matches("^\\d+")) return name.toInt();
-        //if (wire.matches)
-        return 0
-    }
+    private fun calculate(
+        calc: MutableMap<String, List<String>>,
+        results: MutableMap<String, Int>,
+        name: String
+    ): Int {
+        if (name.matches("\\d+"))
+            return name.toInt()
 
-    private fun parse(s: String) : Command{
-        val (left, dest) = s.split("->")
-        val command = left.replace("[^A-Z]".regex(), "")
-        val args = left.replace("[A-Z]".regex(), "").trim().split("\\s+".regex())
-        return Command(command.trim(), args.toList(), dest.trim())
-    }
+        val compute: (String) -> Int = (::calculate).partial(calc, results)
 
-    data class Command(val command: String, val args: List<String>, val destination: String)
+        if (name !in results) {
+            val ops = calc[name]!!
+            val res = if (ops.size == 1) {
+                compute(ops[0])
+            } else {
+                when (ops[ops.size - 2]) {
+                    "AND" -> compute(ops[0]) and compute(ops[2])
+                    "OR" -> compute(ops[0]) or compute(ops[2])
+                    "NOT" -> compute(ops[1]).inv() and 0xffff
+                    "RSHIFT" -> compute(ops[0]) shr compute(ops[2])
+                    "LSHIFT" -> compute(ops[0]) shl compute(ops[2])
+                    else -> 0
+                }
+            }
+            results[name] = res
+        }
+        return results[name]!!
+    }
+}
+
+fun <A, B, C, D> Function3<A, B, C, D>.partial(a: A, b: B): (C) -> D {
+    return { c -> invoke(a, b, c) }
 }

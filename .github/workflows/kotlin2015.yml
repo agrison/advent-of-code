@@ -6,9 +6,9 @@ name: Kotlin - 2015
 on:
   push:
     paths:
-      - "src/main/kotlin/grison/aoc/*.kt"
-      - "src/main/kotlin/grison/aoc/y2015/*.kt"
-      - "src/test/kotlin/grison/aoc/y2015/*.kt"
+      - "src/main/kotlin/me/grison/aoc/*.kt"
+      - "src/main/kotlin/me/grison/aoc/y2015/*.kt"
+      - "src/test/kotlin/me/grison/aoc/y2015/*.kt"
     branches: [ master ]
   pull_request:
     branches: [ master ]

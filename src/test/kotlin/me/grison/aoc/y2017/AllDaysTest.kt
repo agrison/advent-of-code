@@ -12,7 +12,7 @@ class AllDaysTest {
     @TestFactory
     fun answers() = listOf(
         Answer({ Day01() }, 1029, 1220),
-//        Answer({ Day02() }, 98575, "CD8D4"),
+        Answer({ Day02() }, 41919, 303),
 //        Answer({ Day03() }, 862, 1577),
 //        Answer({ Day04() }, 173787, 548),
 //        Answer({ Day05() }, "c6697b55", "8c35d1ab"),

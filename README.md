@@ -1,7 +1,5 @@
 # Advent Of Code
 
-![Advent Of Code 2020](https://github.com/agrison/advent-of-code-2020/workflows/Advent%20Of%20Code%202020/badge.svg)
-
 ## Goal
 
 After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the
@@ -14,6 +12,8 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 I am gradually rewriting all previous years solutions in Kotlin because it's a better language for such challenges than the other I used before (except Python, but I'm not doing so much Python so just forgetting how to write some basic stuff).
 
 ## 2020 
+
+![Kotlin - Advent Of Code 2020](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%20Advent%20Of%20Code%202020/badge.svg)
 
 🎅 In progress 🎅
 
@@ -36,6 +36,8 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 ![2016](2016.png)
 
 ## 2015
+
+![Kotlin - Advent Of Code 2015](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%20Advent%20Of%20Code%202015/badge.svg)
 
 ![2015](2015.png)
 

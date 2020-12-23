@@ -29,6 +29,8 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ## 2017
 
+![Kotlin - 2017](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202017/badge.svg)
+
 ![2017](2017.png)
 
 ## 2016

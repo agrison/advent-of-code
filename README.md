@@ -33,6 +33,8 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ## 2016
 
+![Kotlin - 2016](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%202016/badge.svg)
+
 ![2016](2016.png)
 
 ## 2015

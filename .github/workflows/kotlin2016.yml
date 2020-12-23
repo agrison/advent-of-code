@@ -27,4 +27,4 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew test --tests me.grison.aoc.y2015.AllDaysTest --info --stacktrace --console=plain --max-workers=1 --no-daemon --build-cache -Dkotlin.colors.enabled=false
+      run: ./gradlew test --tests me.grison.aoc.y2016.AllDaysTest --info --stacktrace --console=plain --max-workers=1 --no-daemon --build-cache -Dkotlin.colors.enabled=false

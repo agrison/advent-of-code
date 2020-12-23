@@ -1,10 +1,14 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Kotlin - Advent Of Code 2020
+name: Kotlin - 2020
 
 on:
   push:
+    paths:
+      - "src/main/kotlin/grison/aoc/*.kt"
+      - "src/main/kotlin/grison/aoc/y2020/*.kt"
+      - "src/test/kotlin/grison/aoc/y2020/*.kt"
     branches: [ master ]
   pull_request:
     branches: [ master ]

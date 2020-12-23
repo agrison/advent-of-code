@@ -13,7 +13,7 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ## 2020 
 
-![Kotlin - Advent Of Code 2020](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%20Advent%20Of%20Code%202020/badge.svg)
+![Kotlin - 2020](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%202020/badge.svg)
 
 🎅 In progress 🎅
 
@@ -37,7 +37,7 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ## 2015
 
-![Kotlin - Advent Of Code 2015](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%20Advent%20Of%20Code%202015/badge.svg)
+![Kotlin - 2015](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%202015/badge.svg)
 
 ![2015](2015.png)
 

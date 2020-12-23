@@ -7,13 +7,13 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 
 1. A deep dive into Kotlin.
 2. Write fast and idiomatic solutions.
-3. Using extensions to make code shorter (see [Day.kt](https://github.com/agrison/advent-of-code-2020/blob/master/src/main/kotlin/days/Day.kt)).
+3. Using extensions to make code shorter (see [Extensions.kt](https://github.com/agrison/advent-of-code/blob/master/src/main/kotlin/me/grison/aoc/Extensions.kt)).
 
 I am gradually rewriting all previous years solutions in Kotlin because it's a better language for such challenges than the other I used before (except Python, but I'm not doing so much Python so just forgetting how to write some basic stuff).
 
 ## 2020 
 
-![Kotlin - 2020](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%202020/badge.svg)
+![Kotlin - 2020](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202020/badge.svg)
 
 🎅 In progress 🎅
 
@@ -33,13 +33,13 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ## 2016
 
-![Kotlin - 2016](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%202016/badge.svg)
+![Kotlin - 2016](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202016/badge.svg)
 
 ![2016](2016.png)
 
 ## 2015
 
-![Kotlin - 2015](https://github.com/agrison/advent-of-code-2020/workflows/Kotlin%20-%202015/badge.svg)
+![Kotlin - 2015](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202015/badge.svg)
 
 ![2015](2015.png)
 

@@ -15,6 +15,7 @@ import java.util.stream.IntStream
 import kotlin.collections.ArrayDeque
 import kotlin.math.abs
 import kotlin.math.absoluteValue
+import kotlin.math.ceil
 
 // core types
 // Strings
@@ -186,6 +187,7 @@ fun <T> ArrayDeque<T>.addLast(vararg e: T) : ArrayDeque<T> {
 operator fun <T> ArrayDeque<T>.plus(e: T) = addLast(e)
 /** Alias for `removeFirst`. */
 fun <T> ArrayDeque<T>.shift() = removeFirst()
+fun <T> ArrayDeque<T>.pop() = removeLast()
 
 /** Returns the Collection without its first element. */
 fun <T> Collection<T>.tail() = drop(1)
@@ -242,10 +244,13 @@ fun Pair<Long, Long>.sum() = first + second
 fun Pair<Long, Long>.multiply() = first * second
 /** Shortcut for creating a Pair. */
 fun <T, U> p(t: T, u: U): Pair<T, U> = Pair(t, u)
+fun pd(t: Double, u: Double): Pair<Double, Double> = Pair(t, u)
 /** Returns the manhattan distance for this Pair. */
 fun Pair<Int, Int>.manhattan() = first.absoluteValue + second.absoluteValue
 /** Swap a Pair. */
 fun <T, U> Pair<T, U>.swap() = p(second, first)
+
+fun Pair<Double, Double>.distance() = ceil(abs(first) + kotlin.math.max(0.0, abs(second)-abs(first)/2))
 
 // Stack
 fun <T> Stack<T>.popIf(t: T): T? = if (last() == t) pop() else null

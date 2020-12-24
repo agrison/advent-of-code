@@ -107,6 +107,10 @@ After the 5 last years with Java, Go (finished with Java), OCaml (finished with 
 🎄 --- Day 23: Crab Cups ---
  🌟 Part 1: 53248976      (1.20ms)
  🌟 Part 2: 418819514477  (1.91s)
+ 
+🎄 --- Day 24: Lobby Layout ---
+ 🌟 Part 1: 266   (20.7ms)
+ 🌟 Part 2: 3627  (141ms)
 ```
 
 ### Running

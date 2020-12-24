@@ -1,20 +1,10 @@
 package me.grison.aoc
 
-import scientifik.kmath.operations.Complex
 import util.InputReader
 import java.lang.Integer.parseInt
-import java.lang.Long.parseLong
-import java.lang.System.lineSeparator
 import java.math.BigInteger
 import java.nio.charset.Charset
 import java.security.MessageDigest
-import java.util.*
-import kotlin.math.abs
-import kotlin.math.absoluteValue
-import java.util.stream.Collectors
-
-import java.util.stream.IntStream
-import kotlin.collections.ArrayDeque
 
 
 typealias Instr = String
@@ -96,8 +86,6 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
         return true
     }
 
-
-
     fun md5(data: String) =
         MessageDigest.getInstance("MD5").let { m ->
             m.update(data.toByteArray(Charset.forName("UTF-8")))
@@ -108,6 +96,18 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
         "%0" + (this.size shl 1) + "x",
         BigInteger(1, this)
     )
+
+    // --------- Coordinates ---------------
+    enum class HexagonCoordinates(val pos: Pair<Int, Int>) {
+        NE(p(0, 1)),
+        E(p(1, 0)),
+        SE(p(1, -1)),
+        SW(p(0, -1)),
+        W(p(-1, 0)),
+        NW(p(-1, 1));
+    }
+
+    val zero2d = p(0, 0)
 
 
     // --------------- Santa ------------------

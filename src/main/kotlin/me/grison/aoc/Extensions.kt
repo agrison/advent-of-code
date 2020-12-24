@@ -101,6 +101,9 @@ fun Int.`in`(i: IntRange) = (i.first..(i.last + 1)).contains(this)
 /** Returns whether this is divisible by `other`. */
 fun Long.divisible(other: Long) = this % other == 0L
 
+fun Int.odd() = this % 2 == 1
+fun Int.even() = this % 2 == 0
+
 // Complex
 /** Returns the manhattan distance of this Complex. */
 fun Complex.manhattan() = (abs(this.re) + abs(this.im)).toInt()
@@ -196,6 +199,11 @@ operator fun <T> Collection<T>.get(r: IntRange) = this.filterIndexed { i, _ -> i
 fun <T> Iterable<T>.pair() = iterator().let {
     p(it.next(), it.next())
 }
+operator fun <T> List<T>.component6() = this[5]
+operator fun <T> List<T>.component7() = this[6]
+operator fun <T> List<T>.component8() = this[7]
+operator fun <T> List<T>.component9() = this[8]
+operator fun <T> List<T>.component10() = this[9]
 
 // Sequence
 fun <T : Any> cycle(vararg xs: T): Sequence<T> {

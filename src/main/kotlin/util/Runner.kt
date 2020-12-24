@@ -1,8 +1,13 @@
+@file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package util
 
-import me.grison.aoc.Day
-import me.grison.aoc.afterLast
+import me.grison.aoc.*
 import org.reflections.Reflections
+import java.io.File
+import java.lang.System.lineSeparator
+import java.net.HttpURLConnection
+import java.net.URL
 import kotlin.math.max
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimedValue
@@ -10,17 +15,37 @@ import kotlin.time.measureTimedValue
 
 @ExperimentalTime
 object Runner {
-
     private val defaultYear = 2020
     private var reflections = Reflections("me.grison.aoc")
     private var allYears = false
 
-
     @JvmStatic
     fun main(args: Array<String>) {
+        if (args.isNotEmpty() && "input-" in args[0]) {
+            val arg = args[0].replace("input-", "")
+            val (year, day) = when ("/" in arg) {
+                true -> Pair(arg.before("/").toInt(), arg.after("/"))
+                false -> Pair(defaultYear, arg)
+            }
+            val session = File(javaClass.classLoader.getResource("cookie.txt").toURI()).readText()
+            val output = File(javaClass.classLoader.getResource("$year").toURI().path.replace("build/resources/main", "src/main/resources") + "/$day.txt")
+            if (!output.exists()) output.createNewFile()
+            println("Saving $year/$day to ${output.path}")
+            val url = URL("https://adventofcode.com/$year/day/${if (day.startsWith("0")) day.substring(1) else day}/input")
+            with(url.openConnection() as HttpURLConnection) {
+                setRequestProperty("Cookie", "session=$session")
+                inputStream.bufferedReader().use {
+                    it.lines().forEach { line ->
+                        output.appendText(line + lineSeparator())
+                    }
+                }
+            }
+            System.exit(0)
+        }
+
         if (args.isNotEmpty()) {
             val (year, day) = when ("/" in args[0]) {
-                true -> Pair(args[0].split("/")[0].toInt(), args[0].split("/")[1])
+                true -> Pair(args[0].before("/").toInt(), args[0].after("/"))
                 false -> Pair(defaultYear, args[0])
             }
             println("\uD83C\uDF85 === Advent of Code $year === \uD83C\uDF85\n")

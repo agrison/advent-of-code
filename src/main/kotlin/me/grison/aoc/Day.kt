@@ -98,15 +98,10 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     )
 
     // --------- Coordinates ---------------
-    enum class HexagonCoordinates(val pos: Pair<Int, Int>) {
-        NE(p(0, 1)),
-        E(p(1, 0)),
-        SE(p(1, -1)),
-        SW(p(0, -1)),
-        W(p(-1, 0)),
-        NW(p(-1, 1));
-    }
-
+    val hexagonCoordinates = linkedMapOf(
+        "E" to p(1, 0), "SE" to p(1, -1), "SW" to p(0, -1),
+        "W" to p(-1, 0), "NW" to p(-1, 1), "NE" to p(0, 1)
+    )
     val zero2d = p(0, 0)
 
 

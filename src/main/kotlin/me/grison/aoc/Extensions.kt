@@ -92,6 +92,8 @@ fun String.or(eq: String, or: String?) = if (this == eq) this else or
 /** Returns the string where line separators are replaced by `sep` (default empty string). */
 fun String.oneLine(sep: String = "") = replace(System.lineSeparator(), sep)
 
+fun String.upper() = toUpperCase()
+fun String.lower() = toLowerCase()
 
 // Integers & Long
 /** Returns whether this is divisible by `other`. */
@@ -204,6 +206,8 @@ operator fun <T> List<T>.component7() = this[6]
 operator fun <T> List<T>.component8() = this[7]
 operator fun <T> List<T>.component9() = this[8]
 operator fun <T> List<T>.component10() = this[9]
+
+fun <T> Collection<T>.join(sep: String, left: String ="", right: String = "") = joinToString(sep, left, right)
 
 // Sequence
 fun <T : Any> cycle(vararg xs: T): Sequence<T> {

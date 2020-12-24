@@ -1,8 +1,6 @@
 package me.grison.aoc.y2020
 
-import me.grison.aoc.Day
-import me.grison.aoc.plus
-import me.grison.aoc.regex
+import me.grison.aoc.*
 
 class Day24 : Day(24, 2020) {
     override fun title() = "Lobby Layout"
@@ -15,20 +13,20 @@ class Day24 : Day(24, 2020) {
         floor.size
     }
 
-    private fun loadBlacks() = mutableMapOf<Pair<Int, Int>, Boolean>().let {
-        inputList.forEach { line ->
+    private fun loadBlacks() = mutableMapOf<Pair<Int, Int>, Boolean>().let { blacks ->
+        inputString.upper().lines().forEach { line ->
             var p = zero2d
-            "e|se|sw|w|nw|ne".regex().findAll(line).forEach { dir ->
-                p += HexagonCoordinates.valueOf(dir.value.toUpperCase()).pos
+            hexagonCoordinates.keys.join("|").regex().findAll(line).forEach { dir ->
+                p += hexagonCoordinates[dir.value]!!
             }
-            it.merge(p, true) { prev, new -> prev xor new }
+            blacks.merge(p, true) { prev, new -> prev xor new }
         }
-        it
+        blacks
     }
 
     private fun nextDay(floor: Set<Pair<Int, Int>>) = mutableMapOf<Pair<Int, Int>, Int>().let { count ->
         floor.forEach { f ->
-            HexagonCoordinates.values().map { it.pos }.forEach { p ->
+            hexagonCoordinates.values.forEach { p ->
                 count.merge(f + p, 1) { prev, new -> prev + new }
             }
         }

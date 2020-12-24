@@ -10,9 +10,9 @@ class Day24 : Day(24, 2020) {
     override fun partOne() = loadBlacks().values.count { it }
 
     override fun partTwo() = loadBlacks().let { blacks ->
-        var grid = blacks.toList().filter { it.second }.map { it.first }.toSet()
-        repeat(100) { grid = next(grid) }
-        grid.size
+        var floor = blacks.toList().filter { it.second }.map { it.first }.toSet()
+        repeat(100) { floor = nextDay(floor) }
+        floor.size
     }
 
     private fun loadBlacks() = mutableMapOf<Pair<Int, Int>, Boolean>().let {
@@ -26,7 +26,7 @@ class Day24 : Day(24, 2020) {
         it
     }
 
-    private fun next(floor: Set<Pair<Int, Int>>) = mutableMapOf<Pair<Int, Int>, Int>().let { count ->
+    private fun nextDay(floor: Set<Pair<Int, Int>>) = mutableMapOf<Pair<Int, Int>, Int>().let { count ->
         floor.forEach { f ->
             HexagonCoordinates.values().map { it.pos }.forEach { p ->
                 count.merge(f + p, 1) { prev, new -> prev + new }

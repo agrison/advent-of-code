@@ -36,6 +36,8 @@ dependencies {
     implementation("com.vdurmont", "emoji-java", "5.1.1")
     implementation("com.beust", "klaxon", "5.0.1")
 
+    implementation("commons-io", "commons-io", "2.8.0")
+
     api("kscience.kmath:kmath-core:0.1.4")
 }
 

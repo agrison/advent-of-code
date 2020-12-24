@@ -3,6 +3,7 @@
 package util
 
 import me.grison.aoc.*
+import org.apache.commons.io.IOUtils
 import org.reflections.Reflections
 import java.io.File
 import java.lang.System.lineSeparator
@@ -29,15 +30,20 @@ object Runner {
             }
             val session = File(javaClass.classLoader.getResource("cookie.txt").toURI()).readText()
             val output = File(javaClass.classLoader.getResource("$year").toURI().path.replace("build/resources/main", "src/main/resources") + "/$day.txt")
-            if (!output.exists()) output.createNewFile()
-            println("Saving $year/$day to ${output.path}")
+            var created = false
+            if (!output.exists()) {
+                output.createNewFile()
+                created = true
+            }
             val url = URL("https://adventofcode.com/$year/day/${if (day.startsWith("0")) day.substring(1) else day}/input")
             with(url.openConnection() as HttpURLConnection) {
                 setRequestProperty("Cookie", "session=$session")
                 inputStream.bufferedReader().use {
-                    it.lines().forEach { line ->
-                        output.appendText(line + lineSeparator())
+                    if (!created) { // reset
+                        output.writeText("")
                     }
+                    output.writeText(IOUtils.toString(it).butLast())
+                    println("Saved $year/$day to ${output.path}.")
                 }
             }
             System.exit(0)

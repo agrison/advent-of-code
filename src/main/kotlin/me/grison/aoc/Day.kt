@@ -98,9 +98,15 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     )
 
     // --------- Coordinates ---------------
+    // https://www.redblobgames.com/grids/hexagons/#neighbors-axial
+    /*
+         0,-1   1,-1            NW   NE
+      -1,0   *    1,0         W    *    E
+         -1,1   0,1             SW   SE
+     */
     val hexagonCoordinates = linkedMapOf(
-        "E" to p(1, 0), "SE" to p(1, -1), "SW" to p(0, -1),
-        "W" to p(-1, 0), "NW" to p(-1, 1), "NE" to p(0, 1)
+        "E" to p(1, 0), "NE" to p(0, 1), "NW" to p(-1, 1),
+        "W" to p(-1, 0), "SW" to p(0, -1), "SE" to p(1, -1)
     )
     val zero2d = p(0, 0)
 

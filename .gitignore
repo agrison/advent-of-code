@@ -6,3 +6,5 @@ out/
 # Gradle
 .gradle
 build/
+
+src/main/resources/cookie.txt

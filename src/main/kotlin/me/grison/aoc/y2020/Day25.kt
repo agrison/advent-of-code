@@ -18,7 +18,5 @@ class Day25 : Day(25, 2020) {
     private fun transform(input: Long, subject: Long) =
         (input * subject) % 20201227
 
-    override fun partTwo(): Any {
-        return 0
-    }
+    override fun partTwo() = SANTA
 }

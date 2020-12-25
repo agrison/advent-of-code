@@ -93,6 +93,7 @@ fun String.or(eq: String, or: String?) = if (this == eq) this else or
 /** Returns the string where line separators are replaced by `sep` (default empty string). */
 fun String.oneLine(sep: String = "") = replace(System.lineSeparator(), sep)
 
+fun String.`is`(s: String) = this == s
 fun String.upper() = toUpperCase()
 fun String.lower() = toLowerCase()
 

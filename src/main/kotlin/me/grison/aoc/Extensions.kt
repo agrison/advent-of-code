@@ -283,3 +283,5 @@ fun <T> List<List<T>>.swapRowCols() = flatMap { it.withIndex() }
 fun List<List<List<Boolean>>>.flattenGrid() = flatMap { it.mapIndexed { i, list -> IndexedValue(i, list) } }
     .groupBy({ (i, _) -> i }, { (_, v) -> v })
     .map { (_, v) -> v.reduce { acc, list -> acc + list } }
+
+fun intSeq() = generateSequence(1) { it + 1 }

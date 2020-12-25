@@ -1,6 +1,7 @@
 package me.grison.aoc.y2020
 
 import me.grison.aoc.Day
+import me.grison.aoc.y2015.Day25
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
 import org.junit.jupiter.api.DynamicTest
@@ -35,13 +36,17 @@ class AllDaysTest {
         Answer({ Day22() }, 32598, 35836),
         Answer({ Day23() }, 53248976, 418819514477L),
         Answer({ Day24() }, 266, 3627),
+        Answer({ Day25() }, 7936032, "Merry Christmas!"),
     ).map {
         val day = it.inst.invoke()
         DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 1 - expecting ${it.part1}") {
             assertThat(day.partOne(), `is`(it.part1))
         }
         DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 2 - expecting ${it.part2}") {
-            assertThat(day.partTwo(), `is`(it.part2))
+            assertThat(
+                if (day.dayNumber < 25) day.partTwo()
+                else "Merry Christmas!", `is`(it.part2)
+            )
         }
     }
 }

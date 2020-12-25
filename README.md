@@ -15,8 +15,6 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ![Kotlin - 2020](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202020/badge.svg)
 
-🎅 In progress 🎅
-
 ![2020](2020.png)
 
 ## 2019

@@ -38,8 +38,8 @@
  🌟 Part 2: 17836115  (258ms)
 
 🎄 --- Day 7: Some Assembly Required ---
- 🌟 Part 1: 0  (7.60us)
- 🌟 Part 2: 0  (1.70us)
+ 🌟 Part 1: 3176   (26.3ms)
+ 🌟 Part 2: 14710  (3.24ms)
 
 🎄 --- Day 8: Matchsticks ---
  🌟 Part 1: 1333  (1.40ms)

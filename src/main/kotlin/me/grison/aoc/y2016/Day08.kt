@@ -18,11 +18,10 @@ class Day08 : Day(8, 2016) {
             val (a, b) = line.allInts()
             when (cmd) {
                 "rect" -> rect(a, b)
-                "rotate" ->
-                    when (arg) {
-                        "row" -> rotateRow(a, b)
-                        "column" -> rotateColumn(a, b)
-                    }
+                "rotate" -> when (arg) {
+                    "row" -> rotateRow(a, b)
+                    "column" -> rotateColumn(a, b)
+                }
             }
         }
 

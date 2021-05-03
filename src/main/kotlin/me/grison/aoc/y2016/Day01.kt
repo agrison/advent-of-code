@@ -1,7 +1,7 @@
 package me.grison.aoc.y2016
 
 import me.grison.aoc.*
-import scientifik.kmath.operations.Complex
+import space.kscience.kmath.complex.Complex
 
 class Day01 : Day(1, 2016) {
     override fun title() = "No Time for a Taxicab"

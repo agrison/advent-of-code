@@ -8,7 +8,8 @@
  */
 package me.grison.aoc
 
-import scientifik.kmath.operations.Complex
+import space.kscience.kmath.complex.Complex
+import space.kscience.kmath.complex.r
 import java.util.*
 import java.util.stream.Collectors
 import java.util.stream.IntStream
@@ -119,6 +120,11 @@ val Double.r: Complex
     get() = Complex(this, 0)
 val Int.r: Complex
     get() = Complex(this, 0)
+
+operator fun Complex.times(c: Complex) =
+    Complex(this.re * c.re - this.im * c.im, this.re * c.im + this.im * c.re)
+operator fun Complex.plus(c: Complex) =
+    Complex(this.re + c.re, this.im + c.im)
 
 // Booleans
 /** Returns `1` if `true`, `0` otherwise. */

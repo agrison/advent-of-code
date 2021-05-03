@@ -1,7 +1,7 @@
 package me.grison.aoc.y2016
 
 import me.grison.aoc.*
-import scientifik.kmath.operations.Complex
+import space.kscience.kmath.complex.Complex
 import kotlin.math.abs
 
 class Day02 : Day(2, 2016) {

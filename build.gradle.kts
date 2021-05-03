@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
-    kotlin("jvm") version "1.4.21"
-    kotlin("kapt") version "1.4.21"
+    kotlin("jvm") version "1.4.32"
+    kotlin("kapt") version "1.4.32"
 }
 
 application {
@@ -14,9 +14,9 @@ application {
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral()
     jcenter()
-    maven("https://dl.bintray.com/mipt-npm/scientifik")
+    mavenCentral()
+    maven("https://repo.kotlin.link")
 }
 
 dependencies {
@@ -38,7 +38,8 @@ dependencies {
 
     implementation("commons-io", "commons-io", "2.8.0")
 
-    api("kscience.kmath:kmath-core:0.1.4")
+    implementation("space.kscience:kmath-core:0.2.1")
+    implementation("space.kscience:kmath-complex:0.2.1")
 }
 
 tasks.withType<KotlinCompile> {

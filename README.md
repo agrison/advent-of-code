@@ -11,6 +11,11 @@ After the 6 last years with Java, Go (finished with Java), OCaml (finished with 
 
 I am gradually rewriting all previous years solutions in Kotlin because it's a better language for such challenges than the other I used before (except Python, but I'm not doing so much Python so just forgetting how to write some basic stuff).
 
+## 2021
+
+![Kotlin - 2021](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202021/badge.svg)
+
+
 ## 2020 
 
 ![Kotlin - 2020](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202020/badge.svg)

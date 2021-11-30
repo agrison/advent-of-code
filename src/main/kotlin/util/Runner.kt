@@ -16,7 +16,7 @@ import kotlin.time.measureTimedValue
 
 @ExperimentalTime
 object Runner {
-    private val defaultYear = 2020
+    private val defaultYear = 2021
     private var reflections = Reflections("me.grison.aoc")
     private var allYears = false
 

@@ -2,8 +2,8 @@
 
 ## Goal
 
-After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the
-[Advent of Code](https://adventofcode.com/2020) with **Kotlin** (hopefully this time I won't need Java).
+After the 6 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), Kotlin, this year I'll be solving the
+[Advent of Code](https://adventofcode.com/2021) with **Kotlin** again.
 
 1. A deep dive into Kotlin.
 2. Write fast and idiomatic solutions.
@@ -47,9 +47,11 @@ Project is already setup with gradle. To run the app:
 
 * Navigate to top-level directory on the command line
 * Run `./gradlew run` to run all days for all years
-* Run `./gradlew run --args $DAY` to run a specific day in the current year (*2020*, ex: `./gradlew run --args 8` to run the day 8 of *2020*)
+* Run `./gradlew run --args $DAY` to run a specific day in the current year (*2021*, ex: `./gradlew run --args 8` to run the day 8 of *2021*)
 * Run `./gradlew run --args $YEAR/*` to run all days in a specific year (ex: `./gradlew run --args 2015/*` to run the year *2015*)
 * Run `./gradlew run --args $YEAR/$DAY` to run a specific year & day (ex: `./gradlew run --args 2015/7` to run the day *7* of *2015*)
+* Run `./gradlew run --args input-$DAY` to download the input for a specific day for the current year, provided a `cookie.txt` file in `src/main/resources.txt` which contains your Advent of Code cookie  (ex: `./gradlew run --args input-6` to run the day *6* of *2021*)
+* Run `./gradlew run --args input-$YEAR/$DAY` to download the input for a specific day in a specific year, provided a `cookie.txt` file in `src/main/resources.txt` which contains your Advent of Code cookie  (ex: `./gradlew run --args input-2015/7` to run the day *7* of *2015*)
 
 ### Testing
 

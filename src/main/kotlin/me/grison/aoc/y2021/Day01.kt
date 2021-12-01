@@ -13,6 +13,6 @@ class Day01 : Day(1, 2021) {
     private fun solve(size: Int): Int {
         return inputList.ints()
             .windowed(size).map { it.sum() }
-            .windowed(2).count { it.last() - it.first() > 0 }
+            .windowed(2).count { it.last() > it.first() }
     }
 }

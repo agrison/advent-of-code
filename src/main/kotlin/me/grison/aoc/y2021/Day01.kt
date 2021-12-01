@@ -10,9 +10,8 @@ class Day01 : Day(1, 2021) {
 
     override fun partTwo() = solve(3)
 
-    private fun solve(size: Int): Int {
-        return inputList.ints()
+    private fun solve(size: Int) =
+        inputList.ints()
             .windowed(size).map { it.sum() }
             .windowed(2).count { it.last() > it.first() }
-    }
 }

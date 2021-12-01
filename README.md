@@ -15,9 +15,13 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ![Kotlin - 2021](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202021/badge.svg)
 
+```text
+🎅 === Advent of Code 2021 === 🎅
+
 🎄 --- Day 01: Sonar Sweep ---
-🌟 Part 1: 1581  (13.3ms)
-🌟 Part 2: 1618  (2.62ms)
+  🌟 Part 1: 1581  (13.3ms)
+  🌟 Part 2: 1618  (2.62ms)
+```
 
 ## 2020 
 

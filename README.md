@@ -21,6 +21,10 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 🎄 --- Day 01: Sonar Sweep ---
   🌟 Part 1: 1581  (13.3ms)
   🌟 Part 2: 1618  (2.62ms)
+  
+🎄 --- Day 2: Dive! ---
+  🌟 Part 1: 2117664     (12.6ms)
+  🌟 Part 2: 2073416724  (3.14ms)
 ```
 
 ## 2020 

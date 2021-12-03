@@ -245,6 +245,13 @@ operator fun Pair<Int, Int>.plus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first
 operator fun Pair<Int, Int>.minus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first - p.first, second - p.second)
 /** `*` operator for Pairs. */
 operator fun Pair<Int, Int>.times(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first * p.first, second * p.second)
+
+fun Pair<Int, Int>.up(i: Int) = this.plus(p(0, -i))
+fun Pair<Int, Int>.down(i: Int) = this.plus(p(0, i))
+fun Pair<Int, Int>.forward(i: Int) = this.plus(p(i, 0))
+fun Pair<Int, Int>.forward(i: Int, aim: Int) = this.plus(p(i, aim))
+fun Pair<Int, Int>.backward(i: Int) = this.plus(p(-i, 0))
+
 /** Returns the sum of the elements in this Pair. */
 fun Pair<Long, Long>.sum() = first + second
 /** Returns the product of the elements in this Pair. */

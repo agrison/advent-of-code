@@ -25,6 +25,10 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 🎄 --- Day 2: Dive! ---
   🌟 Part 1: 2117664     (12.6ms)
   🌟 Part 2: 2073416724  (3.14ms)
+  
+🎄 --- Day 3: Binary Diagnostic ---
+  🌟 Part 1: 1082324  (7.91ms)
+  🌟 Part 2: 1353024  (2.42ms)
 ```
 
 ## 2020 

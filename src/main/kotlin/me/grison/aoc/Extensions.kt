@@ -152,6 +152,9 @@ fun Iterable<Long>.product() = reduce { a, b -> a * b }
 /** Returns whether this Collection contains all the given elements. */
 fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
 
+
+fun <T> List<T>.first(num: Int) = this.subList(0, num)
+
 fun <T> Collection<T>.head() : T? = if (this.isNotEmpty()) this.first() else null
 fun <T> MutableCollection<T>.reset(coll: Collection<T>) : MutableCollection<T> {
     this.clear()

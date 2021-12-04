@@ -5,45 +5,35 @@ import me.grison.aoc.*
 class Day04 : Day(4, 2021) {
     override fun title() = "Giant Squid"
 
+    private val suite = inputList.first().allInts()
+    private val boards = inputGroups.tail().map { it.lines().map { it.allInts() } }
+
     override fun partOne(): Int {
-        val suite = inputList.first().allInts()
-        val boards = loadBoards()
-
-        1.until(suite.size).forEach { round ->
-            val numbers = suite.first(round)
-
-            boards.firstOrNull { it.wins(numbers) }
-                ?.let { board ->
+        (1..suite.size).forEach { round ->
+            suite.first(round).let { numbers ->
+                boards.firstOrNull { it.wins(numbers) }?.let { board ->
                     return board.sumOfAllUnmarkedNumbers(numbers) * numbers.last()
                 }
+            }
         }
-
         return 0
     }
 
     override fun partTwo(): Int {
-        val suite = inputList.first().allInts()
-        val boards = loadBoards()
-
         val winners = mutableListOf<Int>()
-        1.until(suite.size).forEach { round ->
-            val numbers = suite.first(round)
+        (1..suite.size).forEach { round ->
+            suite.first(round).let { numbers ->
+                boards.withIndex().forEach { (boardIndex, board) ->
+                    if (boardIndex !in winners && board.wins(numbers)) {
+                        winners.add(boardIndex)
 
-            boards.withIndex().forEach { (boardIndex, board) ->
-                if (boardIndex !in winners && board.wins(numbers)) {
-                    winners.add(boardIndex)
-
-                    if (winners.size == 100)
-                        return board.sumOfAllUnmarkedNumbers(numbers) * numbers.last()
+                        if (winners.size == 100)
+                            return board.sumOfAllUnmarkedNumbers(numbers) * numbers.last()
+                    }
                 }
             }
         }
-
         return 0
-    }
-
-    fun loadBoards(): List<Board> {
-        return inputGroups.tail().map { it.lines().map { x -> x.allInts() } }
     }
 }
 
@@ -51,25 +41,13 @@ class Day04 : Day(4, 2021) {
 typealias Board = List<List<Int>>
 
 fun Board.wins(numbers: List<Int>): Boolean {
-    for (i in 0..4) {
-        var (horizontal, vertical) = p(true, true)
-        for (j in 0..4) {
-            horizontal = horizontal && numbers.contains(this[i][j])
-            vertical = vertical && numbers.contains(this[j][i])
-        }
-        if (horizontal || vertical) return true
+    (0..4).forEach { row ->
+        if (this[row].all { numbers.contains(it) }  // horizontal
+            || (0..4).all { numbers.contains(this[it][row]) }) // vertical
+            return true
     }
     return false
 }
 
-fun Board.sumOfAllUnmarkedNumbers(numbers: List<Int>): Int {
-    var sum = 0
-    for (i in 0..4) {
-        for (j in 0..4) {
-            if (!numbers.contains(this[i][j])) {
-                sum += this[i][j]
-            }
-        }
-    }
-    return sum
-}
+fun Board.sumOfAllUnmarkedNumbers(numbers: List<Int>) =
+    this.sumOf { it.filter { !numbers.contains(it) }.sum() }

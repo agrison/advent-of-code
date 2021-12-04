@@ -27,7 +27,7 @@ class Day04 : Day(4, 2021) {
                     if (boardIndex !in winners && board.wins(numbers)) {
                         winners.add(boardIndex)
 
-                        if (winners.size == 100)
+                        if (winners.size == boards.size)
                             return board.sumOfAllUnmarkedNumbers(numbers) * numbers.last()
                     }
                 }

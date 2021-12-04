@@ -2,8 +2,6 @@ package me.grison.aoc.y2021
 
 import me.grison.aoc.*
 
-typealias Board = List<List<Int>>
-
 class Day04 : Day(4, 2021) {
     override fun title() = "Giant Squid"
 
@@ -47,28 +45,31 @@ class Day04 : Day(4, 2021) {
     fun loadBoards(): List<Board> {
         return inputGroups.tail().map { it.lines().map { x -> x.allInts() } }
     }
+}
 
-    fun Board.wins(numbers: List<Int>): Boolean {
-        for (i in 0..4) {
-            var (horizontal, vertical) = p(true, true)
-            for (j in 0..4) {
-                horizontal = horizontal && numbers.contains(this[i][j])
-                vertical = vertical && numbers.contains(this[j][i])
-            }
-            if (horizontal || vertical) return true
-        }
-        return false
-    }
 
-    fun Board.sumOfAllUnmarkedNumbers(numbers: List<Int>): Int {
-        var sum = 0
-        for (i in 0..4) {
-            for (j in 0..4) {
-                if (!numbers.contains(this[i][j])) {
-                    sum += this[i][j]
-                }
+typealias Board = List<List<Int>>
+
+fun Board.wins(numbers: List<Int>): Boolean {
+    for (i in 0..4) {
+        var (horizontal, vertical) = p(true, true)
+        for (j in 0..4) {
+            horizontal = horizontal && numbers.contains(this[i][j])
+            vertical = vertical && numbers.contains(this[j][i])
+        }
+        if (horizontal || vertical) return true
+    }
+    return false
+}
+
+fun Board.sumOfAllUnmarkedNumbers(numbers: List<Int>): Int {
+    var sum = 0
+    for (i in 0..4) {
+        for (j in 0..4) {
+            if (!numbers.contains(this[i][j])) {
+                sum += this[i][j]
             }
         }
-        return sum
     }
+    return sum
 }

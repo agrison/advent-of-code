@@ -41,12 +41,10 @@ class Day04 : Day(4, 2021) {
 typealias Board = List<List<Int>>
 
 fun Board.wins(numbers: List<Int>): Boolean {
-    (0..4).forEach { row ->
-        if (this[row].all { numbers.contains(it) }  // horizontal
-            || (0..4).all { numbers.contains(this[it][row]) }) // vertical
-            return true
+    return indices.any { row ->
+        this[row].all { numbers.contains(it) } || // horizontal
+                indices.all { numbers.contains(this[it][row]) } // vertical
     }
-    return false
 }
 
 fun Board.sumOfAllUnmarkedNumbers(numbers: List<Int>) =

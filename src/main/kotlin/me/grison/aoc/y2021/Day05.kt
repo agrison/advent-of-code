@@ -22,8 +22,8 @@ class Day05 : Day(5, 2021) {
 
                 generateSequence(p(x1, y1)) { it + p(dX, dY) }
                     .takeWhile { (x, y) -> x != x2 || y != y2 }
-                    .forEach { (x, y) -> points.increase(p(x, y), 1) }
-                points.increase(p(x2, y2), 1)
+                    .forEach { (x, y) -> points.increase(p(x, y)) }
+                points.increase(p(x2, y2))
             }
 
         return points.count { it.value > 1 }

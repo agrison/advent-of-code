@@ -254,6 +254,7 @@ fun Pair<Int, Int>.multiply() = first * second
 fun Pair<Int, Int>.product() = first * second
 /** `+` operator for Pairs. */
 operator fun Pair<Int, Int>.plus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first + p.first, second + p.second)
+fun Pair<Int, Int>.plus(a: Int, b: Int): Pair<Int, Int> = Pair(first + a, second + b)
 /** `-` operator for Pairs. */
 operator fun Pair<Int, Int>.minus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first - p.first, second - p.second)
 /** `*` operator for Pairs. */
@@ -272,6 +273,7 @@ fun Pair<Int, Int>.slope() = when {
     first > second -> -1
     else -> 1
 }
+
 // works with MutableMap.withDefault()
 fun <T> MutableMap<T, Int>.increase(key: T, amount: Int = 1): MutableMap<T, Int> {
     this[key] = this.getValue(key) + amount
@@ -325,3 +327,4 @@ fun List<List<List<Boolean>>>.flattenGrid() = flatMap { it.mapIndexed { i, list 
     .map { (_, v) -> v.reduce { acc, list -> acc + list } }
 
 fun intSeq() = generateSequence(1) { it + 1 }
+fun intSeq(x: Int) = generateSequence(x) { it + 1 }

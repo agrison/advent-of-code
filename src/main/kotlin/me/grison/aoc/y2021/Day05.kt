@@ -20,13 +20,10 @@ class Day05 : Day(5, 2021) {
             .forEach { (x1, y1, x2, y2) ->
                 val (dX, dY) = p(p(x1, x2).slope(), p(y1, y2).slope())
 
-                var (x, y) = p(x1, y1)
-                do {
-                    points.increase(p(x, y), 1)
-                    x += dX
-                    y += dY
-                } while (x != x2 || y != y2);
-                points.increase(p(x, y), 1)
+                generateSequence(p(x1, y1)) { it + p(dX, dY) }
+                    .takeWhile { (x, y) -> x != x2 || y != y2 }
+                    .forEach { (x, y) -> points.increase(p(x, y), 1) }
+                points.increase(p(x2, y2), 1)
             }
 
         return points.count { it.value > 1 }

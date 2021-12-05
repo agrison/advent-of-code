@@ -223,6 +223,10 @@ operator fun <T> Collection<T>.get(r: IntRange) = this.filterIndexed { i, _ -> i
 fun <T> Iterable<T>.pair() = iterator().let {
     p(it.next(), it.next())
 }
+
+fun <T> Iterable<T>.keep(predicate: (T) -> Boolean) = filter(predicate)
+fun <T> Iterable<T>.reject(predicate: (T) -> Boolean) = filterNot(predicate)
+
 operator fun <T> List<T>.component6() = this[5]
 operator fun <T> List<T>.component7() = this[6]
 operator fun <T> List<T>.component8() = this[7]

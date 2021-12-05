@@ -16,7 +16,7 @@ class Day05 : Day(5, 2021) {
     fun solve(predicate: (List<Int>) -> Boolean): Int {
         val points = hashBag<Position>()
         inputList.map { it.allInts() }
-            .filter { predicate(it) }
+            .keep { predicate(it) }
             .forEach { (x1, y1, x2, y2) ->
                 val (dX, dY) = p(p(x1, x2).slope(), p(y1, y2).slope())
 

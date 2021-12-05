@@ -331,3 +331,5 @@ fun intSeq(x: Int) = generateSequence(x) { it + 1 }
 
 typealias HashBag<T> = MutableMap<T, Int>
 fun <T> hashBag() = mutableMapOf<T, Int>().withDefault { 0 }
+
+typealias Position = Pair<Int, Int>

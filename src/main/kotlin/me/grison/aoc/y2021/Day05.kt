@@ -14,7 +14,7 @@ class Day05 : Day(5, 2021) {
     override fun partTwo() = solve { true }
 
     fun solve(predicate: (List<Int>) -> Boolean): Int {
-        val points = mutableMapOf<Pair<Int, Int>, Int>().withDefault { 0 }
+        val points = counter<Pair<Int, Int>>()
         inputList.map { it.allInts() }
             .filter { predicate(it) }
             .forEach { (x1, y1, x2, y2) ->

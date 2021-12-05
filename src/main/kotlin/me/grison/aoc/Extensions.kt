@@ -328,3 +328,6 @@ fun List<List<List<Boolean>>>.flattenGrid() = flatMap { it.mapIndexed { i, list 
 
 fun intSeq() = generateSequence(1) { it + 1 }
 fun intSeq(x: Int) = generateSequence(x) { it + 1 }
+
+typealias Counter<T> = MutableMap<T, Int>
+fun <T> counter() = mutableMapOf<T, Int>().withDefault { 0 }

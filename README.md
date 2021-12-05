@@ -33,6 +33,10 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 🎄 --- Day 4: Giant Squid ---
   🌟 Part 1: 58374  (40ms)
   🌟 Part 2: 11377  (12.4ms)
+    
+🎄 --- Day 5: Hydrothermal Venture ---
+  🌟 Part 1: 6113   (60.0ms)
+  🌟 Part 2: 20373  (50.1ms)
 ```
 
 ## 2020 

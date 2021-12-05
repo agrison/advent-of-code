@@ -10,6 +10,8 @@ package me.grison.aoc
 
 import space.kscience.kmath.complex.Complex
 import space.kscience.kmath.complex.r
+import java.lang.Integer.max
+import java.lang.Integer.min
 import java.util.*
 import java.util.stream.Collectors
 import java.util.stream.IntStream
@@ -262,6 +264,19 @@ fun Pair<Int, Int>.down(i: Int) = this.plus(p(0, i))
 fun Pair<Int, Int>.forward(i: Int) = this.plus(p(i, 0))
 fun Pair<Int, Int>.forward(i: Int, aim: Int) = this.plus(p(i, aim))
 fun Pair<Int, Int>.backward(i: Int) = this.plus(p(-i, 0))
+// return an increasing range
+fun Pair<Int, Int>.range() = min(first, second)..max(first, second)
+// compute the slope of a pair representing two X or two Y (derivative)
+fun Pair<Int, Int>.slope() = when {
+    first == second -> 0
+    first > second -> -1
+    else -> 1
+}
+// works with MutableMap.withDefault()
+fun <T> MutableMap<T, Int>.increase(key: T, amount: Int = 1): MutableMap<T, Int> {
+    this[key] = this.getValue(key) + amount
+    return this
+}
 
 /** Returns the sum of the elements in this Pair. */
 fun Pair<Long, Long>.sum() = first + second

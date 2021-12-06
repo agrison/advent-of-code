@@ -40,6 +40,9 @@ dependencies {
 
     implementation("space.kscience:kmath-core:0.2.1")
     implementation("space.kscience:kmath-complex:0.2.1")
+
+    implementation("org.seleniumhq.selenium:selenium-java:2.41.0")
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
 
 tasks.withType<KotlinCompile> {

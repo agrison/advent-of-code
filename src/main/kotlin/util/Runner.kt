@@ -2,17 +2,42 @@
 
 package util
 
+
 import me.grison.aoc.*
 import org.apache.commons.io.IOUtils
+import org.monte.media.Format
+import org.monte.media.FormatKeys.*
+import org.monte.media.Registry
+import org.monte.media.VideoFormatKeys.CompressorNameKey
+import org.monte.media.VideoFormatKeys.DepthKey
+import org.monte.media.VideoFormatKeys.ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE
+import org.monte.media.VideoFormatKeys.QualityKey
+import org.monte.media.math.Rational
+import org.monte.screenrecorder.ScreenRecorder
+import org.openqa.selenium.Cookie
+import org.openqa.selenium.JavascriptExecutor
+import org.openqa.selenium.OutputType
+import org.openqa.selenium.TakesScreenshot
+import org.openqa.selenium.chrome.ChromeDriver
 import org.reflections.Reflections
+import java.awt.*
 import java.io.File
-import java.lang.System.lineSeparator
+import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption.REPLACE_EXISTING
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter.ISO_DATE
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.math.max
 import kotlin.time.ExperimentalTime
 import kotlin.time.TimedValue
 import kotlin.time.measureTimedValue
+
 
 @ExperimentalTime
 object Runner {
@@ -46,6 +71,115 @@ object Runner {
                     println("Saved $year/$day to ${output.path}.")
                 }
             }
+            System.exit(0)
+        }
+
+
+        if (args.isNotEmpty() && "screenshotold" in args[0]) {
+            System.setProperty("webdriver.chrome.driver", "C:/dev/tools/chromedriver96.exe")
+            val driver = ChromeDriver()
+            driver.get("https://adventofcode.com/2017")
+            driver.manage().timeouts().setScriptTimeout(2, TimeUnit.SECONDS)
+            val session = File(javaClass.classLoader.getResource("cookieold.txt").toURI()).readText()
+            driver.manage().addCookie(Cookie("session", session))
+            driver.navigate().refresh()
+
+            val js = driver as JavascriptExecutor
+            js.executeScript("document.querySelector('.user').innerHTML = document.querySelector('.user').innerHTML.replace('Flaie', 'Alexandre Grison <a href=\"/2021/support\" class=\"supporter-badge\">(AoC++)</a>');")
+            js.executeScript("document.querySelector('#sidebar').remove();")
+            js.executeScript("document.body.style.zoom = '1.5';")
+
+            Thread.sleep(40000)
+            val screenshot = driver as TakesScreenshot
+//            for (i in 1..100) {
+                val sc = screenshot.getScreenshotAs(OutputType.FILE)
+                Files.move(sc.toPath(), Paths.get("screenshots/2017/25.png"), REPLACE_EXISTING)
+//                Files.move(sc.toPath(), Paths.get("screenshots/2017/25-${i}.png"), REPLACE_EXISTING)
+                Thread.sleep(10)
+//            }
+
+            // reinit zoom
+            js.executeScript("document.body.style.zoom = '1';")
+
+            driver.quit()
+            System.exit(0)
+        } else if (args.isNotEmpty() && "screenshot" in args[0]) {
+            System.setProperty("webdriver.chrome.driver", "C:/dev/tools/chromedriver96.exe")
+            val driver = ChromeDriver()
+            driver.get("https://adventofcode.com/")
+            driver.manage().timeouts().setScriptTimeout(2, TimeUnit.SECONDS)
+            val session = File(javaClass.classLoader.getResource("cookie.txt").toURI()).readText()
+            driver.manage().addCookie(Cookie("session", session))
+            driver.navigate().refresh()
+
+            val js = driver as JavascriptExecutor
+            js.executeScript("document.querySelector('.user').innerHTML = document.querySelector('.user').innerHTML.replace('Flaie', 'Alexandre Grison <a href=\"/2021/support\" class=\"supporter-badge\">(AoC++)</a>');")
+            js.executeScript("document.querySelector('#sidebar').remove();")
+            js.executeScript("document.body.style.zoom = '1.5';")
+
+            val screenshot = driver as TakesScreenshot
+            val sc = screenshot.getScreenshotAs(OutputType.FILE)
+            Files.move(sc.toPath(), Paths.get("screenshots/2021/${LocalDate.now().format(ISO_DATE)}.png"), REPLACE_EXISTING)
+
+            // reinit zoom
+            js.executeScript("document.body.style.zoom = '1';")
+
+            driver.quit()
+            System.exit(0)
+        } else if (args.isNotEmpty() && "video" in args[0]) {
+            val file = Paths.get("screenshots/2015/")
+
+            val screenSize: Dimension = Toolkit.getDefaultToolkit().getScreenSize()
+            val width: Int = screenSize.width
+            val height: Int = screenSize.height
+
+            val captureSize = Rectangle(0, 0, width, height)
+
+            val gc = GraphicsEnvironment.getLocalGraphicsEnvironment().defaultScreenDevice.defaultConfiguration
+
+            val screenRecorder = SpecializedScreenRecorder(
+                gc,
+                captureSize,
+                Format(MediaTypeKey, MediaType.FILE, MimeTypeKey, MIME_AVI),
+                Format(
+                    MediaTypeKey,
+                    MediaType.VIDEO,
+                    EncodingKey,
+                    ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
+                    CompressorNameKey,
+                    ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
+                    DepthKey,
+                    24,
+                    FrameRateKey,
+                    Rational.valueOf(60.0),
+                    QualityKey,
+                    1.0f,
+                    KeyFrameIntervalKey,
+                    60 * 60
+                ),
+                Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black", FrameRateKey, Rational.valueOf(60.0)),
+                null,
+                file.toFile(),
+                "MyVideo"
+            )
+            screenRecorder.start()
+
+            System.setProperty("webdriver.chrome.driver", "C:/dev/tools/chromedriver96.exe")
+            val driver = ChromeDriver()
+            driver.get("https://adventofcode.com/2015")
+            driver.manage().timeouts().setScriptTimeout(2, TimeUnit.SECONDS)
+            val session = File(javaClass.classLoader.getResource("cookie.txt").toURI()).readText()
+            driver.manage().addCookie(Cookie("session", session))
+            driver.navigate().refresh()
+
+            val js = driver as JavascriptExecutor
+            js.executeScript("document.querySelector('.user').innerHTML = document.querySelector('.user').innerHTML.replace('Flaie', 'Alexandre Grison <a href=\"/2021/support\" class=\"supporter-badge\">(AoC++)</a>');")
+            js.executeScript("document.querySelector('#sidebar').remove();")
+            js.executeScript("document.body.style.zoom = '1.5';")
+
+            Thread.sleep(15000)
+            driver.quit()
+            screenRecorder.stop()
             System.exit(0)
         }
 
@@ -95,9 +229,13 @@ object Runner {
         val day = dayClass.constructors[0].newInstance() as Day
         println("\n\uD83C\uDF84 --- Day ${if (allYears) day.year.toString() + "/" else ""}${day.dayNumber}: ${day.title()} ---")
 
-        val partOne = measureTimedValue { day.partOne() ?: "empty" }
-        val partTwo = measureTimedValue { day.partTwo() ?: "empty" }
-        printParts(partOne, partTwo)
+        try {
+            val partOne = measureTimedValue { day.partOne() ?: "empty" }
+            val partTwo = measureTimedValue { day.partTwo() ?: "empty" }
+            printParts(partOne, partTwo)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun printParts(partOne: TimedValue<Any>, partTwo: TimedValue<Any>) {
@@ -114,4 +252,31 @@ object Runner {
     }
 
     private fun dayNumber(dayClassName: String) = dayClassName.replace("Day", "").toInt()
+}
+
+
+class SpecializedScreenRecorder(
+    cfg: GraphicsConfiguration?,
+    captureArea: Rectangle?,
+    fileFormat: Format?,
+    screenFormat: Format?,
+    mouseFormat: Format?,
+    audioFormat: Format?,
+    movieFolder: File?,
+    private val name: String
+) :
+    ScreenRecorder(cfg, captureArea, fileFormat, screenFormat, mouseFormat, audioFormat, movieFolder) {
+    @Throws(IOException::class)
+    override fun createMovieFile(fileFormat: Format): File {
+        if (!movieFolder.exists()) {
+            movieFolder.mkdirs()
+        } else if (!movieFolder.isDirectory) {
+            throw IOException("\"$movieFolder\" is not a directory.")
+        }
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH.mm.ss")
+        return File(
+            movieFolder,
+            name + "-" + dateFormat.format(Date()) + "." + Registry.getInstance().getExtension(fileFormat)
+        )
+    }
 }

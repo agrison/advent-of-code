@@ -1,16 +1,5 @@
 # Advent Of Code
 
-## Goal
-
-After the 6 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), Kotlin, this year I'll be solving the
-[Advent of Code](https://adventofcode.com/2021) with **Kotlin** again.
-
-1. A deep dive into Kotlin.
-2. Write fast and idiomatic solutions.
-3. Using extensions to make code shorter (see [Extensions.kt](https://github.com/agrison/advent-of-code/blob/master/src/main/kotlin/me/grison/aoc/Extensions.kt)).
-
-I am gradually rewriting all previous years solutions in Kotlin because it's a better language for such challenges than the other I used before (except Python, but I'm not doing so much Python so just forgetting how to write some basic stuff).
-
 ## 2021
 
 ![Kotlin - 2021](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202021/badge.svg)
@@ -43,33 +32,52 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
   🌟 Part 2: 1595779846729  (2.00ms)
 ```
 
-## 2020 
+## Visualizations
+
+I just discovered p5js, so this year I will try to create some animations about the input I get from AOC.
+
+See: [visualizations](visualizations).
+
+## Goal
+
+After the 6 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), Kotlin, this year I'll be solving the
+[Advent of Code](https://adventofcode.com/2021) with **Kotlin** again.
+
+1. A deep dive into Kotlin.
+2. Write fast and idiomatic solutions.
+3. Using extensions to make code shorter (see [Extensions.kt](https://github.com/agrison/advent-of-code/blob/master/src/main/kotlin/me/grison/aoc/Extensions.kt)).
+
+I am gradually rewriting all previous years solutions in Kotlin because it's a better language for such challenges than the other I used before (except Python, but I'm not doing so much Python so just forgetting how to write some basic stuff).
+
+## Previous years
+
+### 2020 
 
 ![Kotlin - 2020](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202020/badge.svg)
 
 ![2020](2020.png)
 
-## 2019
+### 2019
 
 ![2019](2019.png)
 
-## 2018
+### 2018
 
 ![2018](2018.png)
 
-## 2017
+### 2017
 
 ![Kotlin - 2017](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202017/badge.svg)
 
 ![2017](2017.png)
 
-## 2016
+### 2016
 
 ![Kotlin - 2016](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202016/badge.svg)
 
 ![2016](2016.png)
 
-## 2015
+### 2015
 
 ![Kotlin - 2015](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202015/badge.svg)
 

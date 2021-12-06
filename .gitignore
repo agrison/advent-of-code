@@ -8,3 +8,4 @@ out/
 build/
 
 src/main/resources/cookie.txt
+/src/main/resources/cookieold.txt

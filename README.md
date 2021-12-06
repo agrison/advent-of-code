@@ -37,6 +37,10 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 🎄 --- Day 5: Hydrothermal Venture ---
   🌟 Part 1: 6113   (60.0ms)
   🌟 Part 2: 20373  (50.1ms)
+  
+🎄 --- Day 6: Lanternfish ---
+  🌟 Part 1: 351188         (27.9ms)
+  🌟 Part 2: 1595779846729  (2.00ms)
 ```
 
 ## 2020 

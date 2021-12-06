@@ -280,7 +280,11 @@ fun Pair<Int, Int>.slope() = when {
 
 // works with MutableMap.withDefault()
 fun <T> MutableMap<T, Int>.increase(key: T, amount: Int = 1): MutableMap<T, Int> {
-    this[key] = this.getValue(key) + amount
+    this[key] = this.getOrDefault(key, 0) + amount
+    return this
+}
+fun <T> MutableMap<T, Long>.increase(key: T, amount: Long = 1L): MutableMap<T, Long> {
+    this[key] = this.getOrDefault(key, 0L) + amount
     return this
 }
 
@@ -337,3 +341,13 @@ typealias HashBag<T> = MutableMap<T, Int>
 fun <T> hashBag() = mutableMapOf<T, Int>().withDefault { 0 }
 
 typealias Position = Pair<Int, Int>
+
+fun <T> makeList(size: Int, t: T): MutableList<T> {
+    val list = mutableListOf<T>()
+    for (i in 0.until(size)) {
+        list.add(t)
+    }
+    return list
+}
+
+fun Iterable<Int>.sumLong(): Long = this.fold(0L, Long::plus)

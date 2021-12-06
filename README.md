@@ -75,19 +75,19 @@ I am gradually rewriting all previous years solutions in Kotlin because it's a b
 
 ![Kotlin - 2017](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202017/badge.svg)
 
-![2017](2017.png)
+![2017](screenshots/2017/output.gif)
 
 ### 2016
 
 ![Kotlin - 2016](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202016/badge.svg)
 
-![2016](2016.png)
+![2016](screenshots/2016/output.gif)
 
 ### 2015
 
 ![Kotlin - 2015](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202015/badge.svg)
 
-![2015](2015.png)
+![2015](screenshots/2015/output.gif)
 
 Project is already setup with gradle. To run the app:
 

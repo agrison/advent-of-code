@@ -1,4 +1,10 @@
-## 2016 screenshots
+## 2016
+
+## GIF
+
+![](output.gif)
+
+## screenshots
 
 ![](00.png)
 ![](01.png)

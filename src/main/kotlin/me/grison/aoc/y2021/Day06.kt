@@ -3,19 +3,16 @@ package me.grison.aoc.y2021
 import me.grison.aoc.Day
 import me.grison.aoc.allInts
 import me.grison.aoc.increase
-import kotlin.collections.forEach
-import kotlin.collections.mutableMapOf
 import kotlin.collections.set
-import kotlin.collections.sum
 
 class Day06 : Day(6, 2021) {
     override fun title() = "Lanternfish"
 
-    override fun partOne() = solve(80)
+    override fun partOne() = solveSmart(80)
 
-    override fun partTwo() = solve(256)
+    override fun partTwo() = solveSmart(256)
 
-    fun solve(numDays: Int): Long {
+    private fun solve(numDays: Int): Long {
         val days = mutableMapOf<Int, Long>()
         inputString.allInts().forEach { fish -> days.increase(fish) }
 
@@ -28,5 +25,18 @@ class Day06 : Day(6, 2021) {
         }
 
         return days.values.sum()
+    }
+
+    // not my solution, but smart one
+    private fun solveSmart(numDays: Int): Long {
+        mutableMapOf<Int, Long>().let { days ->
+            inputString.allInts().forEach { fish -> days.increase(fish) }
+
+            0.until(numDays).forEach { day ->
+                days.increase((day + 7) % 9, days[day % 9] ?: 0)
+            }
+
+            return days.values.sum()
+        }
     }
 }

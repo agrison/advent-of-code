@@ -26,6 +26,7 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     }
     protected val inputAsVavrInts: io.vavr.collection.List<Int> by lazy { InputReader.inputAsVavrInts(dayNumber, year) }
     protected val inputInts: List<Int> by lazy { InputReader.inputAsString(dayNumber, year).map { it.toInt() } }
+    protected val inputIntList: List<Int> by lazy { InputReader.inputAsList(dayNumber, year).map { it.toInt() } }
 
     abstract fun partOne(): Any?
 

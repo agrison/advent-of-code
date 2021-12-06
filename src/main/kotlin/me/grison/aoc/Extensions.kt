@@ -339,6 +339,8 @@ fun intSeq(x: Int) = generateSequence(x) { it + 1 }
 
 typealias HashBag<T> = MutableMap<T, Int>
 fun <T> hashBag() = mutableMapOf<T, Int>().withDefault { 0 }
+typealias LongHashBag<T> = MutableMap<T, Int>
+fun <T> longHashBag() = mutableMapOf<T, Long>().withDefault { 0L }
 
 typealias Position = Pair<Int, Int>
 
@@ -351,3 +353,8 @@ fun <T> makeList(size: Int, t: T): MutableList<T> {
 }
 
 fun Iterable<Int>.sumLong(): Long = this.fold(0L, Long::plus)
+
+fun Array<Long>.increase(i: Int, amount: Long = 1): Array<Long> {
+    this[i] += amount
+    return this
+}

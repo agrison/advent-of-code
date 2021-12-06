@@ -20900,12 +20900,15 @@ function draw() {
     stroke('rgb(204, 204, 204)');
     strokeWeight(0.2);
 
+    // draw the lines in white
     for (var i = 0; i < N; ++i) {
         line(L[i].x1, L[i].y1, L[i].x2 , L[i].y2);
     }
 
+    // speed up
     if (N < L.length) N += 10;
     else {
+        // draw the points in gold
         stroke('rgb(255, 255, 102)');
         strokeWeight(0.5);
         for (var j = 0; j < M && j < P.length; ++j) {

@@ -3,7 +3,7 @@ let H;
 
 function setup() {
     frameRate(60);
-    createCanvas(1000, 1000);
+    createCanvas(940, 570);
     H = makeH();
 }
 
@@ -18,51 +18,65 @@ function makeH() {
     return H;
 }
 
+let K = 50;
+
 function draw() {
     background("#10101a");
     stroke('rgb(204, 204, 204)');
     strokeWeight(0.2);
 
+    // elapse
     fill("rgb(204, 204, 204)");
     textSize(32)
     text("days: " + N, 10, 30);
 
+    // compute
     H = makeH();
     for (t = 0; t < N && t < 256; ++t) {
         H[(t + 7) % 9] += H[t % 9];
     }
 
+    // find max and sum
     let M = BigInt(0)
     let S = BigInt(0)
     for (t = 0; t < 9; ++t) {
         if (H[t] > M) M = H[t];
-        //console.log(H[t])
         S += BigInt(H[t]);
     }
     if (M === 0n)
         M = 1n
 
+    // render
+
     for (t = 0; t < 9; ++t) {
+        // Index in white
         fill("rgb(204, 204, 204)");
         textSize(20)
-        text(t, 50, 100 + t *100);
+        text(t, 50, 80 + t * 50);
 
         let X = 100n * H[t];
         X = X / M;
         let Z = Number(X);
 
+        // yellow border rectangle
+        fill("#10101a");
         stroke('rgb(255, 255, 102)');
-        fill(255, 255, 102);
-        rect(80, 50 + t * 100, 8*Z, 90);
+        strokeWeight(2.5)
+        rect(80, 50 + t * 50, 8 * Z, 40);
 
-        fill("black");
+        // fish count
+        strokeWeight(1)
+        fill(255, 255, 102);
         textSize(20)
-        text(H[t].toLocaleString(), 100, 100 + t *100);
+        text(H[t].toLocaleString(), 100, 77 + t * 50);
     }
 
+    // total fishes
     fill("rgb(204, 204, 204)");
     textSize(20)
-    text("Fishes: " + S.toLocaleString(), 50, 980);
+    text("Fishes: " + S.toLocaleString(), 50, 530);
 
-    if (N < 256) N++;
+    if (N === 80) { // pause at 80 for part 1
+        if (K-- < 0) N++;
+    } else if (N < 256) N++;
 }

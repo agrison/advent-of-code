@@ -38,6 +38,12 @@ I just discovered p5js, so this year I will try to create some animations about 
 
 See: [visualizations](visualizations).
 
+## Screenshots
+
+I gather screenshots at each step (most of) of each years, so that I can make videos about the AOC filling up during december.
+
+See: [screenshots](screenshots).
+
 ## Goal
 
 After the 6 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), Kotlin, this year I'll be solving the

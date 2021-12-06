@@ -27,7 +27,7 @@ class Day06 : Day(6, 2021) {
         return days.values.sum()
     }
 
-    // not my solution, but smart one
+    // not my solution, but smart one.
     private fun solveSmart(numDays: Int): Long {
         mutableMapOf<Int, Long>().let { days ->
             inputString.allInts().forEach { fish -> days.increase(fish) }

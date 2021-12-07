@@ -154,6 +154,12 @@ fun Iterable<Long>.product() = reduce { a, b -> a * b }
 /** Returns whether this Collection contains all the given elements. */
 fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
 
+fun List<Int>.median() : Int {
+    this.sorted().let { x ->
+        return if (x.isEmpty()) ((x[x.size / 2] + x[x.size / 2 - 1])) / 2 else x[x.size / 2]
+    }
+}
+
 
 fun <T> List<T>.first(num: Int) = this.subList(0, num)
 

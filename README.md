@@ -30,6 +30,10 @@
 🎄 --- Day 6: Lanternfish ---
   🌟 Part 1: 351188         (27.9ms)
   🌟 Part 2: 1595779846729  (2.00ms)
+  
+🎄 --- Day 7: The Treachery of Whales ---
+  🌟 Part 1: 341534    (22.8ms)
+  🌟 Part 2: 93397707  (29.8ms)
 ```
 
 ## Visualizations

@@ -2,16 +2,37 @@
 
 ![Advent Of Code 2020](https://github.com/agrison/advent-of-code-2020/workflows/Advent%20Of%20Code%202020/badge.svg)
 
-## Goal
+## Code
 
-After the 5 last years with Java, Go (finished with Java), OCaml (finished with Java), Python and Clojure (+ some Java), this year I'll be solving the
-[Advent of Code](https://adventofcode.com/2020) with **Kotlin** (hopefully this time I won't need Java).
+| Day | Title                   | Code          | Tags                                            |
+|-----|-------------------------|---------------|-------------------------------------------------|
+| 1   | Report Repair           | [Day 01](Day01.kt) | window, common                                  |
+| 2   | Password Philosophy     | [Day 02](Day02.kt) | position, plan, command                         |
+| 3   | Toboggan Trajectory     | [Day 03](Day03.kt) | binary, frequency, grouping, filtering          |
+| 4   | Passport Processing     | [Day 04](Day04.kt) | board, game, evolving                           |
+| 5   | Binary Boarding         | [Day 05](Day05.kt) | plan, segments, intersection, couter, filtering |
+| 6   | Custom Customs          | [Day 06](Day06.kt) | maths, modulo, in-place mutable                 |
+| 7   | Handy Haversacks        | [Day 07](Day07.kt) |                                                 |
+| 8   | Handheld Halting        | [Day 08](Day08.kt) |                                                 |
+| 9   | Encoding Error          | [Day 09](Day09.kt) |                                                 |
+| 10  | Adapter Array           | [Day 10](Day10.kt) |                                                 |
+| 11  | Seating System          | [Day 11](Day11.kt) |                                                 |
+| 12  | Rain Risk               | [Day 12](Day12.kt) |                                                 |
+| 13  | Shuttle Search          | [Day 13](Day13.kt) |                                                 |
+| 14  | Docking Data            | [Day 14](Day14.kt) |                                                 |
+| 15  | Rambunctious Recitation | [Day 15](Day15.kt) |                                                 |
+| 16  | Ticket Translation      | [Day 16](Day16.kt) |                                                 |
+| 17  | Conway Cubes            | [Day 17](Day17.kt) |                                                 |
+| 18  | Operation Order         | [Day 18](Day18.kt) |                                                 |
+| 19  | Monster Messages        | [Day 19](Day19.kt) |                                                 |
+| 20  | Jurassic Jigsaw         | [Day 20](Day20.kt) |                                                 |
+| 21  | Allergen Assessment     | [Day 21](Day21.kt) |                                                 |
+| 22  | Crab Combat             | [Day 22](Day22.kt) |                                                 |
+| 23  | Crab Cups               | [Day 23](Day23.kt) |                                                 |
+| 24  | Lobby Layout            | [Day 24](Day24.kt) |                                                 |
+| 25  | Combo Breaker           | [Day 25](Day25.kt) |                                                 |
 
-1. A deep dive into Kotlin.
-2. Write fast and idiomatic solutions.
-3. Using extensions to make code shorter (see [Day.kt](https://github.com/agrison/advent-of-code-2020/blob/master/src/main/kotlin/days/Day.kt)).
-
-## 2020 Output
+## Output
 
 ```text
 🎅 === Advent of Code 2020 === 🎅

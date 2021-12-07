@@ -160,6 +160,10 @@ fun List<Int>.median() : Int {
     }
 }
 
+fun List<Int>.mean() : Int {
+    return this.sum() / this.size
+}
+
 
 fun <T> List<T>.first(num: Int) = this.subList(0, num)
 

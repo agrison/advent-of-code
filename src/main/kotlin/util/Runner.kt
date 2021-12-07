@@ -54,13 +54,19 @@ object Runner {
                 false -> Pair(defaultYear, arg)
             }
             val session = File(javaClass.classLoader.getResource("cookie.txt").toURI()).readText()
-            val output = File(javaClass.classLoader.getResource("$year").toURI().path.replace("build/resources/main", "src/main/resources") + "/$day.txt")
+            val output = File(
+                javaClass.classLoader.getResource("$year").toURI().path.replace(
+                    "build/resources/main",
+                    "src/main/resources"
+                ) + "/$day.txt"
+            )
             var created = false
             if (!output.exists()) {
                 output.createNewFile()
                 created = true
             }
-            val url = URL("https://adventofcode.com/$year/day/${if (day.startsWith("0")) day.substring(1) else day}/input")
+            val url =
+                URL("https://adventofcode.com/$year/day/${if (day.startsWith("0")) day.substring(1) else day}/input")
             with(url.openConnection() as HttpURLConnection) {
                 setRequestProperty("Cookie", "session=$session")
                 inputStream.bufferedReader().use {
@@ -92,10 +98,10 @@ object Runner {
             Thread.sleep(40000)
             val screenshot = driver as TakesScreenshot
 //            for (i in 1..100) {
-                val sc = screenshot.getScreenshotAs(OutputType.FILE)
-                Files.move(sc.toPath(), Paths.get("screenshots/2017/25.png"), REPLACE_EXISTING)
+            val sc = screenshot.getScreenshotAs(OutputType.FILE)
+            Files.move(sc.toPath(), Paths.get("screenshots/2017/25.png"), REPLACE_EXISTING)
 //                Files.move(sc.toPath(), Paths.get("screenshots/2017/25-${i}.png"), REPLACE_EXISTING)
-                Thread.sleep(10)
+            Thread.sleep(10)
 //            }
 
             // reinit zoom
@@ -119,7 +125,11 @@ object Runner {
 
             val screenshot = driver as TakesScreenshot
             val sc = screenshot.getScreenshotAs(OutputType.FILE)
-            Files.move(sc.toPath(), Paths.get("screenshots/2021/${LocalDate.now().format(ISO_DATE)}.png"), REPLACE_EXISTING)
+            Files.move(
+                sc.toPath(),
+                Paths.get("screenshots/2021/${LocalDate.now().format(ISO_DATE)}.png"),
+                REPLACE_EXISTING
+            )
 
             // reinit zoom
             js.executeScript("document.body.style.zoom = '1';")
@@ -195,10 +205,17 @@ object Runner {
             if (day == "*") {
                 val allDayClasses = getAllDayClasses()
                 if (allDayClasses != null) {
-                    allDayClasses.sortedBy { dayNumber(it.simpleName) }.forEach { printDay(it) }
+                    var total = 0L
+                    allDayClasses.sortedBy { dayNumber(it.simpleName) }.forEach {
+                        val start = System.nanoTime()
+                        printDay(it)
+                        total += System.nanoTime() - start
+                    }
+                    println("\nTotal time: ${total / 1000000}ms")
                 } else {
                     printError("Couldn't find day classes - make sure you're in the right directory and try building again")
                 }
+
             } else {
                 val dayClass = getAllDayClasses()?.find { dayNumber(it.simpleName) == day.toInt() }
                 if (dayClass != null) {

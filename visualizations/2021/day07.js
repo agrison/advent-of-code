@@ -27,19 +27,24 @@ let I = 0, I2 = 0;
 let KB = false;
 let KB2 = false;
 let B = false;
+let F1 = 0;
+let F2 = 0;
+
+//let inc = 93397626/N2/H2.length;
 
 function draw() {
     background("#10101a");
     textSize(32)
     stroke('rgb(38, 187, 95)')
     fill('rgb(38, 187, 95)')
-    text("Fuel Cost: " + (I-2), 1800, 30);
-    text("Aligned Crabs: " + H.filter(x => x === N).length, 1736, 70);
+    text("Fuel Cost: " + F1.toLocaleString(), 1700, 30);
+    text("Aligned Crabs: " + H.filter(x => x === N).length, 1636, 70);
 
+    if(F2>93397626)F2=93397626;
     stroke('rgb(255, 255, 102)')
     fill('rgb(255, 255, 102)')
-    text("Fuel Cost: " + (I2-4), 1800, 110);
-    text("Aligned Crabs: " + H2.filter(x => x === N2).length, 1736, 150);
+    text("Fuel Cost: " + F2.toLocaleString(), 1700, 110);
+    text("Aligned Crabs: " + H2.filter(x => x === N2).length, 1636, 150);
 
     stroke('rgb(204, 204, 204)');
     strokeWeight(3);
@@ -71,6 +76,7 @@ function draw() {
             strokeWeight(1)
             if (H[t] !== N) {
                 let x = H[t] > N ? H[t] - 1 : H[t] + 1;
+                F1 += 1;
                 H[t] = x;
                 image(img, 50 + x, t * 2 + 10, 30, 30);
             } else {
@@ -86,6 +92,7 @@ function draw() {
             strokeWeight(1)
             if (H2[t] !== N2) {
                 let x = H2[t] > N2 ? H2[t] - 1 : H2[t] + 1;
+                F2 += 159;
                 H2[t] = x;
                 image(img, 50 + x, t * 2 + 10, 30, 30);
             } else {

@@ -5,12 +5,36 @@ import me.grison.aoc.*
 class Day08 : Day(8, 2021) {
     override fun title() = "Seven Segment Search"
 
+    private val knownSegments = mapOf(2 to 1, 3 to 7, 4 to 4, 7 to 8)
+
     override fun partOne() =
         inputList.map { it.after(" | ").words() }
             .fold(0) { acc, it ->
-                acc + it.map { it.length }.count { it in listOf(2, 3, 4, 7) }
+                acc + it.map { it.length }.count { it in knownSegments.keys }
             }
 
+    // faster solution
+    override fun partTwo(): Int {
+        return inputList.map { it.normalSplit(" | ").map { it.words() } }
+            .fold(0) { accu, (left, right) ->
+                val segments = left.associate { it.length to it.set() }
+                accu + right.fold("") { code, segment ->
+                    segment.set().let { set ->
+                        code + digit(segment.length, set.intersect(segments[4]!!).size, set.intersect(segments[2]!!).size)
+                    }
+                }.int()
+            }
+    }
+
+    private fun digit(length: Int, second: Int, third: Int) =
+        if (length in knownSegments)
+            knownSegments[length]!!
+        else if (length == 5)
+            if (second == 2) 2 else if (third == 1) 5 else 3
+        else
+            if (second == 4) 9 else if (third == 1) 6 else 0
+
+    /* initial solution, but 50 times slower
     override fun partTwo(): Int {
         return inputList.map { it.normalSplit(" | ") }
             .fold(0) { accu, (left, right) ->
@@ -38,4 +62,5 @@ class Day08 : Day(8, 2021) {
         permutations.first { permutation ->
             displays.all { segment -> digitCodes.contains(findDigitCode(segment, permutation)) }
         }
+        */
 }

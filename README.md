@@ -36,8 +36,8 @@
   🌟 Part 2: 93397707  (29.8ms)
 
 🎄 --- Day 8: Seven Segment Search ---
-  🌟 Part 1: 539      (2.96ms)
-  🌟 Part 2: 1084606  (539ms)
+  🌟 Part 1: 539      (1.93ms)
+  🌟 Part 2: 1084606  (6.55ms)
 ```
 
 ## Visualizations

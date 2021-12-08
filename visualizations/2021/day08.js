@@ -218,6 +218,89 @@ function textblue() {
     fill('lightblue');
 }
 
+
+const DIGITS = [];
+DIGITS[0] =
+    " 0000 \n" +
+    "1    2\n" +
+    "1    2\n" +
+    " .... \n" +
+    "3    4\n" +
+    "3    4\n" +
+    " 5555 \n";
+DIGITS[1] =
+    " .... \n" +
+    ".    0\n" +
+    ".    0\n" +
+    " .... \n" +
+    ".    1\n" +
+    ".    1\n" +
+    " .... \n";
+DIGITS[2] =
+    " 0000 \n" +
+    ".    1\n" +
+    ".    1\n" +
+    " 2222 \n" +
+    "3    .\n" +
+    "3    .\n" +
+    " 4444 \n";
+DIGITS[3] =
+    " 0000 \n" +
+    ".    1\n" +
+    ".    1\n" +
+    " 2222 \n" +
+    ".    3\n" +
+    ".    3\n" +
+    " 4444 \n";
+DIGITS[4] =
+    " .... \n" +
+    "0    1\n" +
+    "0    1\n" +
+    " 2222 \n" +
+    ".    3\n" +
+    ".    3\n" +
+    " .... \n";
+DIGITS[5] =
+    " 0000 \n" +
+    "0    .\n" +
+    "0    .\n" +
+    " 2222 \n" +
+    ".    3\n" +
+    ".    3\n" +
+    " 4444 \n";
+DIGITS[6] =
+    " 0000 \n" +
+    "1    .\n" +
+    "1    .\n" +
+    " 2222 \n" +
+    "3    4\n" +
+    "3    4\n" +
+    " 5555 \n";
+DIGITS[7] =
+    " 0000 \n" +
+    ".    1\n" +
+    ".    1\n" +
+    " .... \n" +
+    ".    2\n" +
+    ".    2\n" +
+    " .... \n";
+DIGITS[8] =
+    " 0000 \n" +
+    "1    2\n" +
+    "1    2\n" +
+    " 3333 \n" +
+    "4    5\n" +
+    "4    5\n" +
+    " 6666 \n";
+DIGITS[9] =
+    " 0000 \n" +
+    "1    2\n" +
+    "1    2\n" +
+    " 3333 \n" +
+    ".    4\n" +
+    ".    4\n" +
+    " 5555 \n";
+
 let K = [...L];
 let T = L.map(_ => 100);
 let U = L.map(_ => 100);
@@ -238,8 +321,8 @@ function draw() {
             fill('lightgreen');
             text(L[i][0] + " | " + L[i][1], 10, y);
         } else if(y > 300 && y < 700) { // unscrambled
-            let change = T[i]-- % 10 == 0;
-            const newtext = L[i][0].split(" ").map(e => change && Math.random() < 0.5 ? (Object.keys(L[i][4]).includes(e) ? L[i][4][e] : e) : e);
+            let change = T[i]-- % 10 === 0;
+            const newtext = L[i][0].split(" ").map(e => change && Math.random() < 0.9 ? (Object.keys(L[i][4]).includes(e) ? L[i][4][e] : e) : e);
 
             K[i][0] = newtext.join(" ");
             stroke('rgb(204, 204, 204)');
@@ -251,26 +334,43 @@ function draw() {
             textyellow();
 
         } else if (y < 300) { // solution
-            let change = U[i]-- % 10 == 0;
-            const newtext = L[i][1].split(" ").map((u,e) => change && Math.random() < 0.7 ? L[i][3][u] : e);
+            let change = U[i]-- % 10 === 0;
+            const newtext = L[i][1].split(" ").map((u,e) => change && Math.random() < 0.9 ? L[i][3][u] : e);
             K[i][1] = newtext.join(" ")
 
             stroke('rgb(255, 255, 102)');
             fill('rgb(255, 255, 102)');
             text(K[i][0] + " | " + L[i][3].join(" ") , 10, y);
             sum += parseInt(L[i][3].join(""))
+
+            if (N > -4000) {
+                textSize(12);
+
+                stroke('#10101a');
+                fill('#10101a');
+                rect(400, 80, 1000, 150);
+
+                stroke('#ffcccb');
+                fill('#ffcccb')
+                for (let t = 0; t < 4; ++t) {
+                    let d = L[i][3][t];
+                    let v = Object.entries(L[i][4]).filter(e => e[1] === d)[0][0];
+                    text(DIGITS[d].replace(/(\d)/g, m => v[m]).replace(/\./g, ' '), 600 + t * 60, 100);
+                }
+                textSize(18);
+            }
         }
     }
-    stroke('magenta');
-    fill('magenta');
-    text("output: " + sum.toLocaleString(), 600, 50)
-
-    stroke('rgb(255, 255, 102)');
-    strokeWeight(1);
-    line(0, 290, 1000, 290);
-    stroke('lightgreen');
-    line(0, 690, 1000, 690);
-    strokeWeight(0);
-
-    N-=4;
+    if (N > -4000) {
+        stroke('magenta');
+        fill('magenta');
+        text("output: " + sum.toLocaleString(), 600, 50)
+        stroke('rgb(255, 255, 102)');
+        strokeWeight(1);
+        line(0, 290, 1000, 290);
+        stroke('lightgreen');
+        line(0, 690, 1000, 690);
+        strokeWeight(0);
+    }
+    N-=8;
 }

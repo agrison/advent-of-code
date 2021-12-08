@@ -9,3 +9,4 @@
 | 5   | Hydrothermal Venture | [Day 05](Day05.kt) | plan, segments, intersection, couter, filtering, common solution |
 | 6   | Lanternfish          | [Day 06](Day06.kt) | maths, modulo, in-place mutable, common solution                 |
 | 7   | The Treachery of Whales | [Day 07](Day07.kt)  | maths, modulo, min, median, summation               |
+| 8   | Seven Segment Search | [Day 08](Day08.kt)  | permutations, backtracking               |

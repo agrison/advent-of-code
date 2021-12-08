@@ -34,6 +34,10 @@
 🎄 --- Day 7: The Treachery of Whales ---
   🌟 Part 1: 341534    (22.8ms)
   🌟 Part 2: 93397707  (29.8ms)
+
+🎄 --- Day 8: Seven Segment Search ---
+  🌟 Part 1: 539      (2.96ms)
+  🌟 Part 2: 1084606  (539ms)
 ```
 
 ## Visualizations

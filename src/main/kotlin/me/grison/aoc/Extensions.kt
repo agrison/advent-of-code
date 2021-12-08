@@ -79,6 +79,8 @@ fun String.allInts(): List<Int> = "(\\d+)".regex().findAll(this).map { it.value.
 fun String.allLongs(): List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
 /** Returns like toCharArray() but with strings. */
 fun String.stringList(): List<String> = map { it.toString() }
+/** Returns like toCharArray() but with strings. */
+fun String.list(): List<String> = map { it.toString() }
 /** Returns the string without any spaces. */
 fun String.noSpaces() = replace("\\s+".regex(), "")
 /** Returns like Java `split()` because it's a better `split()`. */
@@ -96,6 +98,9 @@ fun String.or(eq: String, or: String?) = if (this == eq) this else or
 /** Returns the string where line separators are replaced by `sep` (default empty string). */
 fun String.oneLine(sep: String = "") = replace(System.lineSeparator(), sep)
 
+fun String.words() = normalSplit(" ")
+fun String.set() = stringList().toSet()
+
 fun String.`is`(s: String) = this == s
 fun String.upper() = toUpperCase()
 fun String.lower() = toLowerCase()
@@ -110,6 +115,9 @@ fun Long.divisible(other: Long) = this % other == 0L
 
 fun Int.odd() = this % 2 == 1
 fun Int.even() = this % 2 == 0
+fun Int.zero() = this == 0
+fun Int.pos() = this >= 0
+fun Int.neg() = this < 0
 
 // Complex
 /** Returns the manhattan distance of this Complex. */
@@ -162,6 +170,19 @@ fun List<Int>.median() : Int {
 
 fun List<Int>.mean() : Int {
     return this.sum() / this.size
+}
+
+fun <T> List<T>.permutations() : List<List<T>> {
+    val p = io.vavr.collection.Vector.ofAll(this).permutations()
+    val list = mutableListOf<List<T>>()
+    p.forEach {
+        val inner = mutableListOf<T>()
+        it.forEach {
+            inner.add(it)
+        }
+        list.add(inner)
+    }
+    return list
 }
 
 

@@ -6,31 +6,16 @@ import kotlin.Int.Companion.MAX_VALUE
 class Day09 : Day(9, 2021) {
     override fun title() = ""
 
-    private var height = 0
-    private var width = 0
-    private var grid = mutableMapOf<Position, Int>().withDefault { MAX_VALUE }
-    private fun loadGrid() {
-        inputList.forEach { line ->
-            width = 0
-            line.normalSplit("").ints().forEach { n ->
-                grid[p(width++, height)] = n
-            }
-            height++
-        }
-    }
-
     override fun partOne(): Int {
-        loadGrid()
-
+        val grid = loadGrid()
         var sum = 0
-        for (y in 0.until(height)) {
-            for (x in 0.until(width)) {
+        for (y in 0..height) {
+            for (x in 0..width) {
                 val pos = p(x, y)
                 val num = grid.getValue(pos)
                 if (pos.directions().all { num < grid.getValue(it) }) {
                     sum += num + 1
                 }
-
             }
         }
 
@@ -38,10 +23,10 @@ class Day09 : Day(9, 2021) {
     }
 
     override fun partTwo(): Int {
-        loadGrid()
+        val grid = loadGrid()
         val basins = mutableListOf<Position>()
-        for (y in 0.until(height)) {
-            for (x in 0.until(width)) {
+        for (y in 0..height) {
+            for (x in 0..width) {
                 val pos = p(x, y)
                 if (grid.getValue(pos) != 9) {
                     basins.add(findBasin(pos, grid))
@@ -53,10 +38,19 @@ class Day09 : Day(9, 2021) {
             .values.sortedDescending().take(3).product()
     }
 
+    private fun loadGrid() : Map<Position, Int> {
+        inputList.let {
+            width = it[0].length
+            height = it.size
+            return it.intGrid(MAX_VALUE)
+        }
+    }
+
     private fun findBasin(pos: Position, grid: Map<Position, Int>): Position {
-        val bottom = pos.directions()
-            .filter { it.within(0, 0, 100, 100) }
-            .lastOrNull { grid.getValue(it) < grid.getValue(pos) }
+        val bottom = pos.directions().lastOrNull { grid.getValue(it) < grid.getValue(pos) }
         return if (bottom == null) pos else findBasin(bottom, grid)
     }
+
+    private var width: Int = 0
+    private var height: Int = 0
 }

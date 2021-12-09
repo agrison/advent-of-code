@@ -19,17 +19,20 @@ class Day09 : Day(9, 2021) {
         gridPositions(dimensions)
             .map { pos -> p(pos, grid.getValue(pos)) }
             .filter { (_, value) -> value < 9 }
-            .map { (pos, _) -> findBasin(pos, grid) }
+            .map { (pos, _) -> basin(pos) }
             .fold(hashBag<Position>()) { hash, b -> hash.increase(b) }
             .values.sortedDescending().take(3).product()
 
     private fun loadGrid(): Map<Position, Int> =
         inputList.let {
             dimensions = p(it[0].length, it.size)
-            return it.intGrid(MAX_VALUE)
+            it.intGrid(MAX_VALUE)
         }
 
-    private fun findBasin(pos: Position, grid: Map<Position, Int>): Position =
-        pos.directions().lastOrNull { grid.getValue(it) < grid.getValue(pos) }
-            ?.let { findBasin(it, grid) } ?: pos
+    private val basin = { pos: Position -> findBasin(pos) }.memoize()
+    private fun findBasin(pos: Position): Position =
+        pos.directions().firstOrNull { grid.getValue(it) < grid.getValue(pos) }
+            ?.let { basin(it) } ?: pos
 }
+
+

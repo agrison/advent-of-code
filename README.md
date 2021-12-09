@@ -38,6 +38,10 @@
 🎄 --- Day 8: Seven Segment Search ---
   🌟 Part 1: 539      (1.93ms)
   🌟 Part 2: 1084606  (6.55ms)
+  
+🎄 ---- Day 9: Smoke Basin ---
+  🌟 Part 1: 537      (20.0ms)
+  🌟 Part 2: 1142757  (40.4ms)
 ```
 
 ## Visualizations

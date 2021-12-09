@@ -295,11 +295,17 @@ operator fun Pair<Int, Int>.minus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(firs
 /** `*` operator for Pairs. */
 operator fun Pair<Int, Int>.times(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first * p.first, second * p.second)
 
+fun Pair<Int, Int>.above() = this.plus(p(0, -1))
+fun Pair<Int, Int>.below() = this.plus(p(0, 1))
+fun Pair<Int, Int>.left() = this.plus(p(-1, 0))
+fun Pair<Int, Int>.right() = this.plus(p(1, 0))
 fun Pair<Int, Int>.up(i: Int) = this.plus(p(0, -i))
 fun Pair<Int, Int>.down(i: Int) = this.plus(p(0, i))
 fun Pair<Int, Int>.forward(i: Int) = this.plus(p(i, 0))
 fun Pair<Int, Int>.forward(i: Int, aim: Int) = this.plus(p(i, aim))
 fun Pair<Int, Int>.backward(i: Int) = this.plus(p(-i, 0))
+fun Pair<Int, Int>.within(minx:Int, miny:Int, maxx:Int, maxy:Int) = first in minx..maxx && second in miny..maxy
+fun Pair<Int, Int>.directions() = listOf(above(), below(), left(), right())
 // return an increasing range
 fun Pair<Int, Int>.range() = min(first, second)..max(first, second)
 // compute the slope of a pair representing two X or two Y (derivative)

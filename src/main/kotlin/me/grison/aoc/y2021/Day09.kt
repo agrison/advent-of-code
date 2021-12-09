@@ -9,21 +9,19 @@ class Day09 : Day(9, 2021) {
     private var dimensions = p(0, 0)
     private val grid = loadGrid()
 
-    override fun partOne(): Int {
-        return gridPositions(dimensions)
+    override fun partOne() =
+        gridPositions(dimensions)
             .map { pos -> p(pos, grid.getValue(pos)) }
             .filter { (pos, value) -> pos.directions().all { value < grid.getValue(it) } }
             .sumBy { (_, value) -> value + 1 }
-    }
 
-    override fun partTwo(): Int {
-        return gridPositions(dimensions)
+    override fun partTwo() =
+        gridPositions(dimensions)
             .map { pos -> p(pos, grid.getValue(pos)) }
             .filter { (_, value) -> value < 9 }
             .map { (pos, _) -> findBasin(pos, grid) }
             .fold(hashBag<Position>()) { hash, b -> hash.increase(b) }
             .values.sortedDescending().take(3).product()
-    }
 
     private fun loadGrid(): Map<Position, Int> =
         inputList.let {

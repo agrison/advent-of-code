@@ -40,8 +40,8 @@
   🌟 Part 2: 1084606  (6.55ms)
   
 🎄 ---- Day 9: Smoke Basin ---
-  🌟 Part 1: 537      (11.7ms)
-  🌟 Part 2: 1142757  (26.6ms)
+  🌟 Part 1: 537      (9.4ms)
+  🌟 Part 2: 1142757  (9.9ms)
 ```
 
 ## Visualizations

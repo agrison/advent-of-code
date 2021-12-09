@@ -151,6 +151,10 @@ fun List<String>.intGrid(default: Int): Map<Position, Int> {
     }
     return grid
 }
+fun <T> MutableList<T>.append(t: T) : MutableList<T> {
+    this.add(t)
+    return this
+}
 
 // Integers & Long
 /** Returns whether this is divisible by `other`. */
@@ -485,3 +489,5 @@ fun Array<Long>.increase(i: Int, amount: Long = 1): Array<Long> {
     this[i] += amount
     return this
 }
+
+fun gridPositions(height: Int, width: Int) = (0..height).flatMap { y -> (0..width).map { x -> p(x, y) } }

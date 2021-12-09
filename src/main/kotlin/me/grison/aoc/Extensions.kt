@@ -490,4 +490,5 @@ fun Array<Long>.increase(i: Int, amount: Long = 1): Array<Long> {
     return this
 }
 
+fun gridPositions(dimensions: Pair<Int, Int>) = me.grison.aoc.gridPositions(dimensions.first, dimensions.second)
 fun gridPositions(height: Int, width: Int) = (0..height).flatMap { y -> (0..width).map { x -> p(x, y) } }

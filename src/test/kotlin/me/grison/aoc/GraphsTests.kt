@@ -74,6 +74,22 @@ class GraphsTests {
             'S' to mutableListOf('A', 'C', 'G')
         ).depthFirst('A') { node -> builder.append(node) }
         assertEquals("ASGFCEHDB", builder.toString())
+
+        builder.clear()
+        val it = mutableMapOf(
+            'A' to mutableListOf('B', 'S'),
+            'B' to mutableListOf('A'),
+            'C' to mutableListOf('D', 'E', 'F', 'S'),
+            'D' to mutableListOf('C'),
+            'E' to mutableListOf('C', 'H'),
+            'F' to mutableListOf('C', 'G'),
+            'G' to mutableListOf('F', 'S'),
+            'H' to mutableListOf('E', 'G'),
+            'S' to mutableListOf('A', 'C', 'G')
+        ).dfsIterator('A')
+        while (it.hasNext())
+            builder.append(it.next())
+        assertEquals("ASGFCEHDB", builder.toString())
     }
 
 
@@ -112,6 +128,22 @@ class GraphsTests {
             'H' to mutableListOf('E', 'G'),
             'S' to mutableListOf('A', 'C', 'G')
         ).breadthFirst('A') { node -> builder.append(node) }
+        assertEquals("ABSCGDEFH", builder.toString())
+
+        builder.clear()
+        val it = mutableMapOf(
+            'A' to mutableListOf('B', 'S'),
+            'B' to mutableListOf('A'),
+            'C' to mutableListOf('D', 'E', 'F', 'S'),
+            'D' to mutableListOf('C'),
+            'E' to mutableListOf('C', 'H'),
+            'F' to mutableListOf('C', 'G'),
+            'G' to mutableListOf('F', 'S'),
+            'H' to mutableListOf('E', 'G'),
+            'S' to mutableListOf('A', 'C', 'G')
+        ).bfsIterator('A')
+        while (it.hasNext())
+            builder.append(it.next())
         assertEquals("ABSCGDEFH", builder.toString())
     }
 

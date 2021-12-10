@@ -1,10 +1,9 @@
 package me.grison.aoc
 
-import me.grison.aoc.*
 import java.util.*
-import java.util.concurrent.atomic.AtomicBoolean
 import java.util.function.Predicate
 import kotlin.collections.ArrayDeque
+import kotlin.collections.set
 
 typealias Graph<T> = MutableMap<T, MutableList<T>>
 
@@ -44,9 +43,12 @@ fun <T> Graph<T>.shortestPath(a: T, b: T): Pair<Int, List<T>> {
 }
 
 fun <T> Graph<T>.hasPath(source: T, destination: T): Boolean {
-    return AtomicBoolean(false).let { found ->
-        this.breadthFirst(source) { node -> if (node == destination) found.set(true) }
-        found.get()
+    bfsIterator(source).let {
+        while (it.hasNext()) {
+            if (it.next() == destination)
+                return true
+        }
+        return false
     }
 }
 
@@ -71,6 +73,38 @@ fun <T> Graph<T>.depthFirst(root: T, visitor: (T) -> Unit) {
     }
 }
 
+fun <T> Graph<T>.dfsIterator(source: T): Iterator<T> {
+    val stack = Stack<T>()
+    stack.push(source)
+
+    val graph = this
+    val visited = mutableSetOf<T>()
+    return object : Iterator<T> {
+
+        override fun hasNext(): Boolean {
+            if (stack.isEmpty()) return false
+            while (stack.isNotEmpty() && stack.last() in visited) {
+                stack.pop()
+            }
+
+            return stack.isNotEmpty()
+        }
+
+        override fun next(): T {
+            val current = stack.pop()
+            visited.add(current)
+
+            for (neighbor in graph[current]!!) {
+                if (neighbor !in visited) {
+                    stack.push(neighbor)
+                }
+            }
+
+            return current
+        }
+    }
+}
+
 fun <T> Graph<T>.breadthFirst(source: T, visitor: (T) -> Unit) {
     val queue = ArrayDeque<T>()
     queue.add(source)
@@ -89,6 +123,38 @@ fun <T> Graph<T>.breadthFirst(source: T, visitor: (T) -> Unit) {
                     queue.add(neighbor)
                 }
             }
+        }
+    }
+}
+
+fun <T> Graph<T>.bfsIterator(source: T): Iterator<T> {
+    val queue = ArrayDeque<T>()
+    queue.add(source)
+
+    val graph = this
+    val visited = mutableSetOf<T>()
+    return object : Iterator<T> {
+
+        override fun hasNext(): Boolean {
+            if (queue.isEmpty()) return false
+            while (queue.isNotEmpty() && queue.first() in visited) {
+                queue.shift()
+            }
+
+            return queue.isNotEmpty()
+        }
+
+        override fun next(): T {
+            val current = queue.shift()
+            visited.add(current)
+
+            for (neighbor in graph[current]!!) {
+                if (neighbor !in visited) {
+                    queue.add(neighbor)
+                }
+            }
+
+            return current
         }
     }
 }
@@ -174,7 +240,7 @@ fun <T> Grid<T>.minimumIsland(symbol: T, dimensions: Pair<Int, Int>) =
 fun <T> Grid<T>.maximumIsland(symbol: T, dimensions: Pair<Int, Int>) =
     minMaxIsland(symbol, dimensions).second
 
-fun <T> Grid<T>.minMaxIsland(symbol: T, dimensions: Pair<Int, Int>): Pair<Int, Int> {
+private fun <T> Grid<T>.minMaxIsland(symbol: T, dimensions: Pair<Int, Int>): Pair<Int, Int> {
     fun explore(grid: Grid<T>, pos: Position, visited: MutableSet<Position>): Int {
         if (!pos.within(0, 0, dimensions.first, dimensions.second)) return 0
         if (grid.getValue(pos) != symbol) return 0
@@ -191,7 +257,7 @@ fun <T> Grid<T>.minMaxIsland(symbol: T, dimensions: Pair<Int, Int>): Pair<Int, I
         explore(this, pos, visited).let { size ->
             if (size in 1 until minSize)
                 minSize = size
-            if (size  > maxSize)
+            if (size > maxSize)
                 maxSize = size
         }
     }
@@ -200,12 +266,11 @@ fun <T> Grid<T>.minMaxIsland(symbol: T, dimensions: Pair<Int, Int>): Pair<Int, I
 }
 
 fun <T> Grid<T>.hasPath(source: Position, destination: Position, traversable: Predicate<T>): Boolean {
-    return AtomicBoolean(false).let { found ->
-        this.breadthFirst(source, traversable) { position, _ ->
-            if (position == destination) found.set(true)
-            found.get()
-        }
-        found.get()
+    bfsIterator(source, traversable).let {
+        while (it.hasNext())
+            if (it.next().first == destination)
+                return true
+        return false
     }
 }
 
@@ -213,7 +278,7 @@ fun <T> Grid<T>.shortestPath(a: Position, b: Position, traversable: Predicate<T>
     val visited = mutableSetOf(a)
     val queue = ArrayDeque<Triple<Position, Int, MutableList<Position>>>()
     queue.addLast(Triple(a, 0, mutableListOf(a)))
-    val yMax = keys.maxByOrNull{ it.first }!!.first
+    val yMax = keys.maxByOrNull { it.first }!!.first
     val xMax = keys.maxByOrNull { it.second }!!.second
 
     while (queue.size > 0) {
@@ -222,7 +287,8 @@ fun <T> Grid<T>.shortestPath(a: Position, b: Position, traversable: Predicate<T>
 
         node.directions().forEach { neighbor ->
             if (neighbor.within(0, 0, yMax, xMax) && neighbor !in visited
-                && traversable.test(this[neighbor]!!)) {
+                && traversable.test(this[neighbor]!!)
+            ) {
                 visited.add(neighbor)
                 val newPath = path.toMutableList() + neighbor
                 val t = Triple(neighbor, distance + 1, newPath)
@@ -234,11 +300,15 @@ fun <T> Grid<T>.shortestPath(a: Position, b: Position, traversable: Predicate<T>
     return p(-1, listOf())
 }
 
-fun <T> Grid<T>.breadthFirst(source: Position, traversable: Predicate<T>, visitor: (position: Position, value: T) -> Boolean) {
+fun <T> Grid<T>.breadthFirst(
+    source: Position,
+    traversable: Predicate<T>,
+    visitor: (position: Position, value: T) -> Boolean
+) {
     val queue = ArrayDeque<Position>()
     queue.add(source)
     val visited = mutableSetOf<Position>()
-    val yMax = keys.maxByOrNull{ it.first }!!.first
+    val yMax = keys.maxByOrNull { it.first }!!.first
     val xMax = keys.maxByOrNull { it.second }!!.second
 
     while (!queue.isEmpty()) {
@@ -253,7 +323,8 @@ fun <T> Grid<T>.breadthFirst(source: Position, traversable: Predicate<T>, visito
 
             current.directions().forEach { neighbor ->
                 if (neighbor.within(0, 0, yMax, xMax) && neighbor !in visited
-                    && traversable.test(this[neighbor]!!)) {
+                    && traversable.test(this[neighbor]!!)
+                ) {
                     queue.add(neighbor)
                 }
             }
@@ -261,16 +332,51 @@ fun <T> Grid<T>.breadthFirst(source: Position, traversable: Predicate<T>, visito
     }
 }
 
+fun <T> Grid<T>.bfsIterator(source: Position, traversable: Predicate<T>) : Iterator<Pair<Position, T>> {
+    val queue = ArrayDeque<Position>()
+    queue.add(source)
+    val visited = mutableSetOf<Position>()
+    val yMax = keys.maxByOrNull { it.first }!!.first
+    val xMax = keys.maxByOrNull { it.second }!!.second
+
+    val graph = this
+    return object : Iterator<Pair<Position, T>> {
+
+        override fun hasNext(): Boolean {
+            if (queue.isEmpty()) return false
+            while (queue.isNotEmpty() && queue.first() in visited) {
+                queue.shift()
+            }
+
+            return queue.isNotEmpty()
+        }
+
+        override fun next(): Pair<Position, T> {
+            val current = queue.shift()
+            visited.add(current)
+
+            current.directions().forEach { neighbor ->
+                if (neighbor.within(0, 0, yMax, xMax) && neighbor !in visited
+                    && traversable.test(graph[neighbor]!!)) {
+                    queue.add(neighbor)
+                }
+            }
+
+            return p(current, graph[current]!!)
+        }
+    }
+}
+
 fun <T> Grid<T>.print(visited: Set<Position>) {
-    val yMax = keys.maxByOrNull{ it.first }!!.first
+    val yMax = keys.maxByOrNull { it.first }!!.first
     val xMax = keys.maxByOrNull { it.second }!!.second
 
     for (i in 0..yMax) {
         for (j in 0..xMax) {
-            if (p(i,j) in visited) {
+            if (p(i, j) in visited) {
                 print("\u001B[35mx\u001B[0m")
             } else {
-                print(this[p(i,j)])
+                print(this[p(i, j)])
             }
         }
         println()

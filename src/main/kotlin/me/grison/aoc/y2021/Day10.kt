@@ -8,7 +8,7 @@ import java.util.*
 class Day10 : Day(10, 2021) {
     override fun title() = "Syntax Scoring"
 
-    private val matching = mapOf(')' to '(', ']' to '[', '>' to '<', '}' to '{')
+    private val openings = mapOf(')' to '(', ']' to '[', '>' to '<', '}' to '{')
 
     override fun partOne() = solve(mapOf(')' to 3L, ']' to 57L, '}' to 1197L, '>' to 25137L)).first
 
@@ -19,8 +19,8 @@ class Day10 : Day(10, 2021) {
         inputList.forEach { line ->
             var (stack, corrupted) = p(Stack<Char>(), false)
             for (c in line) {
-                if (c in "(<[{") stack.push(c)
-                else if (stack.pop() != matching[c]) {
+                if (c in openings.values) stack.push(c)
+                else if (stack.pop() != openings[c]) {
                     corrupted = true
                     firstScore += scores[c] ?: 0L
                     break

@@ -12,7 +12,6 @@ import space.kscience.kmath.complex.Complex
 import java.lang.Integer.max
 import java.lang.Integer.min
 import java.util.*
-import java.util.concurrent.atomic.AtomicBoolean
 import java.util.stream.Collectors
 import java.util.stream.IntStream
 import kotlin.collections.ArrayDeque
@@ -23,115 +22,6 @@ import kotlin.math.ceil
 // core types
 // Strings
 
-/** Returns the occurrences of `c`. */
-fun String.occurrences(c: Char) = count { it == c }
-
-/** Returns safely `this[pos]`. */
-fun String.at(pos: Int) = this[pos % length]
-
-/** Returns whether `this.at(pos) == c`. */
-fun String.at(pos: Int, c: Char) = at(pos) == c
-
-/** Returns whether this string contains all the given `strs`. */
-fun String.containsAll(vararg strs: String) = strs.map { contains(it) }.fold(true) { a, b -> a && b }
-fun String.field(s: String): String =
-    runCatching { substring(indexOf(s) + s.length + 1).split(" ")[0] }.getOrDefault("")
-
-fun String.intField(s: String, remove: String = "@"): Int = replace(remove, "").field(s).int()
-fun String.int() = runCatching { Integer.parseInt(replace("""[^\d]""", "")) }.getOrDefault(0)
-
-/** Returns a regex from this string. */
-fun String.regex() = toRegex()
-
-/** Returns the string without the last character. */
-fun String.matches(s: String) = matches(s.regex())
-
-/** Returns whether this string is in the given `strs`. */
-fun String.`in`(vararg strs: String) = strs.contains(this)
-
-/** Returns the Int representation of this string. */
-fun String.toInt(radix: Int) = Integer.parseInt(this, radix)
-
-/** Returns the binary representation of this string. */
-fun String.binary() = Integer.parseInt(this, 2)
-
-/** Returns the Long representation of this string. */
-fun String.binaryLong() = java.lang.Long.parseLong(this, 2)
-
-/** Returns the set of characters in this string. */
-fun String.charSet() = split("").toSet() - ""
-
-/** Returns a `List<String>` representing the lines in this string. */
-fun String.lines() = split(System.lineSeparator())
-
-/** Returns a char array. */
-fun String.split() = toCharArray()
-
-/** Returns times operator for string (repeating). */
-operator fun String.times(i: Int) = repeat(i)
-fun String.replacing(m: Map<Char, Char>): String {
-    var s = this
-    m.forEach { s = s.replace(it.key, it.value) }
-    return s
-}
-
-fun String.replacingRegex(m: Map<String, String>): String {
-    var s = this
-    m.forEach { s = s.replace(it.key.regex(), it.value) }
-    return s
-}
-
-/** Returns the string without the last character. */
-fun String.butLast() = substring(0, length - 1)
-
-/** Returns the string between `left` and `right`. */
-fun String.between(left: String, right: String) = split(left)[1].split(right).first()
-
-/** Returns the string after the last `s`. */
-fun String.afterLast(s: String) = split(s).last()
-
-/** Returns all int found in this string. */
-fun String.allInts(): List<Int> = "(\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
-
-/** Returns all long found in this string. */
-fun String.allLongs(): List<Long> = "(\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
-
-/** Returns like toCharArray() but with strings. */
-fun String.stringList(): List<String> = map { it.toString() }
-
-/** Returns like toCharArray() but with strings. */
-fun String.list(): List<String> = map { it.toString() }
-
-/** Returns the string without any spaces. */
-fun String.noSpaces() = replace("\\s+".regex(), "")
-
-/** Returns like Java `split()` because it's a better `split()`. */
-fun String.normalSplit(delim: String) = split(delim).filter { it != "" }
-
-/** Returns the string without all occurrences of `str`. */
-fun String.except(str: String) = replace(str, "")
-
-/** Returns the string without all occurrences of `c`. */
-fun String.except(c: Char) = replace(c + "", "")
-
-/** Returns the string before `str`. */
-fun String.before(str: String) = split(str)[0]
-
-/** Returns the string after `str`. */
-fun String.after(str: String) = split(str)[1]
-
-/** Returns `eq` if this == `eq`, `or` otherwise. */
-fun String.or(eq: String, or: String?) = if (this == eq) this else or
-
-/** Returns the string where line separators are replaced by `sep` (default empty string). */
-fun String.oneLine(sep: String = "") = replace(System.lineSeparator(), sep)
-
-fun String.words() = normalSplit(" ")
-fun String.set() = stringList().toSet()
-
-fun String.`is`(s: String) = this == s
-fun String.upper() = toUpperCase()
-fun String.lower() = toLowerCase()
 
 /*
  219
@@ -161,7 +51,7 @@ fun List<String>.stringGrid(default: String): Grid<String> {
     forEach { line ->
         var width = 0
         line.normalSplit("").forEach { n ->
-            grid[p(width++, height)] = n
+            grid[p(height, width++)] = n
         }
         height++
     }
@@ -222,143 +112,6 @@ fun Char.eq(c: Char) = this == c
 /** Returns whether this range includes all the given `ints`. */
 fun IntRange.includes(vararg ints: Int) = ints.all(this::contains)
 
-// Collections
-/** Returns the product of all elements in this Iterable. */
-fun Iterable<Int>.multiply() = reduce { a, b -> a * b }
-
-/** Returns the product of all elements in this Iterable. */
-fun Iterable<Int>.product() = reduce { a, b -> a * b }
-
-/** Returns the product of all elements in this Iterable. */
-fun Iterable<Long>.multiply() = reduce { a, b -> a * b }
-
-/** Returns the product of all elements in this Iterable. */
-fun Iterable<Long>.product() = reduce { a, b -> a * b }
-
-/** Returns whether this Collection contains all the given elements. */
-fun <T> Collection<T>.contains(vararg e: T) = containsAll(e.toList())
-
-fun List<Int>.median(): Int {
-    this.sorted().let { x ->
-        return if (x.isEmpty()) ((x[x.size / 2] + x[x.size / 2 - 1])) / 2 else x[x.size / 2]
-    }
-}
-
-fun List<Int>.mean(): Int {
-    return this.sum() / this.size
-}
-
-fun <T> List<T>.permutations(): List<List<T>> {
-    val p = io.vavr.collection.Vector.ofAll(this).permutations()
-    val list = mutableListOf<List<T>>()
-    p.forEach {
-        val inner = mutableListOf<T>()
-        it.forEach {
-            inner.add(it)
-        }
-        list.add(inner)
-    }
-    return list
-}
-
-
-fun <T> List<T>.first(num: Int) = this.subList(0, num)
-
-fun <T> Collection<T>.head(): T? = if (this.isNotEmpty()) this.first() else null
-fun <T> MutableCollection<T>.reset(coll: Collection<T>): MutableCollection<T> {
-    this.clear()
-    this.addAll(coll)
-    return this
-}
-
-/** `+` operator for sets. */
-operator fun <T> MutableSet<T>.plus(e: T): MutableSet<T> {
-    this.add(e)
-    return this
-}
-
-/** `+` operator for lists. */
-operator fun <T> MutableList<T>.plus(e: T): MutableList<T> {
-    this.add(e)
-    return this
-}
-
-/** Returns the cumulative sum of this Iterable. */
-fun Iterable<Long>.cumSum() = this.scan(0L) { a, b -> a + b }
-
-/** Returns the Iterable without the given element. */
-fun <T> Iterable<T>.except(filter: T) = filter { it != filter }
-
-/** Make a string of this Iterable, separator is an empty string. */
-fun <T> Iterable<T>.join() = joinToString("")
-
-/** Returns the Iterable without the last element. */
-fun <T> List<T>.butLast() = dropLast(1)
-
-/** Returns the transposed list of list. */
-fun <T> List<List<T>>.transpose(): List<List<T>> {
-    val N = this.stream().mapToInt { l: List<T> -> l.size }.max().orElse(-1)
-    val iterList = this.stream().map { it.iterator() }.collect(Collectors.toList())
-    return IntStream.range(0, N)
-        .mapToObj { _ ->
-            iterList.stream()
-                .filter { it.hasNext() }
-                .map { m: Iterator<T> -> m.next() }
-                .collect(Collectors.toList())
-        }
-        .collect(Collectors.toList())
-}
-
-/** Make an ArrayDeque representing this Collection. */
-fun <T> Collection<T>.deque() = ArrayDeque(this)
-
-/** Returns the Iterable without the last element. */
-fun <T> ArrayDeque<T>.addLast(vararg e: T): ArrayDeque<T> {
-    for (ee in e) {
-        this.addLast(ee)
-    }
-    return this
-}
-
-/** `+` operator for a Deque and a new element. */
-operator fun <T> ArrayDeque<T>.plus(e: T) = addLast(e)
-
-/** Alias for `removeFirst`. */
-fun <T> ArrayDeque<T>.shift() = removeFirst()
-fun <T> ArrayDeque<T>.pop() = removeLast()
-
-/** Returns the Collection without its first element. */
-fun <T> Iterable<T>.tail() = drop(1)
-
-/** Transforms a Collection of String to a Collection of Int. */
-fun Iterable<String>.ints() = map { it.toInt() }
-
-/** Transforms a Collection of String to a Collection of Long. */
-fun Iterable<String>.longs() = map { it.toLong() }
-
-/** Alias for subList. */
-operator fun <T> Iterable<T>.get(x: Int, y: Int) = this.filterIndexed { i, _ -> i in x until y }
-
-/** Alias for subList. */
-operator fun <T> Iterable<T>.get(r: IntRange) = this.filterIndexed { i, _ -> i in r }
-
-fun <T> List<T>.middle() = this[this.size/2]
-
-/** Take the two first elements and make a Pair of it. */
-fun <T> Iterable<T>.pair() = iterator().let {
-    p(it.next(), it.next())
-}
-
-fun <T> Iterable<T>.keep(predicate: (T) -> Boolean) = filter(predicate)
-fun <T> Iterable<T>.reject(predicate: (T) -> Boolean) = filterNot(predicate)
-
-operator fun <T> List<T>.component6() = this[5]
-operator fun <T> List<T>.component7() = this[6]
-operator fun <T> List<T>.component8() = this[7]
-operator fun <T> List<T>.component9() = this[8]
-operator fun <T> List<T>.component10() = this[9]
-
-fun <T> Collection<T>.join(sep: String, left: String = "", right: String = "") = joinToString(sep, left, right)
 
 // Sequence
 fun <T : Any> cycle(vararg xs: T): Sequence<T> {
@@ -449,10 +202,6 @@ fun <T, U> Pair<T, U>.swap() = p(second, first)
 
 fun Pair<Double, Double>.distance() = ceil(abs(first) + kotlin.math.max(0.0, abs(second) - abs(first) / 2))
 
-// Stack
-fun <T> Stack<T>.popIf(t: T): T? = if (last() == t) pop() else null
-fun <T> Stack<T>.lastIs(t: T): Boolean = last() == t
-
 
 // ArrowKt
 fun arrow.core.Tuple2<Int, Int>.sum(): Int = a + b
@@ -460,9 +209,6 @@ fun arrow.core.Tuple2<Int, Int>.mul(): Int = a * b
 fun arrow.core.Tuple3<Int, Int, Int>.sum(): Int = a + b + c
 fun arrow.core.Tuple3<Int, Int, Int>.mul(): Int = a * b * c
 
-// Vavr
-fun io.vavr.collection.List<Int>.sumValues(): Int = this.reduce(Integer::sum)
-fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyExact)
 
 class Memoize1<in T, out R>(val f: (T) -> R) : (T) -> R {
     private val values = mutableMapOf<T, R>()
@@ -510,171 +256,4 @@ fun Array<Long>.increase(i: Int, amount: Long = 1): Array<Long> {
 }
 
 fun gridPositions(dimensions: Pair<Int, Int>) = gridPositions(dimensions.first, dimensions.second)
-fun gridPositions(height: Int, width: Int) = (0.until(height)).flatMap { y -> (0.until(width)).map { x -> p(x, y) } }
-
-
-/// ----------------- graphs
-
-typealias Graph<T> = MutableMap<T, MutableList<T>>
-
-fun <T> List<Pair<T, T>>.toGraph() = graph(this)
-fun <T> graph(edges: List<Pair<T, T>>): Graph<T> {
-    val graph = mutableMapOf<T, MutableList<T>>()
-    for ((a, b) in edges) {
-        if (a !in graph) graph[a] = mutableListOf()
-        if (b !in graph) graph[b] = mutableListOf()
-        graph[a]!!.add(b)
-        graph[b]!!.add(a)
-    }
-    return graph
-}
-
-/* find the shortest path between two nodes a and b, returns -1 if no connection found */
-fun <T> Graph<T>.shortestPath(a: T, b: T): Int {
-    val visited = mutableSetOf(a)
-    val queue = ArrayDeque<Pair<T, Int>>()
-    queue.addLast(p(a, 0))
-
-    while (queue.size > 0) {
-        val (node, distance) = queue.shift()
-        if (b == node) return distance
-
-        for (neighbor in this[node]!!) {
-            if (neighbor !in visited) {
-                visited.add(neighbor)
-                queue.addLast(p(neighbor, distance + 1))
-            }
-        }
-    }
-
-    return -1
-}
-
-fun <T> Graph<T>.hasPath(source: T, destination: T): Boolean {
-    return AtomicBoolean(false).let { found ->
-        this.breadthFirst(source) { node -> if (node == destination) found.set(true) }
-        found.get()
-    }
-}
-
-fun <T> Graph<T>.depthFirst(root: T, visitor: (T) -> Unit) {
-    val stack = Stack<T>()
-    stack.push(root)
-
-    val visited = mutableSetOf<T>()
-
-    while (!stack.isEmpty()) {
-        val current = stack.pop()
-        if (current !in visited) {
-            visited.add(current)
-            visitor(current)
-
-            for (neighbor in this[current]!!) {
-                if (neighbor !in visited) {
-                    stack.push(neighbor)
-                }
-            }
-        }
-    }
-}
-
-fun <T> Graph<T>.breadthFirst(source: T, visitor: (T) -> Unit) {
-    val queue = ArrayDeque<T>()
-    queue.add(source)
-
-    val visited = mutableSetOf<T>()
-
-    while (!queue.isEmpty()) {
-        val current = queue.shift()
-
-        if (current !in visited) {
-            visited.add(current)
-            visitor(current)
-
-            for (neighbor in this[current]!!) {
-                if (neighbor !in visited) {
-                    queue.add(neighbor)
-                }
-            }
-        }
-    }
-}
-
-fun <T> Graph<T>.connectedComponentsCount(): Int {
-    fun explore(graph: Graph<T>, current: T, visited: MutableSet<T>): Boolean {
-        if (current in visited) return false
-        visited.add(current)
-
-        for (neighbor in graph[current]!!) {
-            explore(graph, neighbor, visited)
-        }
-
-        return true
-    }
-
-    val visited = mutableSetOf<T>()
-    var count = 0
-    for (node in this.keys) {
-        if(explore(this, node, visited))
-            count += 1
-    }
-
-    return count
-}
-
-fun <T> Graph<T>.largestComponent(): Int {
-   return sizedComponent(0) { a, b -> kotlin.math.max(a, b) }
-}
-
-fun <T> Graph<T>.smallestComponent(): Int {
-    return sizedComponent(Int.MAX_VALUE) { a, b -> kotlin.math.min(a, b) }
-}
-
-private fun <T> Graph<T>.sizedComponent(default: Int, choser: (Int, Int) -> Int): Int {
-    fun explore(graph: Graph<T>, current: T, visited: MutableSet<T>): Int {
-        if (current in visited) return 0
-        visited.add(current)
-        var size = 1
-        for (neighbor in graph[current]!!) {
-            size += explore(graph, neighbor, visited)
-        }
-
-        return size
-    }
-
-    val visited = mutableSetOf<T>()
-    var sizeval = default
-    for (node in this.keys) {
-        val size = explore(this, node, visited)
-        sizeval = choser(size, sizeval)
-//        if (size > longest) longest = size
-    }
-
-    return sizeval
-}
-
-
-fun <T> Grid<T>.islandCount(symbol: T, dimensions: Pair<Int, Int>): Int {
-    fun explore(grid: Grid<T>, pos: Position, visited: MutableSet<Position>): Boolean{
-        println("-> $pos, ${grid.getValue(pos)}, $visited")
-        if (!pos.within(0, 0, dimensions.first, dimensions.second)) return false
-        if (grid.getValue(pos) != symbol) return false
-        if (pos in visited) return false
-        visited.add(pos)
-        explore(grid, pos.above(), visited)
-        explore(grid, pos.below(), visited)
-        explore(grid, pos.left(), visited)
-        explore(grid, pos.right(), visited)
-        return true
-    }
-
-    val visited = mutableSetOf<Position>()
-    var count = 0
-    gridPositions(dimensions).forEach {
-        println("at $it")
-        if (explore(this, it, visited))
-            count++
-    }
-    return count
-}
-
+fun gridPositions(height: Int, width: Int) = (0.until(height)).flatMap { y -> (0.until(width)).map { x -> p(y, x) } }

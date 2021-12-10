@@ -20,15 +20,21 @@ class GraphsTests {
 
     @Test
     fun `should return shortest path`() {
+        val graph = listOf(
+            p('w', 'x'),
+            p('x', 'y'),
+            p('z', 'y'),
+            p('z', 'v'),
+            p('w', 'v'),
+        ).toGraph()
+
         assertEquals(
             2,
-            listOf(
-                p('w', 'x'),
-                p('x', 'y'),
-                p('z', 'y'),
-                p('z', 'v'),
-                p('w', 'v'),
-            ).toGraph().shortestPath('w', 'z')
+            graph.shortestPath('w', 'z').first
+        )
+        assertEquals(
+            listOf('w', 'v', 'z'),
+            graph.shortestPath('w', 'z').second
         )
     }
 
@@ -204,16 +210,66 @@ class GraphsTests {
         )
     }
 
-    //@Test
-    //fun `should islandCount`() {
-    //    assertEquals(
-    //        3,
-    //        """WLWWW
-    //           WLWWW
-    //           WWWLW
-    //           LWWLL
-    //           LLWWW""".trimMargin().lines().stringGrid("W").islandCount("L", p(5, 5))
-    //    )
-    //}
+    @Test
+    fun `should islandCount`() {
+        assertEquals(
+            3,
+            "/graphs/map5.txt".load().lines().stringGrid("W").islandCount("L", p(5, 5))
+        )
 
+        assertEquals(
+            13,
+            "/graphs/map50x15.txt".load().lines().stringGrid(".").islandCount("#", p(15, 50))
+        )
+    }
+
+    @Test
+    fun `should minimumIsland`() {
+        assertEquals(
+            3,
+            "/graphs/map6.txt".load().lines().stringGrid(".").minimumIsland("#", p(6, 6))
+        )
+
+        assertEquals(
+            3,
+            "/graphs/map50x15.txt".load().lines().stringGrid(".").minimumIsland("#", p(15, 50))
+        )
+    }
+
+    @Test
+    fun `should maximumIsland`() {
+        assertEquals(
+            8,
+            "/graphs/map6.txt".load().lines().stringGrid(".").maximumIsland("#", p(6, 6))
+        )
+
+        assertEquals(
+            16,
+            "/graphs/map50x15.txt".load().lines().stringGrid(".").maximumIsland("#", p(15, 50))
+        )
+    }
+
+    @Test
+    fun `should Maze`() {
+        assertTrue(
+            "/graphs/maze.txt".load().lines().stringGrid(".").hasPath(Position(0, 0), Position(12, 48)) { it == "." })
+        assertFalse(
+            "/graphs/maze.txt".load().lines().stringGrid(".").hasPath(Position(0, 0), Position(0, 10)) { it == "." })
+
+        var path = "/graphs/maze.txt".load().lines().stringGrid(".")
+            .shortestPath(Position(0, 0), Position(12, 48)) { it == "." }
+        assertEquals(66, path.first)
+        assertEquals(path.first + 1, path.second.size)
+        assertEquals(
+            "(0, 0);(0, 1);(0, 2);(1, 2);(1, 3);(1, 4);(1, 5);(2, 5);(3, 5);(4, 5);(4, 6);(4, 7);(4, 8);(4, 9);(5, 9);(5, 10);(5, 11);(6, 11);(7, 11);(8, 11);(9, 11);(9, 12);(9, 13);(10, 13);(10, 14);(10, 15);(10, 16);(10, 17);(10, 18);(10, 19);(10, 20);(10, 21);(9, 21);(9, 22);(9, 23);(9, 24);(9, 25);(9, 26);(9, 27);(9, 28);(9, 29);(9, 30);(9, 31);(9, 32);(10, 32);(10, 33);(11, 33);(11, 34);(11, 35);(12, 35);(12, 36);(12, 37);(13, 37);(14, 37);(14, 38);(14, 39);(14, 40);(14, 41);(14, 42);(14, 43);(14, 44);(14, 45);(13, 45);(12, 45);(12, 46);(12, 47);(12, 48)",
+            path.second.map { it.toString() }.join(";")
+        )
+
+        path = "/graphs/maze.txt".load().lines().stringGrid(".")
+            .shortestPath(Position(0, 0), Position(0, 10)) { it == "." }
+        assertEquals(-1, path.first)
+        assertEquals(emptyList<Position>(), path.second)
+    }
 }
+
+fun String.load() = Day::class.java.getResource(this).readText()

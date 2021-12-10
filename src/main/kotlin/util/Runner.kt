@@ -198,7 +198,7 @@ object Runner {
                 true -> Pair(args[0].before("/").toInt(), args[0].after("/"))
                 false -> Pair(defaultYear, args[0])
             }
-            println("\uD83C\uDF85 === Advent of Code $year === \uD83C\uDF85\n")
+            println("🎅 $YELLOW=== Advent of Code $year ===$RESET 🎅\n")
 
             reflections = Reflections("me.grison.aoc.y$year")
 
@@ -211,7 +211,7 @@ object Runner {
                         printDay(it)
                         total += System.nanoTime() - start
                     }
-                    println("\nTotal time: ${total / 1000000}ms")
+                    println("\nTotal time: ${CYAN}${total / 1000000}ms$RESET")
                 } else {
                     printError("Couldn't find day classes - make sure you're in the right directory and try building again")
                 }
@@ -244,7 +244,7 @@ object Runner {
 
     private fun printDay(dayClass: Class<out Day>) {
         val day = dayClass.constructors[0].newInstance() as Day
-        println("\n\uD83C\uDF84 --- Day ${if (allYears) day.year.toString() + "/" else ""}${day.dayNumber}: ${day.title()} ---")
+        println("\n🎄 $WHITE---$YELLOW Day ${if (allYears) day.year.toString() + "/" else ""}${day.dayNumber}: ${day.title()} $WHITE---$RESET")
 
         try {
             val partOne = measureTimedValue { day.partOne() ?: "empty" }
@@ -260,8 +260,8 @@ object Runner {
             partOne.value.toString().length,
             partTwo.value.toString().length
         ) + 14        // 14 is 8 (length of 'Part 1: ') + 6 more
-        println(" \uD83C\uDF1F Part 1: ${partOne.value}".padEnd(padding, ' ') + "(${partOne.duration})")
-        println(" \uD83C\uDF1F Part 2: ${partTwo.value}".padEnd(padding, ' ') + "(${partTwo.duration})")
+        println(" 🌟 Part 1: ${partOne.value}".padEnd(padding, ' ') + "($CYAN${partOne.duration}$RESET)")
+        println(" 🌟 Part 2: ${partTwo.value}".padEnd(padding, ' ') + "($CYAN${partTwo.duration}$RESET)")
     }
 
     private fun printError(message: String) {
@@ -270,6 +270,16 @@ object Runner {
 
     private fun dayNumber(dayClassName: String) = dayClassName.replace("Day", "").toInt()
 }
+
+const val RESET = "\u001B[0m"
+const val BLACK = "\u001B[30m"
+const val RED = "\u001B[31m"
+const val GREEN = "\u001B[32m"
+const val YELLOW = "\u001B[33m"
+const val BLUE = "\u001B[34m"
+const val PURPLE = "\u001B[35m"
+const val CYAN = "\u001B[36m"
+const val WHITE = "\u001B[37m"
 
 
 class SpecializedScreenRecorder(

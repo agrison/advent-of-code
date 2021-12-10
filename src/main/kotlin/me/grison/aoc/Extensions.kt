@@ -12,6 +12,7 @@ import space.kscience.kmath.complex.Complex
 import java.lang.Integer.max
 import java.lang.Integer.min
 import java.util.*
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.stream.Collectors
 import java.util.stream.IntStream
 import kotlin.collections.ArrayDeque
@@ -139,7 +140,9 @@ fun String.lower() = toLowerCase()
  {(0,0)=2, (0,1)=1, (0,2)=9
   (1,0)=3, (1,1)=9, (1,2)=8}
  */
-fun List<String>.intGrid(default: Int): Map<Position, Int> {
+
+typealias Grid<T> = Map<Position, T>
+fun List<String>.intGrid(default: Int): Grid<Int> {
     val grid = mutableMapOf<Position, Int>().withDefault { default }
     var height = 0
     forEach { line ->
@@ -151,7 +154,21 @@ fun List<String>.intGrid(default: Int): Map<Position, Int> {
     }
     return grid
 }
-fun <T> MutableList<T>.append(t: T) : MutableList<T> {
+
+fun List<String>.stringGrid(default: String): Grid<String> {
+    val grid = mutableMapOf<Position, String>().withDefault { default }
+    var height = 0
+    forEach { line ->
+        var width = 0
+        line.normalSplit("").forEach { n ->
+            grid[p(width++, height)] = n
+        }
+        height++
+    }
+    return grid
+}
+
+fun <T> MutableList<T>.append(t: T): MutableList<T> {
     this.add(t)
     return this
 }
@@ -325,6 +342,8 @@ operator fun <T> Iterable<T>.get(x: Int, y: Int) = this.filterIndexed { i, _ -> 
 /** Alias for subList. */
 operator fun <T> Iterable<T>.get(r: IntRange) = this.filterIndexed { i, _ -> i in r }
 
+fun <T> List<T>.middle() = this[this.size/2]
+
 /** Take the two first elements and make a Pair of it. */
 fun <T> Iterable<T>.pair() = iterator().let {
     p(it.next(), it.next())
@@ -490,5 +509,172 @@ fun Array<Long>.increase(i: Int, amount: Long = 1): Array<Long> {
     return this
 }
 
-fun gridPositions(dimensions: Pair<Int, Int>) = me.grison.aoc.gridPositions(dimensions.first, dimensions.second)
-fun gridPositions(height: Int, width: Int) = (0..height).flatMap { y -> (0..width).map { x -> p(x, y) } }
+fun gridPositions(dimensions: Pair<Int, Int>) = gridPositions(dimensions.first, dimensions.second)
+fun gridPositions(height: Int, width: Int) = (0.until(height)).flatMap { y -> (0.until(width)).map { x -> p(x, y) } }
+
+
+/// ----------------- graphs
+
+typealias Graph<T> = MutableMap<T, MutableList<T>>
+
+fun <T> List<Pair<T, T>>.toGraph() = graph(this)
+fun <T> graph(edges: List<Pair<T, T>>): Graph<T> {
+    val graph = mutableMapOf<T, MutableList<T>>()
+    for ((a, b) in edges) {
+        if (a !in graph) graph[a] = mutableListOf()
+        if (b !in graph) graph[b] = mutableListOf()
+        graph[a]!!.add(b)
+        graph[b]!!.add(a)
+    }
+    return graph
+}
+
+/* find the shortest path between two nodes a and b, returns -1 if no connection found */
+fun <T> Graph<T>.shortestPath(a: T, b: T): Int {
+    val visited = mutableSetOf(a)
+    val queue = ArrayDeque<Pair<T, Int>>()
+    queue.addLast(p(a, 0))
+
+    while (queue.size > 0) {
+        val (node, distance) = queue.shift()
+        if (b == node) return distance
+
+        for (neighbor in this[node]!!) {
+            if (neighbor !in visited) {
+                visited.add(neighbor)
+                queue.addLast(p(neighbor, distance + 1))
+            }
+        }
+    }
+
+    return -1
+}
+
+fun <T> Graph<T>.hasPath(source: T, destination: T): Boolean {
+    return AtomicBoolean(false).let { found ->
+        this.breadthFirst(source) { node -> if (node == destination) found.set(true) }
+        found.get()
+    }
+}
+
+fun <T> Graph<T>.depthFirst(root: T, visitor: (T) -> Unit) {
+    val stack = Stack<T>()
+    stack.push(root)
+
+    val visited = mutableSetOf<T>()
+
+    while (!stack.isEmpty()) {
+        val current = stack.pop()
+        if (current !in visited) {
+            visited.add(current)
+            visitor(current)
+
+            for (neighbor in this[current]!!) {
+                if (neighbor !in visited) {
+                    stack.push(neighbor)
+                }
+            }
+        }
+    }
+}
+
+fun <T> Graph<T>.breadthFirst(source: T, visitor: (T) -> Unit) {
+    val queue = ArrayDeque<T>()
+    queue.add(source)
+
+    val visited = mutableSetOf<T>()
+
+    while (!queue.isEmpty()) {
+        val current = queue.shift()
+
+        if (current !in visited) {
+            visited.add(current)
+            visitor(current)
+
+            for (neighbor in this[current]!!) {
+                if (neighbor !in visited) {
+                    queue.add(neighbor)
+                }
+            }
+        }
+    }
+}
+
+fun <T> Graph<T>.connectedComponentsCount(): Int {
+    fun explore(graph: Graph<T>, current: T, visited: MutableSet<T>): Boolean {
+        if (current in visited) return false
+        visited.add(current)
+
+        for (neighbor in graph[current]!!) {
+            explore(graph, neighbor, visited)
+        }
+
+        return true
+    }
+
+    val visited = mutableSetOf<T>()
+    var count = 0
+    for (node in this.keys) {
+        if(explore(this, node, visited))
+            count += 1
+    }
+
+    return count
+}
+
+fun <T> Graph<T>.largestComponent(): Int {
+   return sizedComponent(0) { a, b -> kotlin.math.max(a, b) }
+}
+
+fun <T> Graph<T>.smallestComponent(): Int {
+    return sizedComponent(Int.MAX_VALUE) { a, b -> kotlin.math.min(a, b) }
+}
+
+private fun <T> Graph<T>.sizedComponent(default: Int, choser: (Int, Int) -> Int): Int {
+    fun explore(graph: Graph<T>, current: T, visited: MutableSet<T>): Int {
+        if (current in visited) return 0
+        visited.add(current)
+        var size = 1
+        for (neighbor in graph[current]!!) {
+            size += explore(graph, neighbor, visited)
+        }
+
+        return size
+    }
+
+    val visited = mutableSetOf<T>()
+    var sizeval = default
+    for (node in this.keys) {
+        val size = explore(this, node, visited)
+        sizeval = choser(size, sizeval)
+//        if (size > longest) longest = size
+    }
+
+    return sizeval
+}
+
+
+fun <T> Grid<T>.islandCount(symbol: T, dimensions: Pair<Int, Int>): Int {
+    fun explore(grid: Grid<T>, pos: Position, visited: MutableSet<Position>): Boolean{
+        println("-> $pos, ${grid.getValue(pos)}, $visited")
+        if (!pos.within(0, 0, dimensions.first, dimensions.second)) return false
+        if (grid.getValue(pos) != symbol) return false
+        if (pos in visited) return false
+        visited.add(pos)
+        explore(grid, pos.above(), visited)
+        explore(grid, pos.below(), visited)
+        explore(grid, pos.left(), visited)
+        explore(grid, pos.right(), visited)
+        return true
+    }
+
+    val visited = mutableSetOf<Position>()
+    var count = 0
+    gridPositions(dimensions).forEach {
+        println("at $it")
+        if (explore(this, it, visited))
+            count++
+    }
+    return count
+}
+

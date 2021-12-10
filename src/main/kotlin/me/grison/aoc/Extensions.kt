@@ -239,6 +239,7 @@ typealias LongHashBag<T> = MutableMap<T, Int>
 fun <T> longHashBag() = mutableMapOf<T, Long>().withDefault { 0L }
 
 typealias Position = Pair<Int, Int>
+fun Position.manhattan(other: Position) = abs(first - other.first) + abs(second - other.second)
 
 fun <T> makeList(size: Int, t: T): MutableList<T> {
     val list = mutableListOf<T>()

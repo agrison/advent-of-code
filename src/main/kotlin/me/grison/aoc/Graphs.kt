@@ -1,5 +1,7 @@
 package me.grison.aoc
 
+import java.lang.Math.pow
+import java.lang.Math.sqrt
 import java.util.*
 import java.util.function.Predicate
 import kotlin.collections.ArrayDeque
@@ -332,7 +334,7 @@ fun <T> Grid<T>.breadthFirst(
     }
 }
 
-fun <T> Grid<T>.bfsIterator(source: Position, traversable: Predicate<T>) : Iterator<Pair<Position, T>> {
+fun <T> Grid<T>.bfsIterator(source: Position, traversable: Predicate<T>): Iterator<Pair<Position, T>> {
     val queue = ArrayDeque<Position>()
     queue.add(source)
     val visited = mutableSetOf<Position>()
@@ -357,7 +359,8 @@ fun <T> Grid<T>.bfsIterator(source: Position, traversable: Predicate<T>) : Itera
 
             current.directions().forEach { neighbor ->
                 if (neighbor.within(0, 0, yMax, xMax) && neighbor !in visited
-                    && traversable.test(graph[neighbor]!!)) {
+                    && traversable.test(graph[neighbor]!!)
+                ) {
                     queue.add(neighbor)
                 }
             }
@@ -383,4 +386,60 @@ fun <T> Grid<T>.print(visited: Set<Position>) {
     }
     println()
 
+}
+
+data class Path(
+    val position: Position, val distance: Int, val path: List<Position>,
+    val destination: Position, val type: DistanceType = DistanceType.MANHATTAN
+) : Comparable<Path> {
+    override fun compareTo(other: Path): Int {
+        return (distance + type.distance(position, destination))
+            .compareTo(other.distance + type.distance(other.position, destination))
+    }
+}
+
+enum class DistanceType {
+    MANHATTAN {
+        override fun distance(a: Position, b: Position): Double {
+            return a.manhattan(b).toDouble()
+        }
+    },
+    EUCLIDIAN {
+        override fun distance(a: Position, b: Position): Double {
+            return sqrt(pow((a.first - b.first).toDouble(), 2.0) + pow((a.second - b.second).toDouble(), 2.0))
+        }
+    };
+
+    abstract fun distance(a: Position, b: Position): Double
+}
+
+fun <T> Grid<T>.aStar(
+    a: Position,
+    b: Position,
+    type: DistanceType = DistanceType.MANHATTAN,
+    traversable: Predicate<T>
+): Pair<Int, List<Position>> {
+    val visited = mutableSetOf(a)
+    val queue = PriorityQueue<Path>()
+    queue.add(Path(a, 0, listOf(a), b))
+    val yMax = keys.maxByOrNull { it.first }!!.first
+    val xMax = keys.maxByOrNull { it.second }!!.second
+
+    while (queue.size > 0) {
+        this.print(visited)
+        val (node, distance, path, _) = queue.poll()
+        if (b == node) return p(distance, path)
+
+        node.directions().forEach { neighbor ->
+            if (neighbor.within(0, 0, yMax, xMax) && neighbor !in visited
+                && traversable.test(this[neighbor]!!)
+            ) {
+                visited.add(neighbor)
+                val newPath = path.toMutableList() + neighbor
+                queue.add(Path(neighbor, distance + 1, newPath, b))
+            }
+        }
+    }
+
+    return p(-1, listOf())
 }

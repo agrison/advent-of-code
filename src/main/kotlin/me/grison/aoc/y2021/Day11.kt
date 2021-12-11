@@ -36,7 +36,7 @@ class Day11 : Day(11, 2021) {
         grid[pos] = -1
         pos.neighbors().forEach {
             if (it in grid.keys && grid[it]!! != -1) {
-                grid[it] = grid[it]!! + 1
+                grid.increase(it)
                 if (grid[it]!! >= 10)
                     flash(grid, it)
             }

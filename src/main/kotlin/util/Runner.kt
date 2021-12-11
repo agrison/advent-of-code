@@ -3,6 +3,9 @@
 package util
 
 
+import com.github.freva.asciitable.AsciiTable
+import com.github.freva.asciitable.Column
+import com.github.freva.asciitable.HorizontalAlign
 import me.grison.aoc.*
 import org.apache.commons.io.IOUtils
 import org.monte.media.Format
@@ -44,7 +47,9 @@ object Runner {
     private val defaultYear = 2021
     private var reflections = Reflections("me.grison.aoc")
     private var allYears = false
+    private val times = mutableListOf<TimedExec>()
 
+    // YEAH, this function is large and ugly. I don't care
     @JvmStatic
     fun main(args: Array<String>) {
         if (args.isNotEmpty() && "input-" in args[0]) {
@@ -211,7 +216,39 @@ object Runner {
                         printDay(it)
                         total += System.nanoTime() - start
                     }
-                    println("\nTotal time: ${CYAN}${total / 1000000}ms$RESET")
+
+                    fun color(a: kotlin.time.Duration, max: kotlin.time.Duration): String {
+                        val ratio = a.toLongMilliseconds() * 100 / max.toLongMilliseconds()
+                        when {
+                            ratio > 100 -> return "$WHITE$a$RESET"
+                            ratio > 80 -> return "${RED}$a${RESET}"
+                            ratio > 60 -> return "${PURPLE}$a${RESET}"
+                            ratio >= 15 -> return "${CYAN}$a${RESET}"
+                            ratio < 15 -> return "${GREEN}$a${RESET}"
+                            else -> return "$WHITE$a$RESET"
+                        }
+                    }
+
+                    // print global statistics
+                    val max = times.maxByOrNull { it.time }
+                    val sum = times.fold(kotlin.time.Duration.ZERO) { acc, it -> acc + it.time }
+                    val table = AsciiTable.getTable(
+                        AsciiTable.BASIC_ASCII_NO_DATA_SEPARATORS_NO_OUTSIDE_BORDER,
+                        times/* + TimedExec("", -1, -1, "Total time", sum)*/, listOf(
+                            Column().header("Year").with { year.toString() },
+                            Column().header("Day").with { it.day.toString() },
+                            Column().header("Title").dataAlign(HorizontalAlign.LEFT).with { it.title },
+                            Column().header("Part").with { it.part.toString() },
+                            Column().header("Result").footer("Total time").footerAlign(HorizontalAlign.RIGHT).with { it.result.toString() },
+                            Column().header("Duration")
+                                .footer(sum.toString())
+                                .headerAlign(HorizontalAlign.LEFT)
+                                .dataAlign(HorizontalAlign.CENTER).with { color(it.time, max!!.time) },
+                        )
+                    )
+                    println("\n\n$table")
+
+                    println("\nTotal time: ${CYAN}${sum}$RESET")
                 } else {
                     printError("Couldn't find day classes - make sure you're in the right directory and try building again")
                 }
@@ -250,6 +287,8 @@ object Runner {
             val partOne = measureTimedValue { day.partOne() ?: "empty" }
             val partTwo = measureTimedValue { day.partTwo() ?: "empty" }
             printParts(partOne, partTwo)
+            times.add(TimedExec(day.title(), day.dayNumber, 1, partOne.value, partOne.duration))
+            times.add(TimedExec(day.title(), day.dayNumber, 2, partTwo.value, partTwo.duration))
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -270,6 +309,14 @@ object Runner {
 
     private fun dayNumber(dayClassName: String) = dayClassName.replace("Day", "").toInt()
 }
+
+data class TimedExec @OptIn(ExperimentalTime::class) constructor(
+    val title: String,
+    val day: Int,
+    val part: Int,
+    val result: Any,
+    val time: kotlin.time.Duration
+)
 
 const val RESET = "\u001B[0m"
 const val BLACK = "\u001B[30m"

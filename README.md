@@ -42,6 +42,14 @@
 🎄 ---- Day 9: Smoke Basin ---
   🌟 Part 1: 537      (9.4ms)
   🌟 Part 2: 1142757  (9.9ms)
+  
+🎄 ---- Day 10: Syntax Scoring ---
+  🌟 Part 1: 367227      (3.85ms)
+  🌟 Part 2: 3583341858  (2.00ms)
+
+🎄 ---- Day 11: Dumbo Octopus ---
+  🌟 Part 1: 1661  (14.9ms)
+  🌟 Part 2: 334   (13.2ms)
 ```
 
 ## Visualizations

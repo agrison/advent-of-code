@@ -11,10 +11,6 @@ package me.grison.aoc
 import space.kscience.kmath.complex.Complex
 import java.lang.Integer.max
 import java.lang.Integer.min
-import java.util.*
-import java.util.stream.Collectors
-import java.util.stream.IntStream
-import kotlin.collections.ArrayDeque
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.ceil
@@ -31,14 +27,14 @@ import kotlin.math.ceil
   (1,0)=3, (1,1)=9, (1,2)=8}
  */
 
-typealias Grid<T> = Map<Position, T>
+typealias Grid<T> = MutableMap<Position, T>
 fun List<String>.intGrid(default: Int): Grid<Int> {
     val grid = mutableMapOf<Position, Int>().withDefault { default }
     var height = 0
     forEach { line ->
         var width = 0
         line.normalSplit("").ints().forEach { n ->
-            grid[p(width++, height)] = n
+            grid[p(height, width++)] = n
         }
         height++
     }
@@ -162,6 +158,11 @@ fun Pair<Int, Int>.forward(i: Int, aim: Int) = this.plus(p(i, aim))
 fun Pair<Int, Int>.backward(i: Int) = this.plus(p(-i, 0))
 fun Pair<Int, Int>.within(minx: Int, miny: Int, maxx: Int, maxy: Int) = first in minx..maxx && second in miny..maxy
 fun Pair<Int, Int>.directions() = listOf(above(), below(), left(), right())
+fun Pair<Int, Int>.neighbors() = listOf(
+    plus(-1, -1), plus(-1, 0), plus(-1, 1),
+    plus(0, -1), /*  self  */ plus(0, 1),
+    plus(1, -1), plus(1, 0), plus(1, 1)
+)
 
 // return an increasing range
 fun Pair<Int, Int>.range() = min(first, second)..max(first, second)

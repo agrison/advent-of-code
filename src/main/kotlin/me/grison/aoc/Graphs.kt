@@ -370,7 +370,7 @@ fun <T> Grid<T>.bfsIterator(source: Position, traversable: Predicate<T>): Iterat
     }
 }
 
-fun <T> Grid<T>.print(visited: Set<Position>) {
+fun <T> Grid<T>.print(visited: Set<Position> = setOf()) {
     val yMax = keys.maxByOrNull { it.first }!!.first
     val xMax = keys.maxByOrNull { it.second }!!.second
 
@@ -385,7 +385,24 @@ fun <T> Grid<T>.print(visited: Set<Position>) {
         println()
     }
     println()
+}
 
+fun <T> Grid<T>.string(visited: Set<Position> = setOf()): String {
+    val yMax = keys.maxByOrNull { it.first }!!.first
+    val xMax = keys.maxByOrNull { it.second }!!.second
+
+    val buffer = StringBuffer()
+    for (i in 0..yMax) {
+        for (j in 0..xMax) {
+            if (p(i, j) in visited) {
+                buffer.append("\u001B[35mx\u001B[0m")
+            } else {
+                buffer.append(this[p(i, j)])
+            }
+        }
+        buffer.append("\n")
+    }
+    return buffer.toString()
 }
 
 data class Path(
@@ -443,3 +460,17 @@ fun <T> Grid<T>.aStar(
 
     return p(-1, listOf())
 }
+
+fun <T> Grid<T>.dimensions() =
+    keys.maxByOrNull { it.first }!!.first.let { yMax ->
+    keys.maxByOrNull { it.second }!!.second.let { xMax ->
+        p(yMax, xMax)
+    }
+}
+
+fun <T> Grid<T>.allPositions(dimensions: Pair<Int, Int> = dimensions()) =
+    keys.maxByOrNull { it.first }!!.first.let { yMax ->
+        keys.maxByOrNull { it.second }!!.second.let { xMax ->
+            gridPositions(yMax + 1, xMax + 1)
+        }
+    }

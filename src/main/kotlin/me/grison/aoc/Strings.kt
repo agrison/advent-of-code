@@ -109,3 +109,6 @@ fun String.set() = stringList().toSet()
 fun String.`is`(s: String) = this == s
 fun String.upper() = toUpperCase()
 fun String.lower() = toLowerCase()
+
+fun String.isLower() = all { it.isLowerCase() }
+fun String.isUpper() = all { it.isUpperCase() }

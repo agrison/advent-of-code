@@ -50,6 +50,10 @@
 🎄 ---- Day 11: Dumbo Octopus ---
   🌟 Part 1: 1661  (14.9ms)
   🌟 Part 2: 334   (13.2ms)
+  
+🎄 ---- Day 12: Passage Pathing ---
+  🌟 Part 1: 4749    (13.4ms)
+  🌟 Part 2: 123054  (95.3ms)
 ```
 
 ## Visualizations

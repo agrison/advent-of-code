@@ -9,6 +9,8 @@
 package me.grison.aoc
 
 import space.kscience.kmath.complex.Complex
+import util.RESET
+import util.YELLOW
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.math.abs
@@ -174,6 +176,9 @@ fun Pair<Int, Int>.slope() = when {
     else -> 1
 }
 
+fun Pair<Int, Int>.pivotSecond(loc: Int) = if (second < loc) this else p(first, loc - (second - loc))
+fun Pair<Int, Int>.pivotFirst(loc: Int) = if (first < loc) this else p(loc - (first - loc), second)
+
 // works with MutableMap.withDefault()
 fun <T> MutableMap<T, Int>.increase(key: T, amount: Int = 1): MutableMap<T, Int> {
     this[key] = this.getOrDefault(key, 0) + amount
@@ -259,3 +264,20 @@ fun Array<Long>.increase(i: Int, amount: Long = 1): Array<Long> {
 
 fun gridPositions(dimensions: Pair<Int, Int>) = gridPositions(dimensions.first, dimensions.second)
 fun gridPositions(height: Int, width: Int) = (0.until(height)).flatMap { y -> (0.until(width)).map { x -> p(y, x) } }
+
+
+fun Iterable<Position>.pointsDisplay() : String {
+    val maxX = this.maxOf { it.first }
+    val maxY = this.maxOf { it.second }
+    val display = mutableListOf<MutableList<String>>()
+    for (y in 0..maxY) {
+        display.add(mutableListOf ())
+        for (x in 0..maxX) {
+            display[y].append(".")
+        }
+    }
+    for ((x, y) in this) {
+        display[y][x] = "$YELLOW#$RESET"
+    }
+    return display.joinToString("\n") { it.joinToString("").trim() }.trim()
+}

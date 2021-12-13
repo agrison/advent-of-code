@@ -112,3 +112,5 @@ fun String.lower() = toLowerCase()
 
 fun String.isLower() = all { it.isLowerCase() }
 fun String.isUpper() = all { it.isUpperCase() }
+
+fun String.command() = normalSplit(" ").last().split("=").pair()

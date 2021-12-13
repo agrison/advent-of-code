@@ -113,4 +113,5 @@ fun String.lower() = toLowerCase()
 fun String.isLower() = all { it.isLowerCase() }
 fun String.isUpper() = all { it.isUpperCase() }
 
+fun String.intCommand() = command().let { p(it.first, it.second.int()) }
 fun String.command() = normalSplit(" ").last().split("=").pair()

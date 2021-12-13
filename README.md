@@ -54,6 +54,10 @@
 🎄 ---- Day 12: Passage Pathing ---
   🌟 Part 1: 4749    (13.4ms)
   🌟 Part 2: 123054  (95.3ms)
+  
+🎄 ---- Day 13: Transparent Origami ---
+  🌟 Part 1: 602       (3.88ms)
+  🌟 Part 2: CAFJHZCK  (6.80us)
 ```
 
 ## Visualizations

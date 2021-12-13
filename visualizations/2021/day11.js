@@ -1004,7 +1004,7 @@ let STEPS = [
 
 function setup() {
     frameRate(60);
-    createCanvas(800, 850);
+    createCanvas(400, 425);
 }
 
 let N = 0;
@@ -1044,25 +1044,25 @@ function draw() {
     background("#10101a");
     const matrix = STEPS[N];
     if (DONE) {
-            image(cavern, 0, 0, 800, 800);
+            image(cavern, 0, 0, 400, 400);
             stroke('rgb(21, 34, 56)');
             fill('rgb(21, 34, 56)');
             for (let i = 0; i < 10; ++i) {
                 for (let j = 0; j < 10; ++j) {
-                    image(img[0], i * 80, j * 80, 80, 80);
+                    image(img[0], i * 40, j * 40, 40, 40);
                 }
             }
 
             stroke('rgb(21, 34, 56)');
             fill('rgb(21, 34, 56)')
-            rect(0, 800, 800, 900);
+            rect(0, 400, 400, 400);
 
             stroke('rgb(148,179,227)');
             fill('rgb(148,179,227)')
-            textSize(45);
+            textSize(30);
             textFont('Consolas')
             strokeWeight(0.5)
-            text("334", 350, 840);
+            text("334", 350/2, 840/2);
         return
     }
 
@@ -1079,10 +1079,10 @@ function draw() {
             // stroke(depthColor(9 - matrix[i][j]));
             // fill(depthColor(9 - matrix[i][j]))
             // rect(i * 80, j * 80, 80, 80);
-            image(img[matrix[i][j]], i * 80, j * 80, 80, 80);
+            image(img[matrix[i][j]], i * 40, j * 40, 40, 40);
             stroke(depthColor(9 - matrix[i][j]));
             fill(depthColor(9 - matrix[i][j]))
-            text(matrix[i][j], i * 80 + 60, j * 80 + 20)
+            text(matrix[i][j], i * 40 + 30, j * 40 + 10)
         }
     }
 
@@ -1095,8 +1095,8 @@ function draw() {
     textSize(20);
     textFont('Consolas');
     strokeWeight(0.5)
-    text("Steps: " + N, 670, 830)
-    text("Flash: " + at0 + "/100", 20, 830)
+    text("Steps: " + N, 670/2-50, 830/2)
+    text("Flash: " + at0 + "/100", 20/2, 830/2)
     if (at0 < 100) {
         if (N < STEPS.length)
             K++;

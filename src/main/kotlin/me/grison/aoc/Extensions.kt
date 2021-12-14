@@ -9,8 +9,8 @@
 package me.grison.aoc
 
 import space.kscience.kmath.complex.Complex
+import util.CYAN
 import util.RESET
-import util.YELLOW
 import java.lang.Integer.max
 import java.lang.Integer.min
 import kotlin.math.abs
@@ -30,6 +30,7 @@ import kotlin.math.ceil
  */
 
 typealias Grid<T> = MutableMap<Position, T>
+
 fun List<String>.intGrid(default: Int): Grid<Int> {
     val grid = mutableMapOf<Position, Int>().withDefault { default }
     var height = 0
@@ -179,6 +180,9 @@ fun Pair<Int, Int>.slope() = when {
 fun Pair<Int, Int>.pivotSecond(loc: Int) = if (second < loc) this else p(first, loc - (second - loc))
 fun Pair<Int, Int>.pivotFirst(loc: Int) = if (first < loc) this else p(loc - (first - loc), second)
 
+fun Pair<Long, Long>.pivotSecond(loc: Long) = if (second < loc) this else Pair(first, loc - (second - loc))
+fun Pair<Long, Long>.pivotFirst(loc: Long) = if (first < loc) this else Pair(loc - (first - loc), second)
+
 // works with MutableMap.withDefault()
 fun <T> MutableMap<T, Int>.increase(key: T, amount: Int = 1): MutableMap<T, Int> {
     this[key] = this.getOrDefault(key, 0) + amount
@@ -245,6 +249,7 @@ typealias LongHashBag<T> = MutableMap<T, Int>
 fun <T> longHashBag() = mutableMapOf<T, Long>().withDefault { 0L }
 
 typealias Position = Pair<Int, Int>
+
 fun Position.manhattan(other: Position) = abs(first - other.first) + abs(second - other.second)
 
 fun <T> makeList(size: Int, t: T): MutableList<T> {
@@ -266,18 +271,27 @@ fun gridPositions(dimensions: Pair<Int, Int>) = gridPositions(dimensions.first, 
 fun gridPositions(height: Int, width: Int) = (0.until(height)).flatMap { y -> (0.until(width)).map { x -> p(y, x) } }
 
 
-fun Iterable<Position>.pointsDisplay() : String {
-    val maxX = this.maxOf { it.first }
-    val maxY = this.maxOf { it.second }
-    val display = mutableListOf<MutableList<String>>()
+fun Iterable<Pair<Long, Long>>.pointsDisplay(empty: String = " "): String {
+    val (maxX, maxY) = p(maxOf { it.first }, maxOf { it.second })
+    val display = arrayListOf<List<String>>()
     for (y in 0..maxY) {
-        display.add(mutableListOf ())
-        for (x in 0..maxX) {
-            display[y].append(".")
-        }
+        display.add((0..maxX).map { x -> if (p(x, y) in this) "$CYAN#$RESET" else empty })
     }
-    for ((x, y) in this) {
-        display[y][x] = "$YELLOW#$RESET"
-    }
-    return display.joinToString("\n") { it.joinToString("").trim() }.trim()
+    return display.joinToString("\n") { "  " + it.joinToString("") }
+}
+
+fun Collection<Int>.range() = max()!! - min()!!
+fun Collection<Long>.range() = max()!! - min()!!
+
+fun <T> Map<T, Long>.frequency() = longHashBag<T>().let { hash ->
+    this.forEach { (k, v) -> hash.increase(k, v)}
+    hash
+}
+fun <T, U> Map<T, Long>.frequency(selector: (T) -> U) = longHashBag<U>().let { hash ->
+    this.forEach { (k, v) -> hash.increase(selector(k), v)}
+    hash
+}
+fun <T> Collection<T>.frequency() =  longHashBag<T>().let { hash ->
+    this.forEach { c -> hash.increase(c) }
+    hash
 }

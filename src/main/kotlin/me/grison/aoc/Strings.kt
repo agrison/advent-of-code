@@ -114,4 +114,10 @@ fun String.isLower() = all { it.isLowerCase() }
 fun String.isUpper() = all { it.isUpperCase() }
 
 fun String.intCommand() = command().let { p(it.first, it.second.int()) }
+fun String.longCommand() = command().let { p(it.first, it.second.toLong()) }
 fun String.command() = normalSplit(" ").last().split("=").pair()
+
+fun String.frequency() =  hashBag<Char>().let { hash ->
+    this.toCharArray().forEach { c -> hash.increase(c) }
+    hash
+}

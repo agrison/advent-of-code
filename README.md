@@ -58,6 +58,10 @@
 🎄 ---- Day 13: Transparent Origami ---
   🌟 Part 1: 602       (3.88ms)
   🌟 Part 2: CAFJHZCK  (6.80us)
+  
+🎄 ---- Day 14: Extended Polymerization ---
+  🌟 Part 1: 2549           (16.7ms)
+  🌟 Part 2: 2516901104210  (5.54ms)
 ```
 
 ## Visualizations

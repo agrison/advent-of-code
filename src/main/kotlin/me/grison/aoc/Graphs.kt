@@ -21,6 +21,16 @@ fun <T> graph(edges: List<Pair<T, T>>): Graph<T> {
     return graph
 }
 
+fun <T> List<Pair<T, T>>.toDirectedGraph() = directedGraph(this)
+fun <T> directedGraph(edges: List<Pair<T, T>>): Graph<T> {
+    val graph = mutableMapOf<T, MutableList<T>>()
+    for ((a, b) in edges) {
+        if (a !in graph) graph[a] = mutableListOf()
+        graph[a]!!.add(b)
+    }
+    return graph
+}
+
 /* find the shortest path between two nodes a and b, returns -1 if no connection found */
 fun <T> Graph<T>.shortestPath(a: T, b: T): Pair<Int, List<T>> {
     val visited = mutableSetOf(a)

@@ -41,6 +41,8 @@ fun String.charSet() = split("").toSet() - ""
 /** Returns a `List<String>` representing the lines in this string. */
 fun String.lines() = split(System.lineSeparator())
 
+fun String.allLines() = split('\n')
+
 /** Returns a char array. */
 fun String.split() = toCharArray()
 

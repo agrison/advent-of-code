@@ -13,6 +13,7 @@ import util.CYAN
 import util.RESET
 import java.lang.Integer.max
 import java.lang.Integer.min
+import java.math.BigInteger
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.ceil
@@ -194,6 +195,11 @@ fun <T> MutableMap<T, Long>.increase(key: T, amount: Long = 1L): MutableMap<T, L
     return this
 }
 
+fun <T> MutableMap<T, BigInteger>.increase(key: T, amount: BigInteger = BigInteger.ONE): MutableMap<T, BigInteger> {
+    this[key] = this.getOrDefault(key, BigInteger.ZERO).add(amount)
+    return this
+}
+
 /** Returns the sum of the elements in this Pair. */
 fun Pair<Long, Long>.sum() = first + second
 
@@ -248,6 +254,8 @@ typealias LongHashBag<T> = MutableMap<T, Int>
 
 fun <T> longHashBag() = mutableMapOf<T, Long>().withDefault { 0L }
 
+fun <T> bigIntHashBag() = mutableMapOf<T, BigInteger>().withDefault { BigInteger.ZERO }
+
 typealias Position = Pair<Int, Int>
 
 fun Position.manhattan(other: Position) = abs(first - other.first) + abs(second - other.second)
@@ -277,11 +285,12 @@ fun Iterable<Pair<Long, Long>>.pointsDisplay(empty: String = " "): String {
     for (y in 0..maxY) {
         display.add((0..maxX).map { x -> if (p(x, y) in this) "$CYAN#$RESET" else empty })
     }
-    return display.joinToString("\n") { "  " + it.joinToString("") }
+    return display.joinToString("\n") { it.joinToString("") }
 }
 
 fun Collection<Int>.range() = max()!! - min()!!
 fun Collection<Long>.range() = max()!! - min()!!
+fun Collection<BigInteger>.range() = max()!!.minus(min()!!)
 
 fun <T> Map<T, Long>.frequency() = longHashBag<T>().let { hash ->
     this.forEach { (k, v) -> hash.increase(k, v)}
@@ -291,7 +300,7 @@ fun <T, U> Map<T, Long>.frequency(selector: (T) -> U) = longHashBag<U>().let { h
     this.forEach { (k, v) -> hash.increase(selector(k), v)}
     hash
 }
-fun <T> Collection<T>.frequency() =  longHashBag<T>().let { hash ->
+fun <T> Collection<T>.frequency() =  bigIntHashBag<T>().let { hash ->
     this.forEach { c -> hash.increase(c) }
     hash
 }

@@ -1955,6 +1955,18 @@ N = 1
 let F = 0
 let G = 0
 
+
+function getCurrentPoints() {
+   let current = STEPS[Math.min(N, STEPS.length - 1)];
+    return step.map(pos => {
+        let coord = COORDS(pos, maxX, maxY)
+        rect(50 + coord[0] / 100.0 * S * K, 50 + coord[1] / 100.0 * S * K, 5, 5)
+    });
+}
+
+
+let CURRENT_POINTS = getCurrentPoints();
+
 function draw() {
     background("#10101a");
     maxX = STEPS.map(e => e.map(x => parseInt(x.split(",")[0]))).flat(2).max()

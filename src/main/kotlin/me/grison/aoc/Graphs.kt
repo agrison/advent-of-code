@@ -1,5 +1,6 @@
 package me.grison.aoc
 
+import util.CYAN
 import java.lang.Math.pow
 import java.lang.Math.sqrt
 import java.util.*
@@ -380,14 +381,17 @@ fun <T> Grid<T>.bfsIterator(source: Position, traversable: Predicate<T>): Iterat
     }
 }
 
-fun <T> Grid<T>.print(visited: Set<Position> = setOf()) {
+fun <T> Grid<T>.print(visited: Set<Position> = setOf(), path: List<Position> = listOf()) {
     val yMax = keys.maxByOrNull { it.first }!!.first
     val xMax = keys.maxByOrNull { it.second }!!.second
 
     for (i in 0..yMax) {
         for (j in 0..xMax) {
-            if (p(i, j) in visited) {
-                print("\u001B[35mx\u001B[0m")
+            if (p(i, j) in path) {
+                print("${CYAN}${this[p(i,j)]}\u001B[0m")
+            }
+            else if (p(i, j) in visited) {
+                print("\u001B[35m${this[p(i,j)]}\u001B[0m")
             } else {
                 print(this[p(i, j)])
             }
@@ -416,28 +420,35 @@ fun <T> Grid<T>.string(visited: Set<Position> = setOf()): String {
 }
 
 data class Path(
+    val grid: Grid<*>,
     val position: Position, val distance: Int, val path: List<Position>,
     val destination: Position, val type: DistanceType = DistanceType.MANHATTAN
 ) : Comparable<Path> {
     override fun compareTo(other: Path): Int {
-        return (distance + type.distance(position, destination))
-            .compareTo(other.distance + type.distance(other.position, destination))
+        return (distance + type.distance(grid, position, destination))
+            .compareTo(other.distance + type.distance(grid, other.position, destination))
     }
 }
 
 enum class DistanceType {
     MANHATTAN {
-        override fun distance(a: Position, b: Position): Double {
+        override fun distance(grid: Grid<*>, a: Position, b: Position): Double {
             return a.manhattan(b).toDouble()
         }
     },
     EUCLIDIAN {
-        override fun distance(a: Position, b: Position): Double {
+        override fun distance(grid: Grid<*>, a: Position, b: Position): Double {
             return sqrt(pow((a.first - b.first).toDouble(), 2.0) + pow((a.second - b.second).toDouble(), 2.0))
+        }
+    },
+    LOWEST_VALUE_NEIGHBOR {
+        override fun distance(grid: Grid<*>, a: Position, b: Position): Double {
+            val g = grid as Grid<Int>
+            return g[b]!!.toDouble()
         }
     };
 
-    abstract fun distance(a: Position, b: Position): Double
+    abstract fun distance(grid: Grid<*>, a: Position, b: Position): Double
 }
 
 fun <T> Grid<T>.aStar(
@@ -448,13 +459,13 @@ fun <T> Grid<T>.aStar(
 ): Pair<Int, List<Position>> {
     val visited = mutableSetOf(a)
     val queue = PriorityQueue<Path>()
-    queue.add(Path(a, 0, listOf(a), b))
+    queue.add(Path(this, a, 0, listOf(a), b))
     val yMax = keys.maxByOrNull { it.first }!!.first
     val xMax = keys.maxByOrNull { it.second }!!.second
 
     while (queue.size > 0) {
         this.print(visited)
-        val (node, distance, path, _) = queue.poll()
+        val (_, node, distance, path, _) = queue.poll()
         if (b == node) return p(distance, path)
 
         node.directions().forEach { neighbor ->
@@ -463,7 +474,7 @@ fun <T> Grid<T>.aStar(
             ) {
                 visited.add(neighbor)
                 val newPath = path.toMutableList() + neighbor
-                queue.add(Path(neighbor, distance + 1, newPath, b))
+                queue.add(Path(this, neighbor, distance + 1, newPath, b, type))
             }
         }
     }
@@ -484,3 +495,36 @@ fun <T> Grid<T>.allPositions(dimensions: Pair<Int, Int> = dimensions()) =
             gridPositions(yMax + 1, xMax + 1)
         }
     }
+
+
+fun Grid<Int>.shortestPath(
+    a: Position,
+    b: Position,
+    type: DistanceType = DistanceType.LOWEST_VALUE_NEIGHBOR,
+    traversable: (original: Pair<Position, Int>, neighbor: Pair<Position, Int>) -> Boolean = { _,_ -> true }
+): Pair<Int, List<Position>> {
+    val visited = mutableSetOf(a)
+    val queue = PriorityQueue<Path>()
+    queue.add(Path(this, a, 0, listOf(a), b))
+    val yMax = keys.maxByOrNull { it.first }!!.first
+    val xMax = keys.maxByOrNull { it.second }!!.second
+
+    while (queue.size > 0) {
+        val (_, node, value, path, _) = queue.poll()
+        if (b == node) {
+            return p(value, path)
+        }
+
+        node.directions().forEach { neighbor ->
+            if (neighbor.within(0, 0, yMax, xMax) && neighbor !in visited
+                && traversable.invoke(p(node, this[node]!!), p(neighbor, this[neighbor]!!))
+            ) {
+                visited.add(neighbor)
+                val newPath = path.toMutableList() + neighbor
+                queue.add(Path(this, neighbor, this[neighbor]!! + value, newPath, b, type))
+            }
+        }
+    }
+
+    return p(-1, listOf())
+}

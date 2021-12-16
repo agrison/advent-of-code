@@ -1,9 +1,6 @@
 package me.grison.aoc.y2021
 
-import me.grison.aoc.Day
-import me.grison.aoc.product
-import me.grison.aoc.toInt
-import me.grison.aoc.toLong
+import me.grison.aoc.*
 import java.math.BigInteger
 
 class Day16 : Day(16, 2021) {
@@ -18,14 +15,11 @@ class Day16 : Day(16, 2021) {
     private val stack = loadInput()
     private val value = evaluateBITS()
 
-    private fun loadInput(): String {
-        return BigInteger(inputString, 16).toString(2).padStart(inputString.length * 4, '0')
-    }
+    private fun loadInput() = BigInteger(inputString, 16).toString(2).padStart(inputString.length * 4, '0')
 
     private fun evaluateBITS(): Long {
-        val version = read(3)
-        val packetTypeId = read(3)
-        versionSum += version
+        versionSum += readInt(3)
+        val packetTypeId = readInt(3)
 
         // literal value
         if (packetTypeId == 4)
@@ -50,7 +44,7 @@ class Day16 : Day(16, 2021) {
     }
 
     private fun readTotalLength(subPackets: MutableList<Long>) {
-        val length = read(15)
+        val length = readInt(15)
         val subPacketEnd = pointer + length
         while (pointer < subPacketEnd) {
             subPackets.add(evaluateBITS())
@@ -58,28 +52,28 @@ class Day16 : Day(16, 2021) {
     }
 
     private fun readNumberOfSubPackets(subPackets: MutableList<Long>) {
-        repeat(read(11)) {
+        repeat(readInt(11)) {
             subPackets.add(evaluateBITS())
         }
     }
 
-    private fun read(n: Int): Int {
-        val s = stack.substring(pointer, n + pointer)
-        pointer += n
-        return s.toInt(2)
-    }
+    private fun read(n: Int) =
+        stack.substring(pointer, n + pointer).let {
+            pointer += n
+            it
+        }
+
+    private fun readInt(n: Int) = read(n).toInt(2)
 
     private fun next() = stack[pointer++].toString().toInt(2)
 
     private fun readPacket(): String {
-        val sb = StringBuilder("0")
+        val builder = StringBuilder("0")
         while (true) {
             val bit = next()
-            val s = stack.substring(pointer, pointer + 4)
-            pointer += 4
-            sb.append(s)
-            if (bit == 0) break
+            builder.append(read(4))
+            if (bit == 0)
+                return builder.toString()
         }
-        return sb.toString()
     }
 }

@@ -62,6 +62,14 @@
 🎄 ---- Day 14: Extended Polymerization ---
   🌟 Part 1: 2549           (16.7ms)
   🌟 Part 2: 2516901104210  (5.54ms)
+  
+🎄 ---- Day 15: Chiton ---
+  🌟 Part 1: 523   (53.7ms)
+  🌟 Part 2: 2876  (1.44s)
+
+🎄 ---- Day 16: Packet Decoder ---
+  🌟 Part 1: 1014           (7.50us)
+  🌟 Part 2: 1922490999789  (1.70us)
 ```
 
 ## Visualizations

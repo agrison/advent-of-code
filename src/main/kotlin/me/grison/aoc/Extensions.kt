@@ -100,6 +100,8 @@ operator fun Complex.plus(c: Complex) =
 // Booleans
 /** Returns `1` if `true`, `0` otherwise. */
 fun Boolean.toInt() = if (this) 1 else 0
+/** Returns `1` if `true`, `0` otherwise. */
+fun Boolean.toLong() = if (this) 1L else 0L
 
 // Characters
 /** `+` operator for characters. */

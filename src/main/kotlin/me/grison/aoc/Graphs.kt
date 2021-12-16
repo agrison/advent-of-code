@@ -436,7 +436,7 @@ enum class DistanceType {
             return a.manhattan(b).toDouble()
         }
     },
-    EUCLIDIAN {
+    EUCLIDEAN {
         override fun distance(grid: Grid<*>, a: Position, b: Position): Double {
             return sqrt(pow((a.first - b.first).toDouble(), 2.0) + pow((a.second - b.second).toDouble(), 2.0))
         }
@@ -498,30 +498,31 @@ fun <T> Grid<T>.allPositions(dimensions: Pair<Int, Int> = dimensions()) =
 
 
 fun Grid<Int>.shortestPath(
-    a: Position,
-    b: Position,
-    type: DistanceType = DistanceType.LOWEST_VALUE_NEIGHBOR,
+    start: Position,
+    end: Position,
+    type: DistanceType = DistanceType.EUCLIDEAN,
     traversable: (original: Pair<Position, Int>, neighbor: Pair<Position, Int>) -> Boolean = { _,_ -> true }
 ): Pair<Int, List<Position>> {
-    val visited = mutableSetOf(a)
+    val visited = mutableSetOf(start)
     val queue = PriorityQueue<Path>()
-    queue.add(Path(this, a, 0, listOf(a), b))
+    queue.add(Path(this, start, 0, listOf(start), end))
     val yMax = keys.maxByOrNull { it.first }!!.first
     val xMax = keys.maxByOrNull { it.second }!!.second
 
     while (queue.size > 0) {
         val (_, node, value, path, _) = queue.poll()
-        if (b == node) {
+        if (end == node) {
+//            this.print(visited, path)
             return p(value, path)
         }
 
-        node.directions().forEach { neighbor ->
+        listOf(node + p(-1,0), node + p(1,0), node + p(0, -1), node + p(0,1)).forEach { neighbor ->
             if (neighbor.within(0, 0, yMax, xMax) && neighbor !in visited
                 && traversable.invoke(p(node, this[node]!!), p(neighbor, this[neighbor]!!))
             ) {
                 visited.add(neighbor)
                 val newPath = path.toMutableList() + neighbor
-                queue.add(Path(this, neighbor, this[neighbor]!! + value, newPath, b, type))
+                queue.add(Path(this, neighbor, this[neighbor]!! + value, newPath, end, type))
             }
         }
     }

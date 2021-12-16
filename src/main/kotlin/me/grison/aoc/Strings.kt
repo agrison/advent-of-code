@@ -123,3 +123,7 @@ fun String.frequency() =  hashBag<Char>().let { hash ->
     this.toCharArray().forEach { c -> hash.increase(c) }
     hash
 }
+
+fun String.subs(x: Int, y: Int) = substring(x, y)
+
+operator fun String.get(x: Int, y: Int) = substring(x, y)

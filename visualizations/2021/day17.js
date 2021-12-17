@@ -30,6 +30,7 @@ function plot(ivx, ivy) {
         if (probey > thismaxy) thismaxy = probey;
         if (probex >= tx1 && probex <= tx2 && probey >= ty1 && probey <= ty2) {
             points.push({probex, probey, step:i, inside:true, vx, vy});
+            // return points
         } else {
             points.push({probex, probey, step:i, inside:false, vx, vy});
         }
@@ -45,7 +46,7 @@ for (let ivx = 0; ivx <= tx2; ++ivx) {
         PLOTS.push(zz)
     }
 }
-let RATIO = 3
+let RATIO = 4
 
 function translateX(x) {
     return x + 30// + W/4
@@ -77,7 +78,7 @@ function draw() {
             for (i = 0; i < PLOTS[I].length; ++i) {
                 let p = PLOTS[I][i]
                 // console.log(translateX(p.probex), translateY(p.probey))
-                arc(translateX(p.probex)*RATIO, translateY(p.probey)*RATIO, 1*RATIO, 1*RATIO, 0, TWO_PI);
+                arc(translateX(p.probex)*RATIO, translateY(p.probey)*RATIO, 4, 4, 0, TWO_PI);
             }
         }
     }
@@ -91,21 +92,29 @@ function draw() {
             // text(I, 500, 100)
             stroke('rgb(255, 255, 102)');
             fill('rgb(255, 255, 102)')
+            let hit = false
             for (i = 0; i < PLOTS[I].length; ++i) {
                 let p = PLOTS[I][i]
                 if (p.probey > MAXY) MAXY = p.probey
                 // console.log(translateX(p.probex), translateY(p.probey))
-                arc(translateX(p.probex)*RATIO, translateY(p.probey)*RATIO, 1, 1, 0, TWO_PI);
+                arc(translateX(p.probex)*RATIO, translateY(p.probey)*RATIO, 4, 4, 0, TWO_PI);
+                if (p.inside && !hit) {
+                    stroke('rgb(88,81,63)');
+                    fill('rgb(88,81,63)')
+                    hit = true
+                }
             }
         }
     }
 
+    stroke('rgb(255, 255, 102)');
+    fill('rgb(255, 255, 102)')
     text(COUNT, textWidth("Velocities with probe inside target: ")+ 20, 25)
     text(MAXY, textWidth("Max Y: ")+ 20, 50)
 
     stroke('white');
     fill('white')
-    arc(translateX(0)*RATIO, translateY(0)*RATIO, 2*3*RATIO, 2*3*RATIO, 0, TWO_PI);
+    arc(translateX(0)*RATIO, translateY(0)*RATIO, 2*RATIO, 2*RATIO, 0, TWO_PI);
 
     stroke('rgb(255, 255, 102)');
     fill('rgba(89,119,167,0.1)')

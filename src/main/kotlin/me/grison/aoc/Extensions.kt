@@ -103,6 +103,8 @@ fun Boolean.toInt() = if (this) 1 else 0
 /** Returns `1` if `true`, `0` otherwise. */
 fun Boolean.toLong() = if (this) 1L else 0L
 
+fun Int.sign() = kotlin.math.sign(this.toDouble()).toInt()
+
 // Characters
 /** `+` operator for characters. */
 operator fun Char.plus(c: Char) = toString() + c

@@ -70,6 +70,10 @@
 🎄 ---- Day 16: Packet Decoder ---
   🌟 Part 1: 1014           (7.50us)
   🌟 Part 2: 1922490999789  (1.70us)
+  
+🎄 ---- Day 17: Trick Shot ---
+  🌟 Part 1: 23005  (1.19ms)
+  🌟 Part 2: 2040   (3.10us)
 ```
 
 ## Visualizations

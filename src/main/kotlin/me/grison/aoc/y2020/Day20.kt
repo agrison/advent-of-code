@@ -9,7 +9,7 @@ class Day20 : Day(20, 2020) {
 
     private fun tiles() =
         inputGroups.map { it.lines() }
-            .map { t -> Tile(t.first().allLongs().first(), t.tail().map { s -> s.map { it == '#' } }) }
+            .map { t -> Tile(t.first().allLongs(includeNegative = false).first(), t.tail().map { s -> s.map { it == '#' } }) }
 
     override fun partOne(): Long {
         val tiles = tiles()

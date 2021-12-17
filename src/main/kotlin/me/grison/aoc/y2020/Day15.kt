@@ -14,9 +14,10 @@ class Day15 : Day(15, 2020) {
     private fun memoryGame(idx: Int): Any {
         val alreadySpoken = IntArray(idx + 1)
         var (last, turn, lastSpoken) = Triple(0, 1, 0)
-        cycle(13, 16, 0, 12, 15, 1).forEachIndexed { i, n ->
+        val input = inputString.allInts()
+        cycle(input).forEachIndexed { i, n ->
             // first consume the input, then use the last spoken ones
-            val num = if (i < 6) n else lastSpoken
+            val num = if (i < input.size) n else lastSpoken
             last = num // <-
             lastSpoken = if (alreadySpoken[num] != 0) turn - alreadySpoken[num] else 0
             alreadySpoken[num] = turn++

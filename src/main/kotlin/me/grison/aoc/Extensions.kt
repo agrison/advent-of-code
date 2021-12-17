@@ -136,6 +136,11 @@ fun <T : Any> cycle(vararg xs: T): Sequence<T> {
     return generateSequence { xs[i++ % xs.size] }
 }
 
+fun <T : Any> cycle(xs: List<T>): Sequence<T> {
+    var i = 0
+    return generateSequence { xs[i++ % xs.size] }
+}
+
 // Pairs
 /** Difference between an ordered Pair. */
 fun Pair<Int, Int>.difference() = second - first

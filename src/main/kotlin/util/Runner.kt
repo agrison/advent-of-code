@@ -89,7 +89,7 @@ object Runner {
         if (args.isNotEmpty() && "screenshotold" in args[0]) {
             System.setProperty("webdriver.chrome.driver", "C:/dev/tools/chromedriver96.exe")
             val driver = ChromeDriver()
-            driver.get("https://adventofcode.com/2017")
+            driver.get("https://adventofcode.com/2020")
             driver.manage().timeouts().setScriptTimeout(2, TimeUnit.SECONDS)
             val session = File(javaClass.classLoader.getResource("cookieold.txt").toURI()).readText()
             driver.manage().addCookie(Cookie("session", session))
@@ -100,13 +100,11 @@ object Runner {
             js.executeScript("document.querySelector('#sidebar').remove();")
             js.executeScript("document.body.style.zoom = '1.5';")
 
-            Thread.sleep(40000)
             val screenshot = driver as TakesScreenshot
 //            for (i in 1..100) {
             val sc = screenshot.getScreenshotAs(OutputType.FILE)
-            Files.move(sc.toPath(), Paths.get("screenshots/2017/25.png"), REPLACE_EXISTING)
+            Files.move(sc.toPath(), Paths.get("screenshots/2020/25.png"), REPLACE_EXISTING)
 //                Files.move(sc.toPath(), Paths.get("screenshots/2017/25-${i}.png"), REPLACE_EXISTING)
-            Thread.sleep(10)
 //            }
 
             // reinit zoom
@@ -181,7 +179,7 @@ object Runner {
 
             System.setProperty("webdriver.chrome.driver", "C:/dev/tools/chromedriver96.exe")
             val driver = ChromeDriver()
-            driver.get("https://adventofcode.com/2015")
+            driver.get("https://adventofcode.com/2020")
             driver.manage().timeouts().setScriptTimeout(2, TimeUnit.SECONDS)
             val session = File(javaClass.classLoader.getResource("cookie.txt").toURI()).readText()
             driver.manage().addCookie(Cookie("session", session))

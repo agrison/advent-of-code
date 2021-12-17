@@ -8,7 +8,7 @@ class Day04 : Day(4, 2016) {
     private val rooms = inputList.map {
         Triple(
             it.substringBeforeLast("-").replace("-", ""),
-            it.allInts().first(),
+            it.allInts(includeNegative = false).first(),
             it.after("[").before("]")
         )
     }

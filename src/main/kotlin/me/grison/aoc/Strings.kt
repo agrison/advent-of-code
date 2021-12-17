@@ -70,10 +70,12 @@ fun String.between(left: String, right: String) = split(left)[1].split(right).fi
 fun String.afterLast(s: String) = split(s).last()
 
 /** Returns all int found in this string. */
-fun String.allInts(): List<Int> = "(-?\\d+)".regex().findAll(this).map { it.value.toInt() }.toList()
+fun String.allInts(includeNegative: Boolean = true): List<Int> =
+    (if (includeNegative) "(-?\\d+)" else "(\\d+)").regex().findAll(this).map { it.value.toInt() }.toList()
 
 /** Returns all long found in this string. */
-fun String.allLongs(): List<Long> = "(-?\\d+)".regex().findAll(this).map { it.value.toLong() }.toList()
+fun String.allLongs(includeNegative: Boolean = true): List<Long> =
+    (if (includeNegative) "(-?\\d+)" else "(\\d+)").regex().findAll(this).map { it.value.toLong() }.toList()
 
 /** Returns like toCharArray() but with strings. */
 fun String.stringList(): List<String> = map { it.toString() }

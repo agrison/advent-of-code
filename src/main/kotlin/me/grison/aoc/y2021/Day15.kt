@@ -13,7 +13,7 @@ class Day15 : Day(15, 2021) {
     }
 
     override fun partTwo(): Int {
-        val grid = inputList.intGrid(0)
+        val grid = inputList.intGrid(0, 500*500)
         expandGrid(grid, 100, 5)
 
         return grid.shortestPath(p(0, 0), p(499, 499), LOWEST_VALUE_NEIGHBOR)

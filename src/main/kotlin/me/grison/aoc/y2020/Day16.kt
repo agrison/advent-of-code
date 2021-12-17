@@ -72,7 +72,7 @@ class Day16 : Day(16, 2020) {
 
         return mutableListOf<List<IntRange>>().let {
             spec.split(lineSeparator()).forEach { line ->
-                val ints = line.allInts()
+                val ints = line.allInts(includeNegative = false)
                 it.add(listOf(IntRange(ints[0], ints[1]), IntRange(ints[2], ints[3])))
             }
             it

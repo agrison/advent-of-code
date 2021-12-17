@@ -32,6 +32,19 @@ import kotlin.math.ceil
 
 typealias Grid<T> = MutableMap<Position, T>
 
+fun List<String>.intGrid(default: Int, size: Int): Grid<Int> {
+    val grid = HashMap<Position, Int>(size).withDefault { default }
+    var height = 0
+    forEach { line ->
+        var width = 0
+        line.normalSplit("").ints().forEach { n ->
+            grid[p(height, width++)] = n
+        }
+        height++
+    }
+    return grid
+}
+
 fun List<String>.intGrid(default: Int): Grid<Int> {
     val grid = mutableMapOf<Position, Int>().withDefault { default }
     var height = 0

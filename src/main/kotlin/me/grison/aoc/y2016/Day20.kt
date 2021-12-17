@@ -5,7 +5,7 @@ import me.grison.aoc.*
 class Day20 : Day(20, 2016) {
     override fun title() = "Firewall Rules"
 
-    val ips = inputList.map { it.allLongs() }.map { p(it[0], it[1]) }
+    val ips = inputList.map { it.allLongs(includeNegative = false) }.map { p(it[0], it[1]) }
         .sortedWith(compareBy({it.first}, {it.second}))
 
     override fun partOne() = lowest().first

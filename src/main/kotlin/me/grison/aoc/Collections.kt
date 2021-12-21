@@ -1,6 +1,7 @@
 package me.grison.aoc
 
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedDeque
 import java.util.stream.Collectors
 import java.util.stream.IntStream
 import kotlin.collections.ArrayDeque
@@ -113,6 +114,7 @@ operator fun <T> ArrayDeque<T>.plus(e: T) = addLast(e)
 /** Alias for `removeFirst`. */
 fun <T> ArrayDeque<T>.shift() = removeFirst()
 fun <T> ArrayDeque<T>.pop() = removeLast()
+fun <T> ConcurrentLinkedDeque<T>.shift() = removeFirst()
 
 /** Returns the Collection without its first element. */
 fun <T> Iterable<T>.tail() = drop(1)

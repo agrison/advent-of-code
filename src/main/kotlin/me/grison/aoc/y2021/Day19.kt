@@ -2,7 +2,9 @@ package me.grison.aoc.y2021
 
 import io.vavr.collection.Vector
 import me.grison.aoc.*
+import java.util.concurrent.ConcurrentLinkedDeque
 import kotlin.collections.ArrayDeque
+import kotlin.streams.toList
 
 class Day19 : Day(19, 2021) {
     override fun title() = "Beacon Scanner"
@@ -19,8 +21,8 @@ class Day19 : Day(19, 2021) {
             .maxOf { it[0].manhattan(it[1]) }
     }
 
-    private fun loadScanners() : ArrayDeque<Scanner> {
-        return ArrayDeque<List<Point3D>>().let { scanners ->
+    private fun loadScanners() : ConcurrentLinkedDeque<Scanner> {
+        return ConcurrentLinkedDeque<List<Point3D>>().let { scanners ->
             inputGroups.forEach { group ->
                 group.lines().tail().map { it.allInts() }.map { Point3D(it) }
                     .also { scanners.add(it) }
@@ -34,12 +36,12 @@ class Day19 : Day(19, 2021) {
 
         val referenceScanner = mutableListOf(p(scanners.shift(), Point3D.ZERO))
         while (scanners.isNotEmpty()) {
-            scanners.filter { scanner ->
+            scanners.parallelStream().filter { scanner ->
                 scannersOverlap(referenceScanner, orientations(scanner))?.let {
                     referenceScanner.add(it)
                     true
                 } ?: false
-            }.also { scanners.removeAll(it) }
+            }.also { scanners.removeAll(it.toList()) }
         }
 
         return referenceScanner

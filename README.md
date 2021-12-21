@@ -74,6 +74,22 @@
 🎄 ---- Day 17: Trick Shot ---
   🌟 Part 1: 23005  (1.19ms)
   🌟 Part 2: 2040   (3.10us)
+
+🎄 ---- Day 18: Snailfish ---
+  🌟 Part 1: 1946  (43.2ms)
+  🌟 Part 2: 3825  (358ms)
+
+🎄 ---- Day 19: Beacon Scanner ---
+  🌟 Part 1: 479    (458us)
+  🌟 Part 2: 13113  (41.0ms)
+
+🎄 ---- Day 20: Trench Map ---
+  🌟 Part 1: 4928   (31.6ms)
+  🌟 Part 2: 16605  (402ms)
+
+🎄 ---- Day 21: Dirac Dice ---
+  🌟 Part 1: 913560           (920us)
+  🌟 Part 2: 110271560863819  (2.74s)
 ```
 
 ## Visualizations

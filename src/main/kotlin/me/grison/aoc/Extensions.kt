@@ -113,6 +113,7 @@ operator fun Complex.plus(c: Complex) =
 // Booleans
 /** Returns `1` if `true`, `0` otherwise. */
 fun Boolean.toInt() = if (this) 1 else 0
+
 /** Returns `1` if `true`, `0` otherwise. */
 fun Boolean.toLong() = if (this) 1L else 0L
 
@@ -184,11 +185,14 @@ fun Pair<Int, Int>.forward(i: Int, aim: Int) = this.plus(p(i, aim))
 fun Pair<Int, Int>.backward(i: Int) = this.plus(p(-i, 0))
 fun Pair<Int, Int>.within(minx: Int, miny: Int, maxx: Int, maxy: Int) = first in minx..maxx && second in miny..maxy
 fun Pair<Int, Int>.directions() = listOf(above(), below(), left(), right())
-fun Pair<Int, Int>.neighbors() = listOf(
-    plus(-1, -1), plus(-1, 0), plus(-1, 1),
-    plus(0, -1), /*  self  */ plus(0, 1),
-    plus(1, -1), plus(1, 0), plus(1, 1)
-)
+fun Pair<Int, Int>.neighbors(self: Boolean = false): List<Position> {
+    val neighbors = listOf(
+        plus(-1, -1), plus(-1, 0), plus(-1, 1),
+        plus(0, -1), this, plus(0, 1),
+        plus(1, -1), plus(1, 0), plus(1, 1)
+    )
+    return if (self) neighbors else neighbors.reject { it == this }
+}
 
 // return an increasing range
 fun Pair<Int, Int>.range() = min(first, second)..max(first, second)
@@ -206,6 +210,9 @@ fun Pair<Int, Int>.pivotFirst(loc: Int) = if (first < loc) this else p(loc - (fi
 fun Pair<Long, Long>.pivotSecond(loc: Long) = if (second < loc) this else Pair(first, loc - (second - loc))
 fun Pair<Long, Long>.pivotFirst(loc: Long) = if (first < loc) this else Pair(loc - (first - loc), second)
 
+fun Triple<Int, Int, Int>.sum() = first + second + third
+fun Triple<Long, Long, Long>.sum() = first + second + third
+
 // works with MutableMap.withDefault()
 fun <T> MutableMap<T, Int>.increase(key: T, amount: Int = 1): MutableMap<T, Int> {
     this[key] = this.getOrDefault(key, 0) + amount
@@ -220,6 +227,34 @@ fun <T> MutableMap<T, Long>.increase(key: T, amount: Long = 1L): MutableMap<T, L
 fun <T> MutableMap<T, BigInteger>.increase(key: T, amount: BigInteger = BigInteger.ONE): MutableMap<T, BigInteger> {
     this[key] = this.getOrDefault(key, BigInteger.ZERO).add(amount)
     return this
+}
+
+fun <T> List<T>.copy() = this.toMutableList()
+fun <T> List<T>.update(i: Int, value: T): List<T> {
+    val copy = this.toMutableList()
+    copy[i] = value
+    return copy
+}
+
+fun <T> List<T>.combinations(k: Int) = io.vavr.collection.Vector.ofAll(this)
+    .combinations(k).map {
+        it.toJavaList() as List<T>
+    }.toJavaList() as List<List<T>>
+
+fun <T> List<T>.uniqueCombinations(k: Int) = this.combinations(k).toSet()
+
+
+fun combinations2(lo: Int, hi: Int) = sequence {
+    for (i in lo..hi)
+        for (j in lo..hi)
+            yield(Pair(i, j))
+}
+
+fun combinations3(lo: Int, hi: Int) = sequence {
+    for (i in lo..hi)
+        for (j in lo..hi)
+            for (k in lo..hi)
+                yield(Triple(i, j, k))
 }
 
 /** Returns the sum of the elements in this Pair. */
@@ -315,14 +350,21 @@ fun Collection<Long>.range() = max()!! - min()!!
 fun Collection<BigInteger>.range() = max()!!.minus(min()!!)
 
 fun <T> Map<T, Long>.frequency() = longHashBag<T>().let { hash ->
-    this.forEach { (k, v) -> hash.increase(k, v)}
+    this.forEach { (k, v) -> hash.increase(k, v) }
     hash
 }
+
 fun <T, U> Map<T, Long>.frequency(selector: (T) -> U) = longHashBag<U>().let { hash ->
-    this.forEach { (k, v) -> hash.increase(selector(k), v)}
+    this.forEach { (k, v) -> hash.increase(selector(k), v) }
     hash
 }
-fun <T> Collection<T>.frequency() =  bigIntHashBag<T>().let { hash ->
+
+fun <T> Collection<T>.frequency() = bigIntHashBag<T>().let { hash ->
     this.forEach { c -> hash.increase(c) }
     hash
+}
+
+fun Int.toBinary(length: Int? = null): String {
+    return if (length == null) this.toString(2)
+    else Integer.toBinaryString((1 shl length) or this).substring(1)
 }

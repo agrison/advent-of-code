@@ -43,6 +43,11 @@ fun <T> List<T>.permutations(): List<List<T>> {
     return list
 }
 
+// listOf(1,2,3).pairCombinations() -> [(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]
+fun <T> Iterable<T>.pairCombinations(): List<Pair<T, T>> = flatMapIndexed { i, a ->
+    filter { j -> i != j }.map { b -> a to b }
+}
+
 
 fun <T> List<T>.first(num: Int) = this.subList(0, num)
 
@@ -150,3 +155,7 @@ fun <T> Stack<T>.lastIs(t: T): Boolean = last() == t
 // Vavr
 fun io.vavr.collection.List<Int>.sumValues(): Int = this.reduce(Integer::sum)
 fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyExact)
+
+fun <T> List<T>.at(pos: Int) : T {
+    return if (pos < 0) this[size + pos] else this[pos % this.size]
+}

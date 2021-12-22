@@ -90,6 +90,10 @@
 🎄 ---- Day 21: Dirac Dice ---
   🌟 Part 1: 913560           (920us)
   🌟 Part 2: 110271560863819  (2.74s)
+
+🎄 ---- Day 22: Reactor Reboot ---
+  🌟 Part 1: 581108            (658ms)
+  🌟 Part 2: 1325473814582641  (29.7ms)
 ```
 
 ## Visualizations

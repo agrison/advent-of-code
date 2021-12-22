@@ -161,3 +161,5 @@ fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyEx
 fun <T> List<T>.at(pos: Int) : T {
     return if (pos < 0) this[size + pos] else this[pos % this.size]
 }
+
+fun <T> List<T>.sub(from: Int) = this.subList(from, this.size)

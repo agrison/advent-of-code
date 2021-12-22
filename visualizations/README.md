@@ -1,6 +1,9 @@
 ## Advent of code visualizations
 
 ## 2021
+
+- [Day 22](2021/day22.html)
+- [Day 20](2021/day20.html)
 - [Day 19](2021/day19.html)
 - [Day 17](2021/day17.html)
 - [Day 16](2021/day16.html)

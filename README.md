@@ -94,6 +94,10 @@
 🎄 ---- Day 22: Reactor Reboot ---
   🌟 Part 1: 581108            (658ms)
   🌟 Part 2: 1325473814582641  (29.7ms)
+  
+🎄 ---- Day 23: Amphipod ---
+  🌟 Part 1: 19019  (561ms)
+  🌟 Part 2: 47533  (556ms)  
 ```
 
 ## Visualizations

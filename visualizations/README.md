@@ -2,6 +2,7 @@
 
 ## 2021
 
+- [Day 23](2021/day23.html)
 - [Day 22](2021/day22.html)
 - [Day 20](2021/day20.html)
 - [Day 19](2021/day19.html)

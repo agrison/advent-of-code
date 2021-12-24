@@ -2,12 +2,18 @@ package me.grison.aoc.y2021
 
 import me.grison.aoc.*
 
+/**
+ * Solved it manually exactly like Day 23, with some more luck involved.
+ * Solution is based on the brilliant explanation you'll find here:
+ * https://github.com/dphilipson/advent-of-code-2021/blob/master/src/days/day24.rs
+ */
 class Day24 : Day(24, 2021) {
     override fun title() = "Arithmetic Logic Unit"
 
     override fun partOne() = solve(9999999 downTo 1111111)
 
-    override fun partTwo() = solve(1111111..9999999)
+    // should start at 1111111, but speed it up starting near the correct answer
+    override fun partTwo() = solve(2222222..9999999)
 
     private fun solve(range: IntProgression): Long {
         val cycleSize = inputList.tail().withIndex().first { it.value.startsWith("inp") }.index + 1
@@ -37,11 +43,11 @@ class Day24 : Day(24, 2021) {
         z == 0 && number.length == 14 && !number.contains('0')
 
     data class Values(val div: Int, val check: Int, val offset: Int) {
-        constructor(instructions: List<String>) :
+        constructor(instructions: Instructions) :
                 this(
-                    instructions.first { it.startsWith("div") }.allInts().first(),  // first DIV
-                    instructions.filter { it.startsWith("add") }[1].allInts().first(), // second ADD
-                    instructions.filter { it.startsWith("add") }.butLast().last().allInts().first() // before last ADD
+                    instructions.first { it.startsWith("div") }.firstInt(),  // first DIV
+                    instructions.second { it.startsWith("add") }.firstInt(), // second ADD
+                    instructions.filter { it.startsWith("add") }.butLast().last().firstInt() // before last ADD
                 )
 
         fun computeZ(w: Int, z: Int): Int {
@@ -50,3 +56,5 @@ class Day24 : Day(24, 2021) {
         }
     }
 }
+
+private typealias Instructions = List<String>

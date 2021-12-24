@@ -77,6 +77,9 @@ fun String.allInts(includeNegative: Boolean = true): List<Int> =
 fun String.allLongs(includeNegative: Boolean = true): List<Long> =
     (if (includeNegative) "(-?\\d+)" else "(\\d+)").regex().findAll(this).map { it.value.toLong() }.toList()
 
+fun String.firstInt(includeNegative: Boolean = true) = allInts(includeNegative).first()
+fun String.lastInt(includeNegative: Boolean = true) = allInts(includeNegative).last()
+
 /** Returns like toCharArray() but with strings. */
 fun String.stringList(): List<String> = map { it.toString() }
 

@@ -163,3 +163,7 @@ fun <T> List<T>.at(pos: Int) : T {
 }
 
 fun <T> List<T>.sub(from: Int) = this.subList(from, this.size)
+
+inline fun <T> List<T>.second(predicate: (T) -> Boolean): T {
+    return filter { predicate(it) }[1]
+}

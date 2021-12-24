@@ -368,3 +368,9 @@ fun Int.toBinary(length: Int? = null): String {
     return if (length == null) this.toString(2)
     else Integer.toBinaryString((1 shl length) or this).substring(1)
 }
+
+fun Int.padLeft(length: Int, value: Char): String {
+    return this.toString().padStart(length, value)
+}
+
+fun Char.int() = this.toString().toInt()

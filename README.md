@@ -98,6 +98,10 @@
 🎄 ---- Day 23: Amphipod ---
   🌟 Part 1: 19019  (561ms)
   🌟 Part 2: 47533  (556ms)  
+  
+🎄 ---- Day 24: Arithmetic Logic Unit ---
+  🌟 Part 1: 99691891979938  (104ms)
+  🌟 Part 2: 27141191213911  (658ms)  
 ```
 
 ## Visualizations

@@ -1,5 +1,6 @@
 package me.grison.aoc
 
+import java.awt.Dimension
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedDeque
 import java.util.stream.Collectors
@@ -166,4 +167,15 @@ fun <T> List<T>.sub(from: Int) = this.subList(from, this.size)
 
 inline fun <T> List<T>.second(predicate: (T) -> Boolean): T {
     return filter { predicate(it) }[1]
+}
+
+fun <T> List<List<T>>.dimensions() = p(size, first().size)
+fun <T> List<List<T>>.iterate(rows: Int, columns: Int) = iterate(p(rows, columns))
+fun <T> List<List<T>>.iterate(dimensions: Pair<Int, Int> = dimensions()): Sequence<Pair<Int, Int>> {
+    val (rows, columns) = dimensions
+    return sequence {
+        for (row in 0 until rows)
+            for (column in 0 until columns)
+                yield(p(row, column))
+    }
 }

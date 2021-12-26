@@ -150,11 +150,6 @@
                 |'= -x       L___   '--,
                 L   __\          '-----'
                  '.____)  (5.80us)
-
-BUILD SUCCESSFUL in 6s
-5 actionable tasks: 1 executed, 4 up-to-date
-12:30:32: Tasks execution finished 'run --args 2021/25'.
-
 ```
 
 ## Visualizations

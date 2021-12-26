@@ -4,6 +4,8 @@
 
 ![Kotlin - 2021](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202021/badge.svg)
 
+![2020](2021.png)
+
 ```text
 🎅 === Advent of Code 2021 === 🎅
 
@@ -102,6 +104,57 @@
 🎄 ---- Day 24: Arithmetic Logic Unit ---
   🌟 Part 1: 99691891979938  (104ms)
   🌟 Part 2: 27141191213911  (658ms)  
+  
+🎄 ---- Day 25: Sea Cucumber ---
+  🌟 Part 1: 305  (201ms)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        (481ms)
+  🌟 Part 2: 
+    |,\/,| |[_' |[_]) |[_]) \\//
+    ||\/|| |[_, ||'\, ||'\,  ||
+
+            ___ __ __ ____  __  __  ____  _  _    __    __
+           // ' |[_]| |[_]) || ((_' '||' |,\/,|  //\\  ((_'
+           \\_, |[']| ||'\, || ,_))  ||  ||\/|| //``\\ ,_))
+                                                               
+
+                                         ,;7,
+                                       _ ||:|,
+                     _,---,_           )\'  '|
+                   .'_.-.,_ '.         ',')  j
+                  /,'   ___}  \        _/   /
+      .,         ,1  .''  =\ _.''.   ,`';_ |
+    .'  \        (.'T ~, (' ) ',.'  /     ';',
+    \   .\(\O/)_. \ (    _Z-'`>--, .'',      ;
+     \  |   I  _|._>;--'`,-j-'    ;    ',  .'
+    __\_|   _.'.-7 ) `'-' "       (      ;'
+  .'.'_.'|.' .'   \ ',_           .'\   /
+  | |  |.'  /      \   \          l  \ /
+  | _.-'   /        '. ('._   _ ,.'   \i
+,--' ---' / k  _.-,.-|__L, '-' ' ()    ;
+ '._     (   ';   (    _-}             |
+  / '     \   ;    ',.__;         ()   /
+ /         |   ;    ; ___._._____.: :-j
+|           \,__',-' ____: :_____.: :-\
+|               F :   .  ' '        ,  L
+',             J  |   ;             j  |
+  \            |  |    L            |  J
+   ;         .-F  |    ;           J    L
+    \___,---' J'--:    j,---,___   |_   |
+              |   |'--' L       '--| '-'|
+               '.,L     |----.__   j.__.'
+                | '----'   |,   '-'  }
+                j         / ('-----';
+               { "---'--;'  }       |
+               |        |   '.----,.'
+               ',.__.__.'    |=, _/
+                |     /      |    '.
+                |'= -x       L___   '--,
+                L   __\          '-----'
+                 '.____)  (5.80us)
+
+BUILD SUCCESSFUL in 6s
+5 actionable tasks: 1 executed, 4 up-to-date
+12:30:32: Tasks execution finished 'run --args 2021/25'.
+
 ```
 
 ## Visualizations
@@ -127,7 +180,13 @@ After the 6 last years with Java, Go (finished with Java), OCaml (finished with 
 
 I am gradually rewriting all previous years solutions in Kotlin because it's a better language for such challenges than the other I used before (except Python, but I'm not doing so much Python so just forgetting how to write some basic stuff).
 
-## Previous years
+## All years
+
+### 2021
+
+![Kotlin - 2021](https://github.com/agrison/advent-of-code/workflows/Kotlin%20-%202021/badge.svg)
+
+![2021](2021.png)
 
 ### 2020 
 

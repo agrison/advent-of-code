@@ -1,5 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(15))
+    }
+}
 
 plugins {
     application
@@ -20,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+    //implementation(kotlin("stdlib-jdk8"))
     implementation("org.reflections", "reflections", "0.9.12")
 
     implementation("io.arrow-kt", "arrow-fx", "0.11.0")
@@ -48,7 +53,7 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "15"
 }
 
 tasks.withType<Test> {

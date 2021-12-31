@@ -3,7 +3,7 @@
 package util
 
 import java.io.File
-import io.vavr.kotlin.*;
+import io.vavr.kotlin.*
 import java.lang.System.lineSeparator
 
 object InputReader {

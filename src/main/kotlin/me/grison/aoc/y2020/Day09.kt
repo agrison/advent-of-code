@@ -19,7 +19,8 @@ class Day09 : Day(9, 2020) {
         scan.forEachIndexed { first, value ->
             (first until scan.size).find { last -> scan[last] - value == invalidNumber }
                     ?.let { last ->
-                        result.add((series.slice(first..last).min() ?: 0L) + (series.slice(first..last).max() ?: 0L))
+                        result.add(
+                            (series.slice(first..last).minOrNull() ?: 0L) + (series.slice(first..last).maxOrNull() ?: 0L))
                     }
         }
         return result.first()

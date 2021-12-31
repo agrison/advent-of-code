@@ -13,7 +13,7 @@ class Day09 : Day(9, 2021) {
         gridPositions(dimensions)
             .map { pos -> p(pos, grid.getValue(pos)) }
             .filter { (pos, value) -> pos.directions().all { value < grid.getValue(it) } }
-            .sumBy { (_, value) -> value + 1 }
+            .sumOf { (_, value) -> value + 1 }
 
     override fun partTwo() =
         gridPositions(dimensions)

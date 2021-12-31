@@ -34,8 +34,8 @@ class Day16 : Day(16, 2021) {
         return when (packetTypeId) {
             0 -> subPackets.sum()
             1 -> subPackets.product()
-            2 -> subPackets.min()!!
-            3 -> subPackets.max()!!
+            2 -> subPackets.minOrNull()!!
+            3 -> subPackets.maxOrNull()!!
             5 -> (subPackets[0] > subPackets[1]).toLong()
             6 -> (subPackets[0] < subPackets[1]).toLong()
             7 -> (subPackets[0] == subPackets[1]).toLong()

@@ -345,9 +345,9 @@ fun Iterable<Pair<Long, Long>>.pointsDisplay(empty: String = " "): String {
     return display.joinToString("\n") { it.joinToString("") }
 }
 
-fun Collection<Int>.range() = max()!! - min()!!
-fun Collection<Long>.range() = max()!! - min()!!
-fun Collection<BigInteger>.range() = max()!!.minus(min()!!)
+fun Collection<Int>.range() = maxOrNull()!! - minOrNull()!!
+fun Collection<Long>.range() = maxOrNull()!! - minOrNull()!!
+fun Collection<BigInteger>.range() = maxOrNull()!!.minus(minOrNull()!!)
 
 fun <T> Map<T, Long>.frequency() = longHashBag<T>().let { hash ->
     this.forEach { (k, v) -> hash.increase(k, v) }

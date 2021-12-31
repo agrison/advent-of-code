@@ -20,8 +20,8 @@ class Day16 : Day(16, 2015) {
         inputList.forEach { line ->
             val x = "^Sue (\\d+): (\\w+): (\\d+), (\\w+): (\\d+), (\\w+): (\\d+)$".regex().find(line)
             val num = x!!.groupValues[1].toInt()
-            val things = mutableListOf(x!!.groupValues[2], x!!.groupValues[4], x!!.groupValues[6])
-            val values = mutableListOf(x!!.groupValues[3], x!!.groupValues[5], x!!.groupValues[7])
+            val things = mutableListOf(x.groupValues[2], x.groupValues[4], x.groupValues[6])
+            val values = mutableListOf(x.groupValues[3], x.groupValues[5], x.groupValues[7])
             if (isRealAunt(things, values))
                 return num
         }

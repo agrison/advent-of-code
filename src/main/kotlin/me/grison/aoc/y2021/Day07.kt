@@ -19,7 +19,7 @@ class Day07 : Day(7, 2021) {
 
     private fun solve(movingCost: (Int) -> Int): Int {
         return inputString.allInts().let { crabs ->
-            crabs.minOf { u -> crabs.sumBy { x -> movingCost(abs(x - u)) } }
+            crabs.minOf { u -> crabs.sumOf { x -> movingCost(abs(x - u)) } }
         }
     }
 }

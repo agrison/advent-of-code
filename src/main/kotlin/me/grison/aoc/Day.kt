@@ -113,7 +113,7 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
 
 
     // --------------- Santa ------------------
-    public val SANTA = """
+    val SANTA = """
     |,\/,| |[_' |[_]) |[_]) \\//
     ||\/|| |[_, ||'\, ||'\,  ||
 

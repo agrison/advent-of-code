@@ -12,6 +12,6 @@ class Day01 : Day(1, 2017) {
     private fun solve(n: Int): Int {
         return """(\d)(?=.{${n - 1}}\1)""".regex().findAll(
             inputString + inputString.substring(0, n)
-        ).sumBy { it.value.toInt() }
+        ).sumOf { it.value.toInt() }
     }
 }

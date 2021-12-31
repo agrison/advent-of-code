@@ -22,7 +22,7 @@ class Day22 : Day(22, 2020) {
 
     private fun decks() = inputGroups.map { it.lines().tail().ints().deque() }.pair()
 
-    private fun Deck.score() = zip((size downTo 1)).sumBy { it.product() }
+    private fun Deck.score() = zip((size downTo 1)).sumOf { it.product() }
 
     private fun recursiveCombat(player1: Deck, player2: Deck): Int {
         val previousRounds = hashSetOf<Any>()

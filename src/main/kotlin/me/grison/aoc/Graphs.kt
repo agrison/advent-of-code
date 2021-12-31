@@ -1,12 +1,11 @@
 package me.grison.aoc
 
 import util.CYAN
-import java.lang.Math.pow
-import java.lang.Math.sqrt
 import java.util.*
 import java.util.function.Predicate
 import kotlin.collections.ArrayDeque
 import kotlin.collections.set
+import kotlin.math.pow
 
 typealias Graph<T> = MutableMap<T, MutableList<T>>
 
@@ -438,12 +437,14 @@ enum class DistanceType {
     },
     EUCLIDEAN {
         override fun distance(grid: Grid<*>, a: Position, b: Position): Double {
-            return sqrt(pow((a.first - b.first).toDouble(), 2.0) + pow((a.second - b.second).toDouble(), 2.0))
+            return kotlin.math.sqrt(
+                (a.first - b.first).toDouble().pow(2.0) + (a.second - b.second).toDouble().pow(2.0)
+            )
         }
     },
     LOWEST_VALUE_NEIGHBOR {
         override fun distance(grid: Grid<*>, a: Position, b: Position): Double {
-            val g = grid as Grid<Int>
+            @Suppress("UNCHECKED_CAST") val g = grid as Grid<Int>
             return g[b]!!.toDouble()
         }
     };
@@ -483,18 +484,10 @@ fun <T> Grid<T>.aStar(
 }
 
 fun <T> Grid<T>.dimensions() =
-    keys.maxByOrNull { it.first }!!.first.let { yMax ->
-    keys.maxByOrNull { it.second }!!.second.let { xMax ->
-        p(yMax, xMax)
-    }
-}
+    p(keys.maxByOrNull { it.first }!!.first, keys.maxByOrNull { it.second }!!.second)
 
 fun <T> Grid<T>.allPositions(dimensions: Pair<Int, Int> = dimensions()) =
-    keys.maxByOrNull { it.first }!!.first.let { yMax ->
-        keys.maxByOrNull { it.second }!!.second.let { xMax ->
-            gridPositions(yMax + 1, xMax + 1)
-        }
-    }
+    gridPositions(keys.maxByOrNull { it.first }!!.first + 1, keys.maxByOrNull { it.second }!!.second + 1)
 
 
 fun Grid<Int>.shortestPath(

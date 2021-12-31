@@ -29,8 +29,8 @@ class Day12 : Day(12, 2020) {
         inputList.forEach { l ->
             val (cmd, amount) = p(l.slice(0..0), l.substring(1).toInt())
             when (cmd) {
-                "L" -> (0 until amount / 90).forEach { waypoint = p(-waypoint.second, waypoint.first) }
-                "R" -> (0 until amount / 90).forEach { waypoint = p(waypoint.second, -waypoint.first) }
+                "L" -> repeat(amount / 90) { waypoint = p(-waypoint.second, waypoint.first) }
+                "R" -> repeat(amount / 90) { waypoint = p(waypoint.second, -waypoint.first) }
                 "F" -> pos += p(amount * waypoint.first, amount * waypoint.second)
                 // N, E, S, W
                 else -> waypoint = move(waypoint, cmd.direction(), amount)

@@ -5,26 +5,26 @@ import me.grison.aoc.*
 class Day14 : Day(14, 2015) {
     override fun title() = "Reindeer Olympics"
 
-    override fun partOne() = load().map { r -> r.distance(2503)}.max()
+    override fun partOne() = load().map { r -> r.distance(2503) }.maxOrNull()
 
     override fun partTwo(): Int? {
         val barn = load()
         (1..2503).forEach { time ->
             val distances = barn.map { it.distance(time) }
-            val max = distances.max() ?: 0
+            val max = distances.maxOrNull() ?: 0
             barn.forEachIndexed { i, reindeer ->
                 if (distances[i] == max)
                     reindeer.incPoints()
             }
         }
-        return barn.map{it.points}.max()
+        return barn.map { it.points }.maxOrNull()
     }
 
-    private fun load() : List<Reindeer> =
-            inputList.map { s ->
-                val p = s.split(" ")
-                Reindeer(p[0], p[3].toInt(), p[6].toInt(), p[13].toInt())
-            }
+    private fun load(): List<Reindeer> =
+        inputList.map { s ->
+            val p = s.split(" ")
+            Reindeer(p[0], p[3].toInt(), p[6].toInt(), p[13].toInt())
+        }
 }
 
 data class Reindeer(val name: String, val speed: Int, val flight: Int, val rest: Int, var points : Int = 0) {

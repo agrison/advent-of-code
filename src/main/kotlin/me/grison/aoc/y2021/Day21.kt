@@ -1,8 +1,6 @@
 package me.grison.aoc.y2021
 
 import me.grison.aoc.*
-import java.util.HashMap
-import java.util.concurrent.ConcurrentHashMap
 
 class Day21 : Day(21, 2021) {
     override fun title() = "Dirac Dice"
@@ -37,7 +35,7 @@ class Day21 : Day(21, 2021) {
         val dices = combinations3(1, 3).map { it.sum() }
 
         while (quantumStates.isNotEmpty()) {
-            val state = quantumStates.keys.minBy { it.totalScore }!!
+            val state = quantumStates.keys.minByOrNull { it.totalScore }!!
             val count = quantumStates.remove(state)!!
             val (positions, scores, turn) = state
             for (roll in dices) {
@@ -49,7 +47,7 @@ class Day21 : Day(21, 2021) {
                     quantumStates.increase(QuantumState(newPositions, newScores, turn.nextTurn()), count)
             }
         }
-        return universes.max()!!
+        return universes.maxOrNull()!!
     }
 
     data class QuantumState(val positions: List<Long>, val scores: List<Long>, val turn: Int) {

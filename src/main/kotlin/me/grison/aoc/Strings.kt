@@ -132,3 +132,9 @@ fun String.frequency() =  hashBag<Char>().let { hash ->
 fun String.subs(x: Int, y: Int) = substring(x, y)
 
 operator fun String.get(x: Int, y: Int) = substring(x, y)
+
+fun String.isAscii() = all { it.toInt() <= 255 }
+
+fun foo() {
+    "".capitalize()
+}

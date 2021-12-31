@@ -9,14 +9,14 @@ class Day21 : Day(21, 2020) {
         val (allergens, ingredients) = load()
 
         val allAllergens = allergens.values.fold(setOf<String>()) { a, b -> a.union(b) }
-        return (ingredients.keys - allAllergens).sumBy { ingredients[it]!! }
+        return (ingredients.keys - allAllergens).sumOf { ingredients[it]!! }
     }
 
     override fun partTwo(): Any {
         val (allergens, _) = load()
 
         // keep going until all allergens found
-        while (allergens.values.map { it.size }.max()!! > 1) {
+        while (allergens.values.map { it.size }.maxOrNull()!! > 1) {
             // select allergens where there's only one ingredient
             for (allergen in allergens.filter { it.value.size == 1 }.keys) {
                 // for every other allergen

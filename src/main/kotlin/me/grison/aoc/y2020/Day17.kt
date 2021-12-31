@@ -53,11 +53,11 @@ data class Cubes(val cubes: Set<Position>, val hyper: Boolean = false) {
     }
 
     private fun allRanges() = mutableListOf<IntRange>().let { ranges ->
-        ranges.add(cubes.map { it.x }.min()!! - 1 .. cubes.map { it.x }.max()!! + 1)
-        ranges.add(cubes.map { it.y }.min()!! - 1 .. cubes.map { it.y }.max()!! + 1)
-        ranges.add(cubes.map { it.z }.min()!! - 1 .. cubes.map { it.z }.max()!! + 1)
+        ranges.add(cubes.minOf { it.x } - 1..cubes.maxOf { it.x } + 1)
+        ranges.add(cubes.minOf { it.y } - 1..cubes.maxOf { it.y } + 1)
+        ranges.add(cubes.minOf { it.z } - 1..cubes.maxOf { it.z } + 1)
         // part2: if hyper then same as x,y,z, otherwise a range of 1
-        ranges.add(if (hyper) cubes.map { it.w }.min()!! - 1 .. cubes.map { it.w }.max()!! + 1
+        ranges.add(if (hyper) cubes.minOf { it.w } - 1..cubes.maxOf { it.w } + 1
                    else       0..0)
         ranges
     }

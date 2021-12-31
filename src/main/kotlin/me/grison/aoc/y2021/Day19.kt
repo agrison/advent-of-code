@@ -3,7 +3,6 @@ package me.grison.aoc.y2021
 import io.vavr.collection.Vector
 import me.grison.aoc.*
 import java.util.concurrent.ConcurrentLinkedDeque
-import kotlin.collections.ArrayDeque
 import kotlin.streams.toList
 
 class Day19 : Day(19, 2021) {

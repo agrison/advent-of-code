@@ -41,7 +41,6 @@ class Day20 : Day(20, 2020) {
         var L = s.split("\n").map { it.stringList().toMutableList() }.toMutableList()
         fun String.red() = red(this)
         fun String.roughColor() = this
-        val SSS = mutableSetOf<Pair<Int, Int>>()
         NESSIES.forEach { (y, x) ->
 
             L[y - 1] = L[y - 1].mapIndexed { i, v -> if (i-x in nessie[0].sharps()) nessieR[0][i-x].toString().red() else v.roughColor() }.toMutableList()
@@ -53,9 +52,7 @@ class Day20 : Day(20, 2020) {
             l.map { if (it == "#") cyan(it) else if (it == ".") blue(it) else it}.toMutableList()
         }.toMutableList()
 
-        println("\n" + L.joinToString("\n") { it.joinToString("") })
-
-
+        //println("\n" + L.joinToString("\n") { it.joinToString("") })
         return count
     }
 

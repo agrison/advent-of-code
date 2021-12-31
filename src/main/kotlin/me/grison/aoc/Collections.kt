@@ -1,6 +1,5 @@
 package me.grison.aoc
 
-import java.awt.Dimension
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedDeque
 import java.util.stream.Collectors

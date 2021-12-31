@@ -12,7 +12,7 @@ class Day13 : Day(13, 2017) {
 
         return heights.filter { scan(it.value, it.key) == 0 }
             .keys
-            .sumBy { it * heights[it]!! }
+            .sumOf { it * heights[it]!! }
     }
 
     override fun partTwo(): Any {

@@ -1,8 +1,6 @@
 package me.grison.aoc.y2021
 
 import me.grison.aoc.*
-import util.CYAN
-import util.RESET
 
 class Day13 : Day(13, 2021) {
     override fun title() = "Transparent Origami"

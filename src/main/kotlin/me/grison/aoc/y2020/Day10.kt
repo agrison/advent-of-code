@@ -18,6 +18,6 @@ class Day10 : Day(10, 2020) {
             ways[j] = listOf(1L, 2L, 3L).filter { it <= j }
                     .sumOf { ways.getOrDefault(j - it, 0L) }
         }
-        return ways.getOrDefault(ways.keys.max() ?: 0L, 0L)
+        return ways.getOrDefault(ways.keys.maxOrNull() ?: 0L, 0L)
     }
 }

@@ -22,7 +22,7 @@ class Day24 : Day(24, 2017) {
 
 typealias Bridge = List<Pair<Int, Int>>
 
-fun Bridge.value() = this.sumBy { it.sum() }
+fun Bridge.value() = this.sumOf { it.sum() }
 fun buildBridge(x: Int, bridge: Bridge, remaining: Bridge, comparator: Comparator<Bridge>): Bridge {
     return remaining.filter { it.first == x || it.second == x }
         .map { buildBridge(if (it.first == x) it.second else it.first, bridge + it, remaining - it, comparator) }

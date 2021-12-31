@@ -16,8 +16,8 @@ class Day06 : Day(6, 2016) {
         var second = ""
         for (column in columns) {
             val count = column.groupingBy { it }.eachCount()
-            first += count.maxBy { it.value }!!.key
-            second += count.minBy { it.value }!!.key
+            first += count.maxByOrNull { it.value }!!.key
+            second += count.minByOrNull { it.value }!!.key
         }
 
         return p(first, second)

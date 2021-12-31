@@ -1,1 +1,3 @@
 visualizations/* linguist-documentation
+*.js linguist-vendored
+*.html linguist-vendored

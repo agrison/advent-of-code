@@ -11,7 +11,7 @@ data class Answer(val inst: () -> Day, val part1: Any, val part2: Any)
 class AllDaysTest {
     @TestFactory
     fun answers() = listOf(
-        Answer({ Day01() }, "", ""),
+        Answer({ Day01() }, 71502, 208191),
     ).map {
         val day = it.inst.invoke()
         DynamicTest.dynamicTest("Day ${day.year}/${day.dayNumber} - Part 1 - expecting ${it.part1}") {

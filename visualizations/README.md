@@ -1,5 +1,9 @@
 ## Advent of code visualizations
 
+## 2022
+
+- [Day 01](2022/day01.html)
+
 ## 2021
 
 - [Day 25](2021/day25.html)

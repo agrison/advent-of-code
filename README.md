@@ -10,7 +10,11 @@
 🎄 --- Day 01: Calorie Counting ---
   🌟 Part 1: 71502  (4.9ms)
   🌟 Part 2: 208191  (3.42ms)
-  
+
+🎄 --- Day 02: Rock Paper Scissors ---
+  🌟 Part 1: 9651  (4.71ms)
+  🌟 Part 2: 10560  (2.86ms)
+    
 ```
 
 ## Visualizations

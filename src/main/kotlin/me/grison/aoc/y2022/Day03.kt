@@ -13,14 +13,14 @@ class Day03 : Day(3, 2022) {
     override fun partTwo() = solve { it.mapSet().chunked(3) }
 
     private fun solve(inputMixer: (List<String>) -> List<List<Set<Char>>>) =
-        inputMixer(inputList).sumOf { itemPriority(it) }
+        inputMixer(inputList)
+            .map { it.intersectAll().first() }
+            .sumOf { itemPriority(it) }
 
-    private fun itemPriority(compartments: List<Set<Char>>): Int =
-        compartments.intersectAll().first().let { item ->
-            if (item.isLowerCase()) {
-                1 + (item.code - 'a'.code)
-            } else {
-                27 + (item.code - 'A'.code)
-            }
+    private fun itemPriority(item: Char): Int =
+        if (item.isLowerCase()) {
+            1 + (item.code - 'a'.code)
+        } else {
+            27 + (item.code - 'A'.code)
         }
 }

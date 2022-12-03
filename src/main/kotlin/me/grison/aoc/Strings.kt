@@ -133,7 +133,9 @@ fun String.subs(x: Int, y: Int) = substring(x, y)
 
 operator fun String.get(x: Int, y: Int) = substring(x, y)
 
-fun String.isAscii() = all { it.toInt() <= 255 }
+fun String.isAscii() = all { it.code <= 255 }
+
+fun String.isDigits() = all { it.code in 48..57 }
 
 fun String.split(at: Int) = listOf(this.take(at), this.drop(at))
 

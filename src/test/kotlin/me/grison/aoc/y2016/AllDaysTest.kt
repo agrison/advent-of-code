@@ -22,7 +22,7 @@ class AllDaysTest {
 //        Answer({ Day09() }, 251, 898),
 //        Answer({ Day10() }, 360154, 5103798),
 //        Answer({ Day11() }, "vzbxxyzz", "vzcaabcc"),
-//        Answer({ Day12() }, 119433, 68466),
+        Answer({ Day12() }, 318117, 9227771),
 //        Answer({ Day13() }, 664, 640),
 //        Answer({ Day14() }, 2696, 1084),
 //        Answer({ Day15() }, 222870, 117936),

@@ -14,6 +14,10 @@
 🎄 --- Day 02: Rock Paper Scissors ---
   🌟 Part 1: 9651  (4.71ms)
   🌟 Part 2: 10560  (2.86ms)
+  
+🎄 --- Day 03: Rucksack Reorganization ---
+  🌟 Part 1: 7553  (4.26ms)
+  🌟 Part 2: 2758  (1.83ms)
     
 ```
 

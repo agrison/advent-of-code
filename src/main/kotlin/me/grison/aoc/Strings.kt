@@ -135,6 +135,10 @@ operator fun String.get(x: Int, y: Int) = substring(x, y)
 
 fun String.isAscii() = all { it.toInt() <= 255 }
 
+fun String.split(at: Int) = listOf(this.take(at), this.drop(at))
+
+fun String.inTwo() = this.split(this.length / 2)
+
 fun foo() {
     "".capitalize()
 }

@@ -178,3 +178,7 @@ fun <T> List<List<T>>.iterate(dimensions: Pair<Int, Int> = dimensions()): Sequen
                 yield(p(row, column))
     }
 }
+
+fun <T> List<Set<T>>.intersectAll() = this.reduce { a, b -> a.intersect(b) }
+fun <T> List<Set<T>>.unionAll() = this.reduce { a, b -> a.union(b) }
+fun List<String>.mapSet() = this.map { it.toSet() }

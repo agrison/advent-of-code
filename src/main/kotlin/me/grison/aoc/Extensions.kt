@@ -350,7 +350,7 @@ fun Collection<Long>.toRange() = LongRange(this.first(), this.last())
 fun Pair<Int, Int>.toRange() = IntRange(this.first, this.second)
 fun Pair<Long, Long>.toRange() = LongRange(this.first, this.second)
 
-fun IntRange.contains(range: IntRange) = this.first <= range.first && this.last >= range.last
+operator fun IntRange.contains(range: IntRange) = this.first <= range.first && this.last >= range.last
 fun IntRange.overlap(range: IntRange) = range.first in this || this.first in range
 
 fun Collection<Int>.range() = maxOrNull()!! - minOrNull()!!

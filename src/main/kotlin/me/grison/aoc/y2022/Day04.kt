@@ -5,7 +5,7 @@ import me.grison.aoc.*
 class Day04 : Day(4, 2022) {
     override fun title() = "Camp Cleanup"
 
-    override fun partOne() = solve { a, b -> a.contains(b) || b.contains(a) }
+    override fun partOne() = solve { a, b -> a in b || b in a }
 
     override fun partTwo() = solve { a, b -> a.overlap(b) }
 

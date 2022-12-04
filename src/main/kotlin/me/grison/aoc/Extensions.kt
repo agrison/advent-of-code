@@ -345,6 +345,14 @@ fun Iterable<Pair<Long, Long>>.pointsDisplay(empty: String = " "): String {
     return display.joinToString("\n") { it.joinToString("") }
 }
 
+fun Collection<Int>.toRange() = IntRange(this.first(), this.last())
+fun Collection<Long>.toRange() = LongRange(this.first(), this.last())
+fun Pair<Int, Int>.toRange() = IntRange(this.first, this.second)
+fun Pair<Long, Long>.toRange() = LongRange(this.first, this.second)
+
+fun IntRange.contains(range: IntRange) = this.first <= range.first && this.last >= range.last
+fun IntRange.overlap(range: IntRange) = range.first in this || range.last in this || this.first in range || this.last in range
+
 fun Collection<Int>.range() = maxOrNull()!! - minOrNull()!!
 fun Collection<Long>.range() = maxOrNull()!! - minOrNull()!!
 fun Collection<BigInteger>.range() = maxOrNull()!!.minus(minOrNull()!!)

@@ -1,5 +1,7 @@
 package me.grison.aoc
 
+import java.util.*
+
 /** Returns the occurrences of `c`. */
 fun String.occurrences(c: Char) = count { it == c }
 
@@ -73,6 +75,7 @@ fun String.afterLast(s: String) = split(s).last()
 fun String.allInts(includeNegative: Boolean = true): List<Int> =
     (if (includeNegative) "(-?\\d+)" else "(\\d+)").regex().findAll(this).map { it.value.toInt() }.toList()
 
+fun String.allPositiveInts(): List<Int> = this.allInts(false)
 /** Returns all long found in this string. */
 fun String.allLongs(includeNegative: Boolean = true): List<Long> =
     (if (includeNegative) "(-?\\d+)" else "(\\d+)").regex().findAll(this).map { it.value.toLong() }.toList()
@@ -101,6 +104,9 @@ fun String.except(c: Char) = replace(c + "", "")
 /** Returns the string before `str`. */
 fun String.before(str: String) = split(str)[0]
 
+fun String.intRange() = this.normalSplit("-").let { IntRange(it[0].toInt(), it[1].toInt()) }
+fun String.longRange() = this.normalSplit("-").let { LongRange(it[0].toLong(), it[1].toLong()) }
+
 /** Returns the string after `str`. */
 fun String.after(str: String) = split(str)[1]
 
@@ -114,8 +120,8 @@ fun String.words() = normalSplit(" ")
 fun String.set() = stringList().toSet()
 
 fun String.`is`(s: String) = this == s
-fun String.upper() = toUpperCase()
-fun String.lower() = toLowerCase()
+fun String.upper() = uppercase(Locale.getDefault())
+fun String.lower() = lowercase(Locale.getDefault())
 
 fun String.isLower() = all { it.isLowerCase() }
 fun String.isUpper() = all { it.isUpperCase() }
@@ -142,5 +148,5 @@ fun String.split(at: Int) = listOf(this.take(at), this.drop(at))
 fun String.inTwo() = this.split(this.length / 2)
 
 fun foo() {
-    "".capitalize()
+    "".replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 }

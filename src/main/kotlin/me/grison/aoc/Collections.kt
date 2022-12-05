@@ -2,9 +2,9 @@ package me.grison.aoc
 
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedDeque
-import java.util.stream.Collectors
 import java.util.stream.IntStream
 import kotlin.collections.ArrayDeque
+import kotlin.streams.toList
 
 /** Returns the product of all elements in this Iterable. */
 fun Iterable<Int>.multiply() = reduce { a, b -> a * b }
@@ -85,16 +85,13 @@ fun <T> List<T>.butLast() = dropLast(1)
 
 /** Returns the transposed list of list. */
 fun <T> List<List<T>>.transpose(): List<List<T>> {
-    val N = this.stream().mapToInt { l: List<T> -> l.size }.max().orElse(-1)
-    val iterList = this.stream().map { it.iterator() }.collect(Collectors.toList())
-    return IntStream.range(0, N)
+    val rows = this.map { it.size }.maxByOrNull { it } ?: -1
+    val iterators = this.map { it.iterator() }
+    return IntStream.range(0, rows)
         .mapToObj { _ ->
-            iterList.stream()
-                .filter { it.hasNext() }
-                .map { m: Iterator<T> -> m.next() }
-                .collect(Collectors.toList())
+            iterators.filter { it.hasNext() }.map { it.next() }
         }
-        .collect(Collectors.toList())
+        .toList()
 }
 
 /** Make an ArrayDeque representing this Collection. */
@@ -131,7 +128,7 @@ operator fun <T> Iterable<T>.get(x: Int, y: Int) = this.filterIndexed { i, _ -> 
 /** Alias for subList. */
 operator fun <T> Iterable<T>.get(r: IntRange) = this.filterIndexed { i, _ -> i in r }
 
-fun <T> List<T>.middle() = this[this.size/2]
+fun <T> List<T>.middle() = this[this.size / 2]
 
 /** Take the two first elements and make a Pair of it. */
 fun <T> Iterable<T>.pair() = iterator().let {
@@ -158,7 +155,7 @@ fun <T> Stack<T>.lastIs(t: T): Boolean = last() == t
 fun io.vavr.collection.List<Int>.sumValues(): Int = this.reduce(Integer::sum)
 fun io.vavr.collection.List<Int>.mulValues(): Int = this.reduce(Math::multiplyExact)
 
-fun <T> List<T>.at(pos: Int) : T {
+fun <T> List<T>.at(pos: Int): T {
     return if (pos < 0) this[size + pos] else this[pos % this.size]
 }
 

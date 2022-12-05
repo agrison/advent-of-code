@@ -18,7 +18,14 @@
 🎄 --- Day 03: Rucksack Reorganization ---
   🌟 Part 1: 7553  (4.26ms)
   🌟 Part 2: 2758  (1.83ms)
-    
+
+🎄 --- Day 4: Camp Cleanup ---
+  🌟 Part 1: 450  (3.52ms)
+  🌟 Part 2: 837  (2.5ms)
+ 
+🎄 --- Day 5: Supply Stacks ---
+  🌟 Part 1: MQTPGLLDN  (7.32ms)
+  🌟 Part 2: LVZPSTTCZ  (4.71ms) 
 ```
 
 ## Visualizations

@@ -147,6 +147,8 @@ fun String.split(at: Int) = listOf(this.take(at), this.drop(at))
 
 fun String.inTwo() = this.split(this.length / 2)
 
+fun String.remove(r: Regex) = this.replace(r, "")
+
 fun foo() {
     "".replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 }

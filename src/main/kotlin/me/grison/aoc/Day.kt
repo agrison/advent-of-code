@@ -18,6 +18,7 @@ abstract class Day(val dayNumber: Int, val year: Int = 2020) {
     protected val program: List<String> by lazy { InputReader.inputAsList(dayNumber, year) }
     protected val inputSet: Set<String> by lazy { InputReader.inputAsSet(dayNumber, year) }
     protected val inputString: String by lazy { InputReader.inputAsString(dayNumber, year) }
+    protected val inputLength: Int by lazy { InputReader.inputAsString(dayNumber, year).length }
     protected val inputAsVavrStrings: io.vavr.collection.List<String> by lazy {
         InputReader.inputAsVavrStrings(
             dayNumber,

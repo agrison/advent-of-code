@@ -18,17 +18,17 @@ class Day07 : Day(7, 2022) {
         inputList
             .filter { !it.startsWith("dir ") }
             .map { ("$it #").words() }
-            .forEach { (promptOrSize, commandOrName, cdPath) ->
-                when (promptOrSize) {
-                    "$" -> when (commandOrName) {
-                        "cd" -> when (cdPath) {
+            .forEach { (size, cmd, path) ->
+                when (size) {
+                    "$" -> when (cmd) {
+                        "cd" -> when (path) {
                             "/" -> currentPath.reset("<root>")
                             ".." -> currentPath.removeLast()
-                            else -> currentPath.append(cdPath)
+                            else -> currentPath.append(path)
                         }
                     }
                     else -> currentPath.scan("") { acc, dir -> "$acc/$dir" }.forEach { fullPath ->
-                        directorySizes.increase(fullPath, promptOrSize.toInt())
+                        directorySizes.increase(fullPath, size.toInt())
                     }
                 }
             }

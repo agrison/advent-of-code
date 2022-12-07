@@ -26,6 +26,15 @@
 🎄 --- Day 5: Supply Stacks ---
   🌟 Part 1: MQTPGLLDN  (7.32ms)
   🌟 Part 2: LVZPSTTCZ  (4.71ms) 
+ 
+🎄 --- Day 6: Tuning Trouble ---
+  🌟 Part 1: 1080  (9.47ms)
+  🌟 Part 2: 3645  (4.73ms) 
+  
+🎄 --- Day 7: No Space Left On Device ---
+  🌟 Part 1: 1582412  (11.92ms)
+  🌟 Part 2: 3696336  (74.4us)
+  
 ```
 
 ## Visualizations

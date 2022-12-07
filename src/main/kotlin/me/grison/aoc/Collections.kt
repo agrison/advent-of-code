@@ -94,6 +94,12 @@ fun <T> List<List<T>>.transpose(): List<List<T>> {
         .toList()
 }
 
+fun <T> MutableList<T>.reset(item: T) : MutableList<T> {
+    this.clear()
+    this.add(item)
+    return this
+}
+
 /** Make an ArrayDeque representing this Collection. */
 fun <T> Collection<T>.deque() = ArrayDeque(this)
 

@@ -34,7 +34,10 @@
 🎄 --- Day 7: No Space Left On Device ---
   🌟 Part 1: 1582412  (11.92ms)
   🌟 Part 2: 3696336  (74.4us)
-  
+ 
+🎄 ---- Day 8: Treetop Tree House ---
+  🌟 Part 1: 1763    (27.7ms)
+  🌟 Part 2: 671160  (7.8us)  
 ```
 
 ## Visualizations

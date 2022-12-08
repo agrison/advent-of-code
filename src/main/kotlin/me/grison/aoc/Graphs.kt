@@ -224,6 +224,19 @@ private fun <T> Graph<T>.sizedComponent(default: Int, choser: (Int, Int) -> Int)
     return sizeval
 }
 
+fun <T> Grid<T>.allInDirection(pos: Pair<Int, Int>, dir: Pair<Int, Int>) : List<Pair<Int, Int>> {
+    var cursor = pos
+    val list = mutableListOf<Pair<Int, Int>>()
+    while (true) {
+        cursor += dir
+        if (cursor !in this) {
+            break
+        }
+        list.add(cursor)
+    }
+    return list
+}
+
 fun <T> Grid<T>.islandCount(symbol: T, dimensions: Pair<Int, Int>): Int {
     fun explore(grid: Grid<T>, pos: Position, visited: MutableSet<Position>): Boolean {
         if (!pos.within(0, 0, dimensions.first, dimensions.second)) return false

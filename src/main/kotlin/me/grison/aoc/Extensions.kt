@@ -174,6 +174,11 @@ operator fun Pair<Int, Int>.minus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(firs
 /** `*` operator for Pairs. */
 operator fun Pair<Int, Int>.times(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first * p.first, second * p.second)
 
+fun bools() = mutableListOf<Boolean>()
+fun ints() = mutableListOf<Int>()
+
+fun directions() = listOf(p(-1, 0), p(1, 0), p(0, -1), p(0, 1))
+
 fun Pair<Int, Int>.above() = this.plus(p(0, -1))
 fun Pair<Int, Int>.below() = this.plus(p(0, 1))
 fun Pair<Int, Int>.left() = this.plus(p(-1, 0))

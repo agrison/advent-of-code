@@ -2,6 +2,7 @@ package me.grison.aoc
 
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedDeque
+import java.util.function.Predicate
 import java.util.stream.IntStream
 import kotlin.collections.ArrayDeque
 import kotlin.streams.toList
@@ -94,7 +95,7 @@ fun <T> List<List<T>>.transpose(): List<List<T>> {
         .toList()
 }
 
-fun <T> MutableList<T>.reset(item: T) : MutableList<T> {
+fun <T> MutableList<T>.reset(item: T): MutableList<T> {
     this.clear()
     this.add(item)
     return this
@@ -188,3 +189,17 @@ fun List<String>.mapSet() = this.map { it.toSet() }
 
 fun <T> List<T>.rejectAll(elem: T) = this.filter { it != elem }
 fun <T> List<T>.mutable() = this.toMutableList()
+
+fun <T> List<T>.countUntil(pred: Predicate<T>) = this.until(pred).count()
+fun <T> List<T>.until(pred: Predicate<T>): List<T> {
+    val l = mutableListOf<T>()
+    for (x in this) {
+        l.add(x)
+        if (pred.test(x)) {
+            break
+        }
+    }
+    return l
+}
+
+fun <K, V> Map<K, V>.at(k: K) = this.getValue(k)

@@ -198,6 +198,12 @@ fun Pair<Int, Int>.neighbors(self: Boolean = false): List<Position> {
     )
     return if (self) neighbors else neighbors.reject { it == this }
 }
+fun Pair<Int, Int>.abs() = p(abs(first), abs(second))
+fun Pair<Int, Int>.max() = kotlin.math.max(first, second)
+fun Pair<Int, Int>.min() = kotlin.math.min(first, second)
+fun <T, U> Pair<T, U>.first(t: T) = p(t, second)
+fun <T, U> Pair<T, U>.second(u: U) = p(first, u)
+fun movements() = mapOf("R" to p(0, 1), "L" to p(0, -1), "D" to p(1, 0), "U" to p(-1, 0))
 
 // return an increasing range
 fun Pair<Int, Int>.range() = min(first, second)..max(first, second)

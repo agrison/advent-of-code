@@ -203,3 +203,9 @@ fun <T> List<T>.until(pred: Predicate<T>): List<T> {
 }
 
 fun <K, V> Map<K, V>.at(k: K) = this.getValue(k)
+
+fun <T> mutableList(size: Int, x: T) : MutableList<T> {
+    val list = mutableListOf<T>()
+    repeat(size) { list.add(x) }
+    return list
+}

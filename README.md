@@ -38,6 +38,10 @@
 🎄 ---- Day 8: Treetop Tree House ---
   🌟 Part 1: 1763    (27.7ms)
   🌟 Part 2: 671160  (7.8us)  
+
+🎄 ---- Day 9: Rope Bridge ---
+  🌟 Part 1: 6026  (28.7ms)
+  🌟 Part 2: 2273  (22.2ms)  
 ```
 
 ## Visualizations

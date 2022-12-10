@@ -42,6 +42,10 @@
 🎄 ---- Day 9: Rope Bridge ---
   🌟 Part 1: 6026  (28.7ms)
   🌟 Part 2: 2273  (22.2ms)  
+
+🎄 ---- Day 10: Cathode-Ray Tube ---
+  🌟 Part 1: 12980     (12.51ms)
+  🌟 Part 2: BRJLFULP  (8.1us)
 ```
 
 ## Visualizations

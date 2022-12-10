@@ -7,7 +7,7 @@ class Day13 : Day(13, 2021) {
 
     override fun partOne() = fold().first().size
 
-    override fun partTwo() = fold().last().pointsDisplay().ocrExtract()
+    override fun partTwo() = fold().last().map { p(it.first.toInt(), it.second.toInt()) }.pointsDisplay().ocrExtract()
 
     private fun fold(): List<Set<Pair<Long, Long>>> {
         var coordinates = inputGroups[0].lines().map { it.allLongs().pair() }.toSet()
@@ -16,7 +16,7 @@ class Day13 : Day(13, 2021) {
         val steps = mutableListOf<Set<Pair<Long, Long>>>()
         foldInstructions.forEach { (axis, num) ->
             coordinates = coordinates.map { if (axis == "y") it.pivotSecond(num) else it.pivotFirst(num) }.toSet()
-                    steps.add(coordinates)
+            steps.add(coordinates)
         }
 
         return steps

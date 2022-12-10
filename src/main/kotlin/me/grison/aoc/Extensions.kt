@@ -347,7 +347,7 @@ fun gridPositions(dimensions: Pair<Int, Int>) = gridPositions(dimensions.first, 
 fun gridPositions(height: Int, width: Int) = (0.until(height)).flatMap { y -> (0.until(width)).map { x -> p(y, x) } }
 
 
-fun Iterable<Pair<Long, Long>>.pointsDisplay(empty: String = " "): String {
+fun Iterable<Position>.pointsDisplay(empty: String = " "): String {
     val (maxX, maxY) = p(maxOf { it.first }, maxOf { it.second })
     val display = arrayListOf<List<String>>()
     for (y in 0..maxY) {
@@ -355,6 +355,15 @@ fun Iterable<Pair<Long, Long>>.pointsDisplay(empty: String = " "): String {
     }
     return display.joinToString("\n") { it.joinToString("") }
 }
+
+//fun Iterable<Pair<Long, Long>>.pointsDisplay(empty: String = " "): String {
+//    val (maxX, maxY) = p(maxOf { it.first }, maxOf { it.second })
+//    val display = arrayListOf<List<String>>()
+//    for (y in 0..maxY) {
+//        display.add((0..maxX).map { x -> if (p(x, y) in this) "$CYAN#$RESET" else empty })
+//    }
+//    return display.joinToString("\n") { it.joinToString("") }
+//}
 
 fun Collection<Int>.toRange() = IntRange(this.first(), this.last())
 fun Collection<Long>.toRange() = LongRange(this.first(), this.last())
@@ -393,3 +402,5 @@ fun Int.padLeft(length: Int, value: Char): String {
 }
 
 fun Char.int() = this.toString().toInt()
+
+fun <T,U,V> t(t: T, u: U, v: V) = Triple(t, u, v)

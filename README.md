@@ -46,6 +46,10 @@
 🎄 ---- Day 10: Cathode-Ray Tube ---
   🌟 Part 1: 12980     (12.51ms)
   🌟 Part 2: BRJLFULP  (8.1us)
+  
+🎄 ---- Day 11: Monkey in the Middle ---
+  🌟 Part 1: 76728        (30.8ms)
+  🌟 Part 2: 21553910156  (100.1ms)  
 ```
 
 ## Visualizations

@@ -1,5 +1,6 @@
 package me.grison.aoc
 
+import java.math.BigInteger
 import java.util.*
 
 /** Returns the occurrences of `c`. */
@@ -79,6 +80,9 @@ fun String.allPositiveInts(): List<Int> = this.allInts(false)
 /** Returns all long found in this string. */
 fun String.allLongs(includeNegative: Boolean = true): List<Long> =
     (if (includeNegative) "(-?\\d+)" else "(\\d+)").regex().findAll(this).map { it.value.toLong() }.toList()
+
+fun String.allBigIntegers(includeNegative: Boolean = true): List<BigInteger> =
+    (if (includeNegative) "(-?\\d+)" else "(\\d+)").regex().findAll(this).map { it.value.toBigInteger() }.toList()
 
 fun String.firstInt(includeNegative: Boolean = true) = allInts(includeNegative).first()
 fun String.lastInt(includeNegative: Boolean = true) = allInts(includeNegative).last()

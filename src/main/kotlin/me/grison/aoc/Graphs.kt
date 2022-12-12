@@ -41,7 +41,7 @@ fun <T> Graph<T>.shortestPath(a: T, b: T): Pair<Int, List<T>> {
         val (node, distance, path) = queue.shift()
         if (b == node) return p(distance, path)
 
-        for (neighbor in this[node]!!) {
+        for (neighbor in (this[node] ?: listOf())) {
             if (neighbor !in visited) {
                 visited.add(neighbor)
                 val newPath = path.toMutableList() + neighbor

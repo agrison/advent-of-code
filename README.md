@@ -50,6 +50,10 @@
 🎄 ---- Day 11: Monkey in the Middle ---
   🌟 Part 1: 76728        (30.8ms)
   🌟 Part 2: 21553910156  (100.1ms)  
+  
+🎄 ---- Day 12: Hill Climbing Algorithm ---
+  🌟 Part 1: 391  (21.16ms)
+  🌟 Part 2: 386  (237.14ms)
 ```
 
 ## Visualizations

@@ -54,6 +54,10 @@
 🎄 ---- Day 12: Hill Climbing Algorithm ---
   🌟 Part 1: 391  (21.16ms)
   🌟 Part 2: 386  (237.14ms)
+  
+🎄 ---- Day 13: Distress Signal ---
+  🌟 Part 1: 5292   (43.82ms)
+  🌟 Part 2: 23868  (8.9us)  
 ```
 
 ## Visualizations

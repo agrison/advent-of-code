@@ -18,8 +18,9 @@ class Day14 : Day(14, 2022) {
             sand.y() != floor && sand !in filled
 
         var (part1, part2, tick) = listOf(-1, 0, 0)
+        var source = p(500, 0)
         while (true) {
-            var sand = p(500, 0)
+            var sand = source
             while (true) {
                 if (sand.y() + 1 >= floor && part1 < 0)
                     part1 = tick
@@ -32,7 +33,7 @@ class Day14 : Day(14, 2022) {
                 }
             }
 
-            if (sand == p(500, 0)) {
+            if (sand == source) {
                 part2 = tick + 1
                 break
             }

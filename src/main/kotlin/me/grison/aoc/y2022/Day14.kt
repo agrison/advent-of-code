@@ -18,7 +18,7 @@ class Day14 : Day(14, 2022) {
             sand.y() != floor && sand !in filled
 
         var (part1, part2, tick) = listOf(-1, 0, 0)
-        var source = p(500, 0)
+        val source = p(500, 0)
         while (true) {
             var sand = source
             while (true) {

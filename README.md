@@ -58,6 +58,10 @@
 🎄 ---- Day 13: Distress Signal ---
   🌟 Part 1: 5292   (43.82ms)
   🌟 Part 2: 23868  (8.9us)  
+  
+🎄 ---- Day 14: Regolith Reservoir ---
+  🌟 Part 1: 843    (255.6ms)
+  🌟 Part 2: 27625  (8us)  
 ```
 
 ## Visualizations

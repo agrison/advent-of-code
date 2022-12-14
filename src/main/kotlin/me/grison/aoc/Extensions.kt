@@ -404,3 +404,21 @@ fun Int.padLeft(length: Int, value: Char): String {
 fun Char.int() = this.toString().toInt()
 
 fun <T,U,V> t(t: T, u: U, v: V) = Triple(t, u, v)
+
+fun Position.sign() = p(first.sign(), second.sign())
+
+fun Position.x() = first
+fun Position.y() = second
+
+fun List<Int>.min() = minByOrNull { it }!!
+fun Iterable<Position>.minX() = map {it.first}.min()
+fun Iterable<Position>.minY() = map {it.second}.min()
+
+fun List<Int>.max() = maxByOrNull { it }!!
+fun Iterable<Position>.maxX() = map {it.first}.max()
+fun Iterable<Position>.maxY() = map {it.second}.max()
+
+fun <T> List<T>.peek(index: Int, sideEffect: (T) -> Unit) : List<T> {
+    sideEffect.invoke(this[index])
+    return this;
+}

@@ -62,6 +62,10 @@
 🎄 ---- Day 14: Regolith Reservoir ---
   🌟 Part 1: 843    (255.6ms)
   🌟 Part 2: 27625  (8us)  
+  
+🎄 ---- Day 15: Beacon Exclusion Zone ---
+  🌟 Part 1: 5688618         (1.89s)
+  🌟 Part 2: 12625383204261  (238.56ms)  
 ```
 
 ## Visualizations

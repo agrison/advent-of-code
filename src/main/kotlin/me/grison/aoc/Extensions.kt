@@ -166,13 +166,15 @@ fun Pair<Int, Int>.product() = first * second
 
 /** `+` operator for Pairs. */
 operator fun Pair<Int, Int>.plus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first + p.first, second + p.second)
+//operator fun Pair<Long, Long>.plus(p: Pair<Long, Long>): Pair<Long, Long> = Pair(first + p.first, second + p.second)
 fun Pair<Int, Int>.plus(a: Int, b: Int): Pair<Int, Int> = Pair(first + a, second + b)
 
 /** `-` operator for Pairs. */
 operator fun Pair<Int, Int>.minus(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first - p.first, second - p.second)
 
 /** `*` operator for Pairs. */
-operator fun Pair<Int, Int>.times(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first * p.first, second * p.second)
+operator fun Pair<Int, Int>.times(p: Pair<Int, Int>): Pair<Int, Int> = Pair(first * p.first, second * p.second)/** `*` operator for Pairs. */
+//operator fun Pair<Long, Long>.times(p: Pair<Long, Long>): Pair<Long, Long> = Pair(first * p.first, second * p.second)
 
 fun bools() = mutableListOf<Boolean>()
 fun ints() = mutableListOf<Int>()
@@ -325,8 +327,10 @@ fun <T> longHashBag() = mutableMapOf<T, Long>().withDefault { 0L }
 fun <T> bigIntHashBag() = mutableMapOf<T, BigInteger>().withDefault { BigInteger.ZERO }
 
 typealias Position = Pair<Int, Int>
+typealias LPosition = Pair<Long, Long>
 
 fun Position.manhattan(other: Position) = abs(first - other.first) + abs(second - other.second)
+fun LPosition.manhattan(other: LPosition) = abs(first - other.first) + abs(second - other.second)
 
 fun <T> makeList(size: Int, t: T): MutableList<T> {
     val list = mutableListOf<T>()

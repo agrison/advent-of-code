@@ -33,7 +33,7 @@ class Day15 : Day(15, 2022) {
     override fun partTwo(): Long {
         val data = data()
 
-        for (i in 3_000_000..4_000_000) {
+        for (i in 3_000_000L..4_000_000L) {
             val bounds = mutableListOf<LPosition>()
             for ((sensor, beacon) in data) {
                 val distance = sensor.manhattan(beacon)
@@ -46,7 +46,7 @@ class Day15 : Day(15, 2022) {
             var last = 0L
             for ((bx, by) in bounds) {
                 if (bx > last)
-                    return i * 4000000L + (bx-1)
+                    return i * 4_000_000L + bx.dec()
                 last = max(last, by);
             }
         }

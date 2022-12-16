@@ -66,6 +66,10 @@
 🎄 ---- Day 15: Beacon Exclusion Zone ---
   🌟 Part 1: 5688618         (1.89s)
   🌟 Part 2: 12625383204261  (238.56ms)  
+
+🎄 ---- Day 16: Proboscidea Volcanium ---
+  🌟 Part 1: 1653  (204.21ms)
+  🌟 Part 2: 2223  (18.3s)  
 ```
 
 ## Visualizations

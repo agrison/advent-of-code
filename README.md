@@ -70,6 +70,10 @@
 🎄 ---- Day 16: Proboscidea Volcanium ---
   🌟 Part 1: 1653  (204.21ms)
   🌟 Part 2: 2223  (18.3s)  
+  
+🎄 ---- Day 17: Pyroclastic Flow ---
+  🌟 Part 1: 3126           (281.5ms)
+  🌟 Part 2: 1561176470570  (1.22s)  
 ```
 
 ## Visualizations

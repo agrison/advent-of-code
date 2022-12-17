@@ -422,6 +422,8 @@ fun List<Int>.max() = maxByOrNull { it }!!
 fun Iterable<Position>.maxX() = map {it.first}.max()
 fun Iterable<Position>.maxY() = map {it.second}.max()
 
+fun List<Long>.max() = maxByOrNull { it }!!
+
 fun <T> List<T>.peek(index: Int, sideEffect: (T) -> Unit) : List<T> {
     sideEffect.invoke(this[index])
     return this;
